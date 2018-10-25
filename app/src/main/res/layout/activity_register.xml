@@ -14,7 +14,7 @@
         android:background="@color/white"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        tools:context=".RegisterActivity">
+        tools:context=".Activity.RegisterActivity">
 
 
         <TextView

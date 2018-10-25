@@ -1,13 +1,15 @@
-package future3pay.newsportfamily;
-
-import android.content.SharedPreferences;
-import android.util.Log;
+package future3pay.newsportfamily.API;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
+import future3pay.newsportfamily.DoMainUrl;
+import future3pay.newsportfamily.Index;
+import future3pay.newsportfamily.UIkit.Loading;
+import future3pay.newsportfamily.Activity.LoginActivity;
+import future3pay.newsportfamily.UIkit.ToastShow;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -69,7 +71,7 @@ public class LoginAPI {
                                         .apply();
 
                                 ToastShow.start(LoginActivity.WeakLoginActivity.get(),"登入成功");
-
+                                    LoginActivity.WeakLoginActivity.get().finish();
                             }else{
 
                                 ToastShow.start(LoginActivity.WeakLoginActivity.get(),"帳號或密碼錯誤");

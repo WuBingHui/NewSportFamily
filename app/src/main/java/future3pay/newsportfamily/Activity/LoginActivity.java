@@ -1,4 +1,4 @@
-package future3pay.newsportfamily;
+package future3pay.newsportfamily.Activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +11,12 @@ import android.widget.TextView;
 import com.cy.dialog.BaseDialog;
 
 import java.lang.ref.WeakReference;
+
+import future3pay.newsportfamily.API.LoginAPI;
+import future3pay.newsportfamily.API.ResetPassWordAPI;
+import future3pay.newsportfamily.R;
+import future3pay.newsportfamily.UIkit.Loading;
+import future3pay.newsportfamily.UIkit.ToastShow;
 
 public class LoginActivity extends AppCompatActivity {
 

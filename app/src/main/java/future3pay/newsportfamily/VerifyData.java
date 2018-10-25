@@ -4,7 +4,7 @@ import android.widget.EditText;
 
 import java.util.regex.Pattern;
 
- class VerifyData {
+public class VerifyData {
 
 
 
@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
     }
 
     //判斷是否中文
-     static Boolean VerifyChiness(String str) {
+    public static Boolean VerifyChiness(String str) {
 
             Pattern pattern = Pattern.compile("[\\u4E00-\\u9FA5]+");
             if(str.equals("")){

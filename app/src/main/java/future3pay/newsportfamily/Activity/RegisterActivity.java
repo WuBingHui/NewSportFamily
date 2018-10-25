@@ -1,20 +1,22 @@
-package future3pay.newsportfamily;
+package future3pay.newsportfamily.Activity;
 
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
+
+import future3pay.newsportfamily.API.RegisterAPI;
+import future3pay.newsportfamily.API.SmsAPI;
+import future3pay.newsportfamily.R;
+import future3pay.newsportfamily.UIkit.Loading;
+import future3pay.newsportfamily.UIkit.ToastShow;
+import future3pay.newsportfamily.VerifyData;
 
 public class RegisterActivity extends AppCompatActivity {
     public EditText Account, PassWord, AgainPassWord, UserName, Email, BankAccount, InviteCode, Phone, VerifyCode;

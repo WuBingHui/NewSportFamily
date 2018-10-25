@@ -1,4 +1,4 @@
-package future3pay.newsportfamily;
+package future3pay.newsportfamily.UIkit;
 
 import android.app.Activity;
 import android.app.Application;

@@ -222,5 +222,8 @@
         <item>822中國信託</item>
     </array>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

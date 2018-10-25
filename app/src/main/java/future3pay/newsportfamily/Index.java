@@ -4,10 +4,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -20,8 +21,16 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import future3pay.newsportfamily.API.GameInfoAPI;
+import future3pay.newsportfamily.API.SportTypeAPI;
+import future3pay.newsportfamily.Activity.LoginActivity;
+import future3pay.newsportfamily.Fragment.BettingFragment;
+
 
 public class Index extends AppCompatActivity {
+    public String SportType="s-441";
+    public FragmentManager manager = null;
+    public FragmentTransaction transaction = null;
 private FrameLayout IndexFrame;
 public SharedPreferences UserInfo ;
 public List<String> SporeType;
@@ -52,8 +61,14 @@ public static WeakReference<Index> WeakIndex;
 
        // Intent intent=new Intent();
        // intent.setClass(this,LoginActivity.class);
-       // startActivity(intent);
-
+      // startActivity(intent);
+        //透過下方程式碼，取得Activity中執行的個體。
+       manager = getSupportFragmentManager();
+       transaction = manager.beginTransaction();
+        BettingFragment BettingFragment = new BettingFragment();
+      transaction.setCustomAnimations(R.anim.slide_right_in, R.anim.slide_left_out);
+      transaction.replace(R.id.IndexFrame, BettingFragment, "BettingFragment");
+       transaction.commitAllowingStateLoss();
     }
 
 private void actionbar(){

@@ -1,8 +1,10 @@
-package future3pay.newsportfamily;
+package future3pay.newsportfamily.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import future3pay.newsportfamily.R;
 
 public class PrivacyPolicyActivity extends AppCompatActivity {
 
