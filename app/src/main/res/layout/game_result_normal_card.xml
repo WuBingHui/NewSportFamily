@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/corners_3">
+
+    <TextView
+        android:id="@+id/HomeOne"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/HomeNameSmall"
+        app:layout_constraintEnd_toStartOf="@+id/HomeTwo"
+        app:layout_constraintStart_toEndOf="@+id/HomeNameSmall"
+        app:layout_constraintTop_toTopOf="@+id/HomeNameSmall" />
+
+    <TextView
+        android:id="@+id/HomeTwo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="2"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/HomeOne"
+        app:layout_constraintEnd_toStartOf="@+id/HomeThree"
+        app:layout_constraintStart_toEndOf="@+id/HomeOne"
+        app:layout_constraintTop_toTopOf="@+id/HomeOne" />
+
+    <TextView
+        android:id="@+id/HomeThree"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="3"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/HomeTwo"
+        app:layout_constraintEnd_toStartOf="@+id/HomeFour"
+        app:layout_constraintStart_toEndOf="@+id/HomeTwo"
+        app:layout_constraintTop_toTopOf="@+id/HomeTwo" />
+
+    <TextView
+        android:id="@+id/HomeFour"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="4"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/HomeThree"
+        app:layout_constraintEnd_toStartOf="@+id/HomeFive"
+        app:layout_constraintStart_toEndOf="@+id/HomeThree"
+        app:layout_constraintTop_toTopOf="@+id/HomeThree" />
+
+    <TextView
+        android:id="@+id/HomeFive"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="5"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/HomeFour"
+        app:layout_constraintEnd_toStartOf="@+id/HomeSix"
+        app:layout_constraintStart_toEndOf="@+id/HomeFour"
+        app:layout_constraintTop_toTopOf="@+id/HomeFour" />
+
+    <TextView
+        android:id="@+id/HomeSix"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="6"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/HomeFive"
+        app:layout_constraintEnd_toStartOf="@+id/HomeSeven"
+        app:layout_constraintStart_toEndOf="@+id/HomeFive"
+        app:layout_constraintTop_toTopOf="@+id/HomeFive" />
+
+    <TextView
+        android:id="@+id/HomeSeven"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="7"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/HomeSix"
+        app:layout_constraintEnd_toStartOf="@+id/HomeEight"
+        app:layout_constraintStart_toEndOf="@+id/HomeSix"
+        app:layout_constraintTop_toTopOf="@+id/HomeSix" />
+
+    <TextView
+        android:id="@+id/HomeEight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="8"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/HomeSeven"
+        app:layout_constraintEnd_toStartOf="@+id/HomeNine"
+        app:layout_constraintStart_toEndOf="@+id/HomeSeven"
+        app:layout_constraintTop_toTopOf="@+id/HomeSeven" />
+
+    <TextView
+        android:id="@+id/HomeNine"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="9"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/HomeEight"
+        app:layout_constraintEnd_toStartOf="@+id/HomeOT"
+        app:layout_constraintStart_toEndOf="@+id/HomeEight"
+        app:layout_constraintTop_toTopOf="@+id/HomeEight" />
+
+    <TextView
+        android:id="@+id/HomeOT"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="OT"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/HomeNine"
+        app:layout_constraintEnd_toEndOf="@+id/divider8"
+        app:layout_constraintStart_toEndOf="@+id/HomeNine"
+        app:layout_constraintTop_toTopOf="@+id/HomeNine" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:alpha="0.3"
+        android:background="@color/topcolor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/GameCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/corners_5"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        android:text="1090"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView21"
+        app:layout_constraintEnd_toStartOf="@+id/GameCategory"
+        app:layout_constraintStart_toStartOf="@+id/textView21"
+        app:layout_constraintTop_toTopOf="@+id/textView21" />
+
+    <TextView
+        android:id="@+id/GameCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginStart="8dp"
+        android:text="美國職棒季後賽"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/GameCode"
+        app:layout_constraintEnd_toStartOf="@+id/GameStartTime"
+        app:layout_constraintStart_toEndOf="@+id/GameCode"
+        app:layout_constraintTop_toTopOf="@+id/GameCode" />
+
+    <TextView
+        android:id="@+id/AwayNameBig"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:text="密爾瓦基釀酒人"
+        android:textColor="@color/Black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/HomeNameBig"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+    <TextView
+        android:id="@+id/HomeNameBig"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:text="洛杉磯道奇"
+        android:textColor="@color/Black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/AwayNameBig"
+        app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+    <TextView
+        android:id="@+id/AwaySum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="5"
+        android:textColor="@color/Black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/AwayNameBig"
+        app:layout_constraintStart_toStartOf="@+id/AwayNameBig"
+        app:layout_constraintTop_toBottomOf="@+id/AwayNameBig" />
+
+    <TextView
+        android:id="@+id/HomeSum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="12"
+        android:textColor="@color/Black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/HomeNameBig"
+        app:layout_constraintStart_toStartOf="@+id/HomeNameBig"
+        app:layout_constraintTop_toBottomOf="@+id/HomeNameBig" />
+
+    <View
+        android:id="@+id/divider6"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/grey_400"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AwaySum" />
+
+    <TextView
+        android:id="@+id/AwayNameSmall"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="7dp"
+        android:text="密爾瓦基釀酒人"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toTopOf="@+id/divider8"
+        app:layout_constraintEnd_toStartOf="@+id/AwayOne"
+        app:layout_constraintStart_toStartOf="@+id/divider7"
+        app:layout_constraintTop_toBottomOf="@+id/divider7"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
+
+    <TextView
+        android:id="@+id/AwayOne"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/AwayNameSmall"
+        app:layout_constraintEnd_toStartOf="@+id/AwayTwo"
+        app:layout_constraintStart_toEndOf="@+id/AwayNameSmall"
+        app:layout_constraintTop_toTopOf="@+id/AwayNameSmall" />
+
+    <TextView
+        android:id="@+id/AwayTwo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="2"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/AwayOne"
+        app:layout_constraintEnd_toStartOf="@+id/AwayThree"
+        app:layout_constraintStart_toEndOf="@+id/AwayOne"
+        app:layout_constraintTop_toTopOf="@+id/AwayOne" />
+
+    <TextView
+        android:id="@+id/AwayThree"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="3"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/AwayTwo"
+        app:layout_constraintEnd_toStartOf="@+id/AwayFour"
+        app:layout_constraintStart_toEndOf="@+id/AwayTwo"
+        app:layout_constraintTop_toTopOf="@+id/AwayTwo" />
+
+    <TextView
+        android:id="@+id/AwayFour"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="4"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/AwayThree"
+        app:layout_constraintEnd_toStartOf="@+id/AwayFive"
+        app:layout_constraintStart_toEndOf="@+id/AwayThree"
+        app:layout_constraintTop_toTopOf="@+id/AwayThree" />
+
+    <TextView
+        android:id="@+id/AwayFive"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="5"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/AwayFour"
+        app:layout_constraintEnd_toStartOf="@+id/AwaySix"
+        app:layout_constraintStart_toEndOf="@+id/AwayFour"
+        app:layout_constraintTop_toTopOf="@+id/AwayFour" />
+
+    <TextView
+        android:id="@+id/AwaySix"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="6"
+        android:textColor="@color/Black"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/AwayFive"
+        app:layout_constraintEnd_toStartOf="@+id/AwaySeven"
+        app:layout_constraintStart_toEndOf="@+id/AwayFive"
+        app:layout_constraintTop_toTopOf="@+id/AwayFive" />
+
+    <TextView
+        android:id="@+id/AwaySeven"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="7"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/AwaySix"
+        app:layout_constraintEnd_toStartOf="@+id/AwayEight"
+        app:layout_constraintStart_toEndOf="@+id/AwaySix"
+        app:layout_constraintTop_toTopOf="@+id/AwaySix" />
+
+    <TextView
+        android:id="@+id/AwayEight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="8"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/AwaySeven"
+        app:layout_constraintEnd_toStartOf="@+id/AwayNine"
+        app:layout_constraintStart_toEndOf="@+id/AwaySeven"
+        app:layout_constraintTop_toTopOf="@+id/AwaySeven" />
+
+    <TextView
+        android:id="@+id/AwayNine"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="9"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/AwayEight"
+        app:layout_constraintEnd_toStartOf="@+id/AwayOT"
+        app:layout_constraintStart_toEndOf="@+id/AwayEight"
+        app:layout_constraintTop_toTopOf="@+id/AwayEight" />
+
+    <TextView
+        android:id="@+id/AwayOT"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="OT"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/AwayNine"
+        app:layout_constraintEnd_toEndOf="@+id/divider7"
+        app:layout_constraintStart_toEndOf="@+id/AwayNine"
+        app:layout_constraintTop_toTopOf="@+id/AwayNine" />
+
+    <TextView
+        android:id="@+id/HomeNameSmall"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="密爾瓦基釀酒人"
+        android:textColor="@color/Black"
+        app:layout_constraintEnd_toStartOf="@+id/HomeOne"
+        app:layout_constraintStart_toStartOf="@+id/divider8"
+        app:layout_constraintTop_toBottomOf="@+id/divider8" />
+
+    <View
+        android:id="@+id/divider7"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/grey_400"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView34" />
+
+    <View
+        android:id="@+id/divider8"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/grey_400"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AwayNameSmall" />
+
+    <TextView
+        android:id="@+id/textView34"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:textColor="@color/Black"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/textView45"
+        app:layout_constraintEnd_toStartOf="@+id/textView35"
+        app:layout_constraintStart_toEndOf="@+id/textView45"
+        app:layout_constraintTop_toTopOf="@+id/textView45" />
+
+    <TextView
+        android:id="@+id/textView35"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="2"
+        android:gravity="center"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView34"
+        app:layout_constraintEnd_toStartOf="@+id/textView36"
+        app:layout_constraintStart_toEndOf="@+id/textView34"
+        app:layout_constraintTop_toTopOf="@+id/textView34" />
+
+    <TextView
+        android:id="@+id/textView36"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="3"
+        android:gravity="center"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView35"
+        app:layout_constraintEnd_toStartOf="@+id/textView37"
+        app:layout_constraintStart_toEndOf="@+id/textView35"
+        app:layout_constraintTop_toTopOf="@+id/textView35" />
+
+    <TextView
+        android:id="@+id/textView37"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="4"
+        android:gravity="center"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView36"
+        app:layout_constraintEnd_toStartOf="@+id/textView38"
+        app:layout_constraintStart_toEndOf="@+id/textView36"
+        app:layout_constraintTop_toTopOf="@+id/textView36" />
+
+    <TextView
+        android:id="@+id/textView38"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="5"
+        android:gravity="center"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView37"
+        app:layout_constraintEnd_toStartOf="@+id/textView39"
+        app:layout_constraintStart_toEndOf="@+id/textView37"
+        app:layout_constraintTop_toTopOf="@+id/textView37" />
+
+    <TextView
+        android:id="@+id/textView39"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="6"
+        android:gravity="center"
+        android:textColor="@color/Black"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/textView38"
+        app:layout_constraintEnd_toStartOf="@+id/textView40"
+        app:layout_constraintStart_toEndOf="@+id/textView38"
+        app:layout_constraintTop_toTopOf="@+id/textView38" />
+
+    <TextView
+        android:id="@+id/textView40"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="7"
+        android:gravity="center"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView39"
+        app:layout_constraintEnd_toStartOf="@+id/textView41"
+        app:layout_constraintStart_toEndOf="@+id/textView39"
+        app:layout_constraintTop_toTopOf="@+id/textView39" />
+
+    <TextView
+        android:id="@+id/textView41"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="8"
+        android:gravity="center"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView40"
+        app:layout_constraintEnd_toStartOf="@+id/textView42"
+        app:layout_constraintStart_toEndOf="@+id/textView40"
+        app:layout_constraintTop_toTopOf="@+id/textView40" />
+
+    <TextView
+        android:id="@+id/textView42"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="9"
+        android:gravity="center"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView41"
+        app:layout_constraintEnd_toStartOf="@+id/textView46"
+        app:layout_constraintStart_toEndOf="@+id/textView41"
+        app:layout_constraintTop_toTopOf="@+id/textView41" />
+
+    <TextView
+        android:id="@+id/textView45"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/局數"
+        android:textColor="@color/Black"
+        app:layout_constraintEnd_toStartOf="@+id/textView34"
+        app:layout_constraintStart_toStartOf="@+id/divider6"
+        app:layout_constraintTop_toBottomOf="@+id/divider6" />
+
+    <TextView
+        android:id="@+id/textView46"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="OT"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView42"
+        app:layout_constraintEnd_toEndOf="@+id/divider6"
+        app:layout_constraintStart_toEndOf="@+id/textView42"
+        app:layout_constraintTop_toTopOf="@+id/textView42" />
+
+    <View
+        android:id="@+id/divider9"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/grey_400"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/HomeNameSmall" />
+
+    <TextView
+        android:id="@+id/textView47"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/corners"
+        android:gravity="center"
+        android:text="@string/加總"
+        android:textColor="@color/Black"
+        app:layout_constraintEnd_toStartOf="@+id/textView48"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider9" />
+
+    <TextView
+        android:id="@+id/textView48"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/corners"
+        android:gravity="center"
+        android:text="@string/勝分差"
+        android:textColor="@color/Black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView47"
+        app:layout_constraintTop_toBottomOf="@+id/divider9" />
+
+    <TextView
+        android:id="@+id/Sum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="5分"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView47"
+        app:layout_constraintStart_toStartOf="@+id/textView47"
+        app:layout_constraintTop_toBottomOf="@+id/textView47" />
+
+    <TextView
+        android:id="@+id/WhoWin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="課勝一分"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView48"
+        app:layout_constraintStart_toStartOf="@+id/textView48"
+        app:layout_constraintTop_toBottomOf="@+id/textView48" />
+
+    <TextView
+        android:id="@+id/GameStartTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="right|center"
+        android:text="10月20日 17:00"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView21"
+        app:layout_constraintEnd_toEndOf="@+id/textView21"
+        app:layout_constraintStart_toEndOf="@+id/GameCategory"
+        app:layout_constraintTop_toTopOf="@+id/textView21" />
+
+</android.support.constraint.ConstraintLayout>

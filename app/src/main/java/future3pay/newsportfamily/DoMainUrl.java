@@ -16,7 +16,7 @@ public class DoMainUrl {
         SportsType = "https://dev-new.fet555888.tw/api/mobile/get/sports"; //賽事球種
         GameInfo = "https://dev-new.fet555888.tw/api/mobile/get/game/info/"; //一般賽事投注
         GameChampionInfo = "https://dev-new.fet555888.tw/api/mobile/get/champion/game/info/"; //冠軍賽事投注
-        GameResult = "https://dev-new.fet555888.tw/api/api/mobile/get/data/info"; //賽事結果
+        GameResult = "https://dev-new.fet555888.tw/api/mobile/get/data/info"; //賽事結果
         GameCountDown = "https://dev-new.fet555888.tw/api/mobile/get/live/game/countdown"; //場中賽事 倒數計時最近一場
         GameActive = "https://dev-new.fet555888.tw/api/mobile/get/live/game/active";//場中賽事 正在進行中場次
         BettingRecord = "https://dev-new.fet555888.tw/api/mobile/get/member/all-betting-record";//投注紀錄

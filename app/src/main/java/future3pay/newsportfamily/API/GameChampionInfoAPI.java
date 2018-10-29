@@ -1,11 +1,14 @@
 package future3pay.newsportfamily.API;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
-import future3pay.newsportfamily.Bean.GameInfoBean;
+import future3pay.newsportfamily.Bean.GameChampionInfoBean;
+import future3pay.newsportfamily.Bean.GameNormalInfoBean;
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.Fragment.BettingFragment;
 import future3pay.newsportfamily.Index;
@@ -45,7 +48,9 @@ public class GameChampionInfoAPI {
                         //告知使用者連線失敗
                         ToastShow.start(  Index.WeakIndex.get(),"無網路狀態，請檢查您的行動網路是否開啟");
 
-
+                        Loading.diss();
+                        BettingFragment.WeakBettingFragment.get().BettingRV.finishRefreshing();
+                        BettingFragment.WeakBettingFragment.get().GameChampionAdapter.notifyDataSetChanged();
                     }
 
                 });
@@ -67,6 +72,20 @@ public class GameChampionInfoAPI {
                                 JSONObject content = new JSONObject(json);
 
                                 if(content.getInt("result") == 0){
+                                    BettingFragment.WeakBettingFragment.get().GameChampionInfoList.clear();
+                                    for(int i = 0; i<content.getJSONArray("game").length();i++ ){
+
+                                            Log.d("aaaaaaaaaaaaa", String.valueOf(content.getJSONArray("game").getJSONObject(i).getJSONArray("gameInfo")));
+                                        BettingFragment.WeakBettingFragment.get().GameChampionInfoList.add(new GameChampionInfoBean(
+
+                                                content.getJSONArray("game").getJSONObject(i).getString("category"),
+                                                content.getJSONArray("game").getJSONObject(i).getJSONArray("gameInfo").toString(),
+                                                content.getJSONArray("game").getJSONObject(i).getJSONArray("gameInfo").length()
+
+                                        ));
+
+                                    }
+
 
 
 
@@ -88,13 +107,16 @@ public class GameChampionInfoAPI {
 
                         }
 
-
+                        Loading.diss();
+                        BettingFragment.WeakBettingFragment.get().BettingRV.finishRefreshing();
+                        BettingFragment.WeakBettingFragment.get().GameChampionAdapter.notifyDataSetChanged();
 
                     }
                 });
 
 
             }
+
         });
 
 

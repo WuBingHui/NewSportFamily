@@ -6,6 +6,20 @@
     android:layout_height="wrap_content">
 
     <TextView
+        android:id="@+id/BettingGameCount"
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@color/red_A700"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/SportCategory"
         android:layout_width="0dp"
         android:layout_height="50dp"

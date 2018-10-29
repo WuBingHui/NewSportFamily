@@ -224,6 +224,26 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="加總">加總</string>
+    <string name="勝分差">勝分差</string>
+    <string name="局數">局數</string>
+    <string name="遊戲玩法">遊戲玩法</string>
+    <string name="結果">結果</string>
+    <string name="球種">球種:</string>
+    <string name="期間">期間:</string>
+    <string name="聯盟">聯盟:</string>
+
+
+    <array name="Time_list">
+        <item>1天</item>
+        <item>3天</item>
+        <item>1週</item>
+        <item>3週</item>
+        <item>1月</item>
+        <item>1月</item>
+        <item>1月</item>
+    </array>
+
 
 
 </resources>

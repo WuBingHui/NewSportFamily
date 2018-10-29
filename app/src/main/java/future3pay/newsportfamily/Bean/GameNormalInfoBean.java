@@ -4,7 +4,7 @@ package future3pay.newsportfamily.Bean;
  * Created by cy on 2018/4/6.
  */
 
-public class GameInfoBean {
+public class GameNormalInfoBean {
 
     private String gameStartTime;
     private String Category;
@@ -26,7 +26,7 @@ public class GameInfoBean {
 
 
 
-    public GameInfoBean(String Category, String Ti, int GameLeagth, String Game) {
+    public GameNormalInfoBean(String Category, String Ti, int GameLeagth, String Game) {
 
         this.Category = Category;
         this.Ti = Ti;

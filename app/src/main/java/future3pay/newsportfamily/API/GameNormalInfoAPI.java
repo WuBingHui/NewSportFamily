@@ -1,15 +1,11 @@
 package future3pay.newsportfamily.API;
 
-import android.util.Log;
-import android.view.View;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
-import future3pay.newsportfamily.Activity.RegisterActivity;
-import future3pay.newsportfamily.Bean.GameInfoBean;
+import future3pay.newsportfamily.Bean.GameNormalInfoBean;
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.Fragment.BettingFragment;
 import future3pay.newsportfamily.Index;
@@ -17,12 +13,11 @@ import future3pay.newsportfamily.UIkit.Loading;
 import future3pay.newsportfamily.UIkit.ToastShow;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class GameInfoAPI {
+public class GameNormalInfoAPI {
 
 
     public static void GameInfo(){
@@ -51,7 +46,7 @@ public class GameInfoAPI {
                         ToastShow.start(  Index.WeakIndex.get(),"無網路狀態，請檢查您的行動網路是否開啟");
                         Loading.diss();
                         BettingFragment.WeakBettingFragment.get().BettingRV.finishRefreshing();
-                        BettingFragment.WeakBettingFragment.get().rvAdapter.notifyDataSetChanged();
+                        BettingFragment.WeakBettingFragment.get().GameNormalAdapter.notifyDataSetChanged();
 
                     }
 
@@ -75,10 +70,10 @@ public class GameInfoAPI {
 
                                 if(content.getInt("result") == 0){
 
-                                    BettingFragment.WeakBettingFragment.get().GameInfoList.clear();
+                                    BettingFragment.WeakBettingFragment.get().GameNormalInfoList.clear();
                                     for(int i = 0; i<content.getJSONArray("game").length();i++ ){
 
-                                        BettingFragment.WeakBettingFragment.get().GameInfoList.add(new GameInfoBean(
+                                        BettingFragment.WeakBettingFragment.get().GameNormalInfoList.add(new GameNormalInfoBean(
 
                                                 content.getJSONArray("game").getJSONObject(i).getString("category"),
                                                 content.getJSONArray("game").getJSONObject(i).getString("ti"),
@@ -96,7 +91,7 @@ public class GameInfoAPI {
                                     ToastShow.start(  Index.WeakIndex.get(),"賽事獲取失敗");
                                 }
                             } catch (JSONException e) {
-                                Log.d("aaaaaaaaaaaaaaaa",e.toString());
+
                                 e.printStackTrace();
                                 ToastShow.start(  Index.WeakIndex.get(),"伺服器斷線");
 
@@ -111,7 +106,7 @@ public class GameInfoAPI {
 
                         Loading.diss();
                         BettingFragment.WeakBettingFragment.get().BettingRV.finishRefreshing();
-                        BettingFragment.WeakBettingFragment.get().rvAdapter.notifyDataSetChanged();
+                        BettingFragment.WeakBettingFragment.get().GameNormalAdapter.notifyDataSetChanged();
 
                     }
                 });

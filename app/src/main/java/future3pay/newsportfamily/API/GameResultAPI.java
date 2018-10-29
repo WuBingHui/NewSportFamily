@@ -1,10 +1,13 @@
 package future3pay.newsportfamily.API;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
+import future3pay.newsportfamily.Activity.RegisterActivity;
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.UIkit.ToastShow;
@@ -15,9 +18,12 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class SportTypeAPI {
+public class GameResultAPI {
 
-    public static void SportType(){
+
+
+
+    public static void GameResul(){
 
 
 
@@ -27,9 +33,12 @@ public class SportTypeAPI {
         //構建FormBody，傳入要提交的參數
         FormBody formBody = new FormBody
                 .Builder()
+                .add("type", "s-443")
+                .add("time", "B")
                 .build();
+
         Request request=new Request.Builder()
-                .url(DoMainUrl.SportsType)
+                .url(DoMainUrl.GameResult)
                 .header("Accept","application/json")
                 .post(formBody)
                 .build();
@@ -44,7 +53,7 @@ public class SportTypeAPI {
                     public void run() {
 
                         //告知使用者連線失敗
-                        ToastShow.start(Index.WeakIndex.get(),"無網路狀態，請檢查您的行動網路是否開啟");
+                        ToastShow.start(RegisterActivity.WeakRegisterActivity.get(),"無網路狀態，請檢查您的行動網路是否開啟");
 
                     }
 
@@ -59,40 +68,45 @@ public class SportTypeAPI {
                 Index.WeakIndex.get().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        try {
+                            String json =response.body().string();
+                            JSONObject content = new JSONObject(json);
+
                         if(response.isSuccessful()){
 
-                            try {
-                                String json =response.body().string();
-                                JSONObject content = new JSONObject(json);
 
                                 if(content.getInt("result") == 0){
-                                    Index.WeakIndex.get().GameType.clear();
-                                    Index.WeakIndex.get().GameName.clear();
 
-                                    for(int i=0 ;i<content.getJSONArray("sportsType").length();i++){
-                                        Index.WeakIndex.get().GameName.add(content.getJSONArray("sportsType").getJSONObject(i).getString("name"));
-                                        Index.WeakIndex.get().GameType.add(content.getJSONArray("sportsType").getJSONObject(i).getString("type"));
-                                     //   Log.d("aaaaaaaaaaaaaa",content.getJSONArray("sportsType").getJSONObject(i).getString("name")+"    "+content.getJSONArray("sportsType").getJSONObject(i).getString("type"));
+
+                                    for(int i=0; i < content.getJSONArray("gamesResult").length();i++){
+
+
+                                     content.getJSONArray("gamesResult").getJSONObject(0).getString("category");
+
+
                                     }
+
 
                                 }else{
 
-                                    ToastShow.start(Index.WeakIndex.get(),"獲取賽事球種失敗");
+                                    ToastShow.start(Index.WeakIndex.get(),"賽事獲取失敗，請在試一次");
 
                                 }
-                            } catch (JSONException e) {
 
-                                e.printStackTrace();
-                                ToastShow.start(Index.WeakIndex.get(),"伺服器無回應");
-
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
                         }else{
 
-                            ToastShow.start(Index.WeakIndex.get(),"獲取賽事球種失敗");
+                            ToastShow.start(Index.WeakIndex.get(),"賽事獲取失敗，請在試一次");
 
                         }
+                        } catch (JSONException e) {
+
+                            e.printStackTrace();
+                            ToastShow.start(Index.WeakIndex.get(),"伺服器斷線");
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
                     }
                 });
 
@@ -104,6 +118,11 @@ public class SportTypeAPI {
 
 
     }
+
+
+
+
+
 
 
 }

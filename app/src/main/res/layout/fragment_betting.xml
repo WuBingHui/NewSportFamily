@@ -11,9 +11,7 @@
         android:layout_height="match_parent"
         android:background="@android:color/white">
 
-        <com.cy.cyrvadapter.refreshrv.VerticalRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+        <com.cy.cyrvadapter.refreshrv.VerticalRefreshLayout
             android:id="@+id/BettingRV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

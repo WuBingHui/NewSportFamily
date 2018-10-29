@@ -1,6 +1,5 @@
 package future3pay.newsportfamily;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
@@ -21,20 +20,18 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import future3pay.newsportfamily.API.GameInfoAPI;
 import future3pay.newsportfamily.API.SportTypeAPI;
-import future3pay.newsportfamily.Activity.LoginActivity;
 import future3pay.newsportfamily.Fragment.BettingFragment;
 
 
 public class Index extends AppCompatActivity {
-    public String SportType="s-441";
+    public String SportType="s-442";
     public FragmentManager manager = null;
     public FragmentTransaction transaction = null;
 private FrameLayout IndexFrame;
 public SharedPreferences UserInfo ;
-public List<String> SporeType;
-public List<String> SporeName;
+public List<String> GameType;
+public List<String> GameName;
 public static WeakReference<Index> WeakIndex;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +43,8 @@ public static WeakReference<Index> WeakIndex;
         UserInfo = PreferenceManager
                 .getDefaultSharedPreferences(this);
 
-        SporeType = new ArrayList<>();
-        SporeName = new ArrayList<>();
+        GameType = new ArrayList<>();
+        GameName = new ArrayList<>();
 
         IndexFrame = findViewById(R.id.IndexFrame);
 
@@ -62,13 +59,12 @@ public static WeakReference<Index> WeakIndex;
        // Intent intent=new Intent();
        // intent.setClass(this,LoginActivity.class);
       // startActivity(intent);
+
         //透過下方程式碼，取得Activity中執行的個體。
        manager = getSupportFragmentManager();
        transaction = manager.beginTransaction();
-        BettingFragment BettingFragment = new BettingFragment();
-      transaction.setCustomAnimations(R.anim.slide_right_in, R.anim.slide_left_out);
-      transaction.replace(R.id.IndexFrame, BettingFragment, "BettingFragment");
-       transaction.commitAllowingStateLoss();
+
+        SwitchFragment.init(savedInstanceState,manager,transaction);
     }
 
 private void actionbar(){
@@ -119,6 +115,39 @@ private void actionbar(){
             bottomNavigation.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
 
             // bottomNavigation.setCurrentItem(0);
+
+
+            // Set listeners
+            bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
+                @Override
+                public boolean onTabSelected(int position, boolean wasSelected) {
+                    switch (position){
+                        case 0 :
+                            if(!wasSelected){
+                                SwitchFragment.selectFragment("BettingFragment");
+                            }
+                            break;
+                        case 1 :
+                            if(!wasSelected){
+                                SwitchFragment.selectFragment("BettingCountDownFragment");
+                            }
+                            break;
+                        case 2:
+                            if(!wasSelected){
+                                SwitchFragment.selectFragment("GameResultFragment");
+                            }
+                            break;
+                        case 3 :
+                            if(!wasSelected){
+                                SwitchFragment.selectFragment("MemberFragment");
+                            }
+                            break;
+                    }
+                    return true;
+                }
+            });
+
+
         }
 
     }
