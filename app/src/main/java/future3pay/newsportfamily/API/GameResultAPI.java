@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import future3pay.newsportfamily.Activity.RegisterActivity;
 import future3pay.newsportfamily.DoMainUrl;
+import future3pay.newsportfamily.Fragment.GameResultFragment;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.UIkit.ToastShow;
 import okhttp3.Call;
@@ -23,7 +24,7 @@ public class GameResultAPI {
 
 
 
-    public static void GameResul(){
+    public static void GameResul(String type,String time){
 
 
 
@@ -33,8 +34,8 @@ public class GameResultAPI {
         //構建FormBody，傳入要提交的參數
         FormBody formBody = new FormBody
                 .Builder()
-                .add("type", "s-443")
-                .add("time", "B")
+                .add("type",type)
+                .add("time", time)
                 .build();
 
         Request request=new Request.Builder()
@@ -53,7 +54,7 @@ public class GameResultAPI {
                     public void run() {
 
                         //告知使用者連線失敗
-                        ToastShow.start(RegisterActivity.WeakRegisterActivity.get(),"無網路狀態，請檢查您的行動網路是否開啟");
+                        ToastShow.start(Index.WeakIndex.get(),"無網路狀態，請檢查您的行動網路是否開啟");
 
                     }
 

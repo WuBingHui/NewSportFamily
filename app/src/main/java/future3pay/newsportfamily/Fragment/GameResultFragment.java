@@ -3,6 +3,7 @@ package future3pay.newsportfamily.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import java.util.List;
 
 import future3pay.newsportfamily.API.GameChampionInfoAPI;
 import future3pay.newsportfamily.API.GameResultAPI;
+import future3pay.newsportfamily.API.SportTypeAPI;
 import future3pay.newsportfamily.Bean.GameChampionInfoBean;
 import future3pay.newsportfamily.Bean.GameResultBean;
 import future3pay.newsportfamily.Index;
@@ -68,14 +70,7 @@ public class GameResultFragment extends Fragment {
 
         GameResulList = new ArrayList<>();
 
-        ArrayAdapter<String> List = new ArrayAdapter<>(WeakGameResult.get().getContext(),
-                android.R.layout.simple_spinner_dropdown_item,
-                Index.WeakIndex.get().GameType);
-
-        GameResultType.setAdapter(List);
-
-
-        GameResultAPI.GameResul();
+        SportTypeAPI.SportType();//取球種Api
 
         GetGameResultInfo();
 
@@ -84,6 +79,38 @@ public class GameResultFragment extends Fragment {
 
         return  view;
     }
+
+    public String SwitchDate(){
+            String time ="A";
+        switch (GameResultDate.getSelectedItem().toString()){
+            case "1天":
+                time ="A";
+            break;
+            case "3天":
+                time ="B";
+                break;
+            case "1週":
+                time ="C";
+                break;
+
+            case "3週":
+                time ="D";
+                break;
+            case "1月":
+                time ="E";
+                break;
+            case "2月":
+                time ="F";
+                break;
+            case "3月":
+                time ="G";
+                break;
+
+        }
+        return time;
+    }
+
+
 
     private void GetGameResultInfo(){
 
@@ -118,7 +145,7 @@ public class GameResultFragment extends Fragment {
                     @Override
                     public void onRefresh() {
 
-                        GameResultAPI.GameResul();
+                        GameResultAPI.GameResul(Index.WeakIndex.get().GameType.get(GameResultType.getSelectedItemPosition()),SwitchDate());
 
                     }
                 });

@@ -1,11 +1,14 @@
 package future3pay.newsportfamily.API;
 
+import android.widget.ArrayAdapter;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
 import future3pay.newsportfamily.DoMainUrl;
+import future3pay.newsportfamily.Fragment.GameResultFragment;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.UIkit.ToastShow;
 import okhttp3.Call;
@@ -70,11 +73,19 @@ public class SportTypeAPI {
                                     Index.WeakIndex.get().GameName.clear();
 
                                     for(int i=0 ;i<content.getJSONArray("sportsType").length();i++){
+
+
                                         Index.WeakIndex.get().GameName.add(content.getJSONArray("sportsType").getJSONObject(i).getString("name"));
                                         Index.WeakIndex.get().GameType.add(content.getJSONArray("sportsType").getJSONObject(i).getString("type"));
                                      //   Log.d("aaaaaaaaaaaaaa",content.getJSONArray("sportsType").getJSONObject(i).getString("name")+"    "+content.getJSONArray("sportsType").getJSONObject(i).getString("type"));
                                     }
+                                    ArrayAdapter<String> List = new ArrayAdapter<>(GameResultFragment.WeakGameResult.get().getContext(),
+                                            android.R.layout.simple_spinner_dropdown_item,
+                                            Index.WeakIndex.get().GameName);
 
+                                    GameResultFragment.WeakGameResult.get().GameResultType.setAdapter(List);
+
+                                    GameResultAPI.GameResul(Index.WeakIndex.get().GameType.get(GameResultFragment.WeakGameResult.get().GameResultType.getSelectedItemPosition()),GameResultFragment.WeakGameResult.get().SwitchDate());
                                 }else{
 
                                     ToastShow.start(Index.WeakIndex.get(),"獲取賽事球種失敗");

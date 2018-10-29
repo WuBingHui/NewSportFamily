@@ -54,7 +54,7 @@ public static WeakReference<Index> WeakIndex;
         DoMainUrl.GetDoMain();//加載一次domain
         actionbar();
 
-        SportTypeAPI.SportType();//取球種Api
+
 
        // Intent intent=new Intent();
        // intent.setClass(this,LoginActivity.class);
