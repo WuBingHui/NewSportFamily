@@ -364,7 +364,7 @@
         android:background="@color/grey_400"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView34" />
+        app:layout_constraintTop_toBottomOf="@+id/One" />
 
     <View
         android:id="@+id/divider8"
@@ -379,113 +379,113 @@
         app:layout_constraintTop_toBottomOf="@+id/AwayNameSmall" />
 
     <TextView
-        android:id="@+id/textView34"
+        android:id="@+id/One"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="1"
         android:textColor="@color/Black"
-        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="@+id/textView45"
-        app:layout_constraintEnd_toStartOf="@+id/textView35"
+        app:layout_constraintEnd_toStartOf="@+id/Two"
         app:layout_constraintStart_toEndOf="@+id/textView45"
         app:layout_constraintTop_toTopOf="@+id/textView45" />
 
     <TextView
-        android:id="@+id/textView35"
+        android:id="@+id/Two"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="2"
         android:gravity="center"
         android:textColor="@color/Black"
-        app:layout_constraintBottom_toBottomOf="@+id/textView34"
-        app:layout_constraintEnd_toStartOf="@+id/textView36"
-        app:layout_constraintStart_toEndOf="@+id/textView34"
-        app:layout_constraintTop_toTopOf="@+id/textView34" />
+        app:layout_constraintBottom_toBottomOf="@+id/One"
+        app:layout_constraintEnd_toStartOf="@+id/Three"
+        app:layout_constraintStart_toEndOf="@+id/One"
+        app:layout_constraintTop_toTopOf="@+id/One" />
 
     <TextView
-        android:id="@+id/textView36"
+        android:id="@+id/Three"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="3"
         android:gravity="center"
         android:textColor="@color/Black"
-        app:layout_constraintBottom_toBottomOf="@+id/textView35"
-        app:layout_constraintEnd_toStartOf="@+id/textView37"
-        app:layout_constraintStart_toEndOf="@+id/textView35"
-        app:layout_constraintTop_toTopOf="@+id/textView35" />
+        app:layout_constraintBottom_toBottomOf="@+id/Two"
+        app:layout_constraintEnd_toStartOf="@+id/Four"
+        app:layout_constraintStart_toEndOf="@+id/Two"
+        app:layout_constraintTop_toTopOf="@+id/Two" />
 
     <TextView
-        android:id="@+id/textView37"
+        android:id="@+id/Four"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="4"
         android:gravity="center"
         android:textColor="@color/Black"
-        app:layout_constraintBottom_toBottomOf="@+id/textView36"
-        app:layout_constraintEnd_toStartOf="@+id/textView38"
-        app:layout_constraintStart_toEndOf="@+id/textView36"
-        app:layout_constraintTop_toTopOf="@+id/textView36" />
+        app:layout_constraintBottom_toBottomOf="@+id/Three"
+        app:layout_constraintEnd_toStartOf="@+id/Five"
+        app:layout_constraintStart_toEndOf="@+id/Three"
+        app:layout_constraintTop_toTopOf="@+id/Three" />
 
     <TextView
-        android:id="@+id/textView38"
+        android:id="@+id/Five"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="5"
         android:gravity="center"
         android:textColor="@color/Black"
-        app:layout_constraintBottom_toBottomOf="@+id/textView37"
-        app:layout_constraintEnd_toStartOf="@+id/textView39"
-        app:layout_constraintStart_toEndOf="@+id/textView37"
-        app:layout_constraintTop_toTopOf="@+id/textView37" />
+        app:layout_constraintBottom_toBottomOf="@+id/Four"
+        app:layout_constraintEnd_toStartOf="@+id/Six"
+        app:layout_constraintStart_toEndOf="@+id/Four"
+        app:layout_constraintTop_toTopOf="@+id/Four" />
 
     <TextView
-        android:id="@+id/textView39"
+        android:id="@+id/Six"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="6"
         android:gravity="center"
         android:textColor="@color/Black"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/textView38"
-        app:layout_constraintEnd_toStartOf="@+id/textView40"
-        app:layout_constraintStart_toEndOf="@+id/textView38"
-        app:layout_constraintTop_toTopOf="@+id/textView38" />
+        app:layout_constraintBottom_toBottomOf="@+id/Five"
+        app:layout_constraintEnd_toStartOf="@+id/Seven"
+        app:layout_constraintStart_toEndOf="@+id/Five"
+        app:layout_constraintTop_toTopOf="@+id/Five" />
 
     <TextView
-        android:id="@+id/textView40"
+        android:id="@+id/Seven"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="7"
         android:gravity="center"
         android:textColor="@color/Black"
-        app:layout_constraintBottom_toBottomOf="@+id/textView39"
-        app:layout_constraintEnd_toStartOf="@+id/textView41"
-        app:layout_constraintStart_toEndOf="@+id/textView39"
-        app:layout_constraintTop_toTopOf="@+id/textView39" />
+        app:layout_constraintBottom_toBottomOf="@+id/Six"
+        app:layout_constraintEnd_toStartOf="@+id/Eight"
+        app:layout_constraintStart_toEndOf="@+id/Six"
+        app:layout_constraintTop_toTopOf="@+id/Six" />
 
     <TextView
-        android:id="@+id/textView41"
+        android:id="@+id/Eight"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="8"
         android:gravity="center"
         android:textColor="@color/Black"
-        app:layout_constraintBottom_toBottomOf="@+id/textView40"
-        app:layout_constraintEnd_toStartOf="@+id/textView42"
-        app:layout_constraintStart_toEndOf="@+id/textView40"
-        app:layout_constraintTop_toTopOf="@+id/textView40" />
+        app:layout_constraintBottom_toBottomOf="@+id/Seven"
+        app:layout_constraintEnd_toStartOf="@+id/Nine"
+        app:layout_constraintStart_toEndOf="@+id/Seven"
+        app:layout_constraintTop_toTopOf="@+id/Seven" />
 
     <TextView
-        android:id="@+id/textView42"
+        android:id="@+id/Nine"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="9"
         android:gravity="center"
         android:textColor="@color/Black"
-        app:layout_constraintBottom_toBottomOf="@+id/textView41"
-        app:layout_constraintEnd_toStartOf="@+id/textView46"
-        app:layout_constraintStart_toEndOf="@+id/textView41"
-        app:layout_constraintTop_toTopOf="@+id/textView41" />
+        app:layout_constraintBottom_toBottomOf="@+id/Eight"
+        app:layout_constraintEnd_toStartOf="@+id/OT"
+        app:layout_constraintStart_toEndOf="@+id/Eight"
+        app:layout_constraintTop_toTopOf="@+id/Eight" />
 
     <TextView
         android:id="@+id/textView45"
@@ -494,21 +494,21 @@
         android:layout_marginTop="8dp"
         android:text="@string/局數"
         android:textColor="@color/Black"
-        app:layout_constraintEnd_toStartOf="@+id/textView34"
+        app:layout_constraintEnd_toStartOf="@+id/One"
         app:layout_constraintStart_toStartOf="@+id/divider6"
         app:layout_constraintTop_toBottomOf="@+id/divider6" />
 
     <TextView
-        android:id="@+id/textView46"
+        android:id="@+id/OT"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="OT"
         android:textColor="@color/Black"
-        app:layout_constraintBottom_toBottomOf="@+id/textView42"
+        app:layout_constraintBottom_toBottomOf="@+id/Nine"
         app:layout_constraintEnd_toEndOf="@+id/divider6"
-        app:layout_constraintStart_toEndOf="@+id/textView42"
-        app:layout_constraintTop_toTopOf="@+id/textView42" />
+        app:layout_constraintStart_toEndOf="@+id/Nine"
+        app:layout_constraintTop_toTopOf="@+id/Nine" />
 
     <View
         android:id="@+id/divider9"

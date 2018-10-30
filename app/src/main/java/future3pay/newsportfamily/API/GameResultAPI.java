@@ -1,6 +1,7 @@
 package future3pay.newsportfamily.API;
 
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 
 import org.json.JSONException;
@@ -17,6 +18,7 @@ import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.Fragment.BettingFragment;
 import future3pay.newsportfamily.Fragment.GameResultFragment;
 import future3pay.newsportfamily.Index;
+import future3pay.newsportfamily.UIkit.Loading;
 import future3pay.newsportfamily.UIkit.ToastShow;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -132,13 +134,20 @@ public class GameResultAPI {
                             e.printStackTrace();
                         }
                         GameResultFragment.WeakGameResult.get().GameResultRV.finishRefreshing();
-                        GameResultFragment.WeakGameResult.get().GameResultAdapter.notifyDataSetChanged();
 
                         ArrayAdapter<String> List = new ArrayAdapter<>(GameResultFragment.WeakGameResult.get().getContext(),
                                 android.R.layout.simple_spinner_dropdown_item,
                                 ArrayRemoveDuplicate.RemoveDuplicate(GameResultFragment.WeakGameResult.get().GameResulList));
                         GameResultFragment.WeakGameResult.get().GameResultCategory.setAdapter(List);
 
+                        GameResultFragment.WeakGameResult.get().GetGameResultInfo();
+
+                        GameResultFragment.WeakGameResult.get() .GameResultType.setOnItemSelectedListener(GameResultFragment.WeakGameResult.get().TypeSelect);
+
+                        GameResultFragment.WeakGameResult.get() .GameResultCategory.setOnItemSelectedListener(GameResultFragment.WeakGameResult.get().CategorySelect);
+
+                        GameResultFragment.WeakGameResult.get().GameResultDate.setOnItemSelectedListener(GameResultFragment.WeakGameResult.get().DateSelect);
+                        GameResultFragment.WeakGameResult.get().GameResultRV.setVisibility(View.VISIBLE);
                     }
                 });
 
