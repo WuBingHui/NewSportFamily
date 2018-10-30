@@ -32,6 +32,7 @@ private FrameLayout IndexFrame;
 public SharedPreferences UserInfo ;
 public List<String> GameType;
 public List<String> GameName;
+    public List<String> GameCategory;
 public static WeakReference<Index> WeakIndex;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public static WeakReference<Index> WeakIndex;
 
         GameType = new ArrayList<>();
         GameName = new ArrayList<>();
-
+        GameCategory=  new ArrayList<>();
         IndexFrame = findViewById(R.id.IndexFrame);
 
         ButtomTab buttomTab = new ButtomTab();

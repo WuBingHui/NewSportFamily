@@ -1,5 +1,6 @@
 package future3pay.newsportfamily.API;
 
+import android.util.Log;
 import android.widget.ArrayAdapter;
 
 import org.json.JSONException;
@@ -86,6 +87,7 @@ public class SportTypeAPI {
                                     GameResultFragment.WeakGameResult.get().GameResultType.setAdapter(List);
 
                                     GameResultAPI.GameResul(Index.WeakIndex.get().GameType.get(GameResultFragment.WeakGameResult.get().GameResultType.getSelectedItemPosition()),GameResultFragment.WeakGameResult.get().SwitchDate());
+
                                 }else{
 
                                     ToastShow.start(Index.WeakIndex.get(),"獲取賽事球種失敗");

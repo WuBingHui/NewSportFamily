@@ -1,14 +1,20 @@
 package future3pay.newsportfamily.API;
 
 import android.util.Log;
+import android.widget.ArrayAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
 
 import future3pay.newsportfamily.Activity.RegisterActivity;
+import future3pay.newsportfamily.ArrayRemoveDuplicate;
+import future3pay.newsportfamily.Bean.GameResultBean;
 import future3pay.newsportfamily.DoMainUrl;
+import future3pay.newsportfamily.Fragment.BettingFragment;
 import future3pay.newsportfamily.Fragment.GameResultFragment;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.UIkit.ToastShow;
@@ -78,14 +84,31 @@ public class GameResultAPI {
 
                                 if(content.getInt("result") == 0){
 
-
+                                    GameResultFragment.WeakGameResult.get().GameResulList.clear();
+                                    GameResultFragment.WeakGameResult.get().GameResulCount.clear();
                                     for(int i=0; i < content.getJSONArray("gamesResult").length();i++){
 
-
-                                     content.getJSONArray("gamesResult").getJSONObject(0).getString("category");
-
+                                            GameResultFragment.WeakGameResult.get().GameResulList.add(new GameResultBean(
+                                                    content.getJSONArray("gamesResult").getJSONObject(i).getString("bets_type"),
+                                                    content.getJSONArray("gamesResult").getJSONObject(i).getString("game_start_time"),
+                                                    content.getJSONArray("gamesResult").getJSONObject(i).getString("category"),
+                                                    content.getJSONArray("gamesResult").getJSONObject(i).getString("ti"),
+                                                    content.getJSONArray("gamesResult").getJSONObject(i).getString("away_team"),
+                                                    content.getJSONArray("gamesResult").getJSONObject(i).getString("home_team"),
+                                                    content.getJSONArray("gamesResult").getJSONObject(i).getString("away_score"),
+                                                    content.getJSONArray("gamesResult").getJSONObject(i).getString("home_score"),
+                                                    content.getJSONArray("gamesResult").getJSONObject(i).getString("away_period"),
+                                                    content.getJSONArray("gamesResult").getJSONObject(i).getString("home_period"),
+                                                    content.getJSONArray("gamesResult").getJSONObject(i).getString("finial_result"),
+                                                    content.getJSONArray("gamesResult").getJSONObject(i).getString("ni"),
+                                                    content.getJSONArray("gamesResult").getJSONObject(i).getString("code"),
+                                                    content.getJSONArray("gamesResult").getJSONObject(i).getString("type"),
+                                                    content.getJSONArray("gamesResult").getJSONObject(i).getString("status")
+                                            ));
 
                                     }
+
+
 
 
                                 }else{
@@ -99,6 +122,7 @@ public class GameResultAPI {
                             ToastShow.start(Index.WeakIndex.get(),"賽事獲取失敗，請在試一次");
 
                         }
+
                         } catch (JSONException e) {
 
                             e.printStackTrace();
@@ -107,6 +131,13 @@ public class GameResultAPI {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                        GameResultFragment.WeakGameResult.get().GameResultRV.finishRefreshing();
+                        GameResultFragment.WeakGameResult.get().GameResultAdapter.notifyDataSetChanged();
+
+                        ArrayAdapter<String> List = new ArrayAdapter<>(GameResultFragment.WeakGameResult.get().getContext(),
+                                android.R.layout.simple_spinner_dropdown_item,
+                                ArrayRemoveDuplicate.RemoveDuplicate(GameResultFragment.WeakGameResult.get().GameResulList));
+                        GameResultFragment.WeakGameResult.get().GameResultCategory.setAdapter(List);
 
                     }
                 });
@@ -119,6 +150,7 @@ public class GameResultAPI {
 
 
     }
+
 
 
 
