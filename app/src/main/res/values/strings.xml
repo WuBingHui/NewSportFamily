@@ -232,6 +232,20 @@
     <string name="球種">球種:</string>
     <string name="期間">期間:</string>
     <string name="聯盟">聯盟:</string>
+    <string name="無賽事資料">無賽事資料</string>
+    <string name="待出單">待出單</string>
+    <string name="待派彩">待派彩</string>
+    <string name="今日筆數">今日筆數</string>
+    <string name="個人資料">個人資料</string>
+    <string name="投注紀錄">投注紀錄</string>
+    <string name="使用紀錄">使用紀錄</string>
+    <string name="補點紀錄">補點紀錄</string>
+    <string name="提領紀錄">提領紀錄</string>
+    <string name="家族幣">家族幣</string>
+    <string name="現金點數">現金點數</string>
+    <string name="登出">登出</string>
+    <string name="邀請碼">邀請碼</string>
+    <string name="熱門聯賽">熱門聯賽</string>
 
 
     <array name="Time_list">

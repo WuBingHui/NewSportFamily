@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Menu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView43"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:alpha="0.9"
+        android:background="@color/topcolor"
+        android:drawableStart="@android:drawable/ic_menu_compass"
+        android:gravity="center|start"
+        android:paddingStart="4dp"
+        android:text="@string/熱門聯賽"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NormalGame" />
+
+    <TextView
+        android:id="@+id/textView35"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:alpha="0.9"
+        android:background="@color/topcolor"
+        android:drawableStart="@android:drawable/ic_menu_compass"
+        android:gravity="center|start"
+        android:paddingStart="4dp"
+        android:text="@string/熱門聯賽"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView36" />
+
+    <TextView
+        android:id="@+id/textView36"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:background="@color/topcolor"
+        android:gravity="center|start"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:text="提供熱門賽事資訊，即時投注更便利"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/NormalGame"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/textView43"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView35">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ChampionGame"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView43"></LinearLayout>
+</android.support.constraint.ConstraintLayout>

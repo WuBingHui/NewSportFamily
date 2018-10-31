@@ -110,7 +110,13 @@ public class GameResultAPI {
 
                                     }
 
-
+                                        if( GameResultFragment.WeakGameResult.get().GameResulList.size() <= 0){
+                                            GameResultFragment.WeakGameResult.get().GameResultRV.setVisibility(View.GONE);
+                                            GameResultFragment.WeakGameResult.get().NoGame.setVisibility(View.VISIBLE);
+                                        }else{
+                                            GameResultFragment.WeakGameResult.get().GameResultRV.setVisibility(View.VISIBLE);
+                                            GameResultFragment.WeakGameResult.get().NoGame.setVisibility(View.GONE);
+                                        }
 
 
                                 }else{
@@ -147,7 +153,9 @@ public class GameResultAPI {
                         GameResultFragment.WeakGameResult.get() .GameResultCategory.setOnItemSelectedListener(GameResultFragment.WeakGameResult.get().CategorySelect);
 
                         GameResultFragment.WeakGameResult.get().GameResultDate.setOnItemSelectedListener(GameResultFragment.WeakGameResult.get().DateSelect);
+
                         GameResultFragment.WeakGameResult.get().GameResultRV.setVisibility(View.VISIBLE);
+
                     }
                 });
 

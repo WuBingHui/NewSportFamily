@@ -48,7 +48,6 @@ import future3pay.newsportfamily.UIkit.Loading;
 public class GameResultFragment extends Fragment {
 
 
-
     public static WeakReference<GameResultFragment> WeakGameResult;
 
     public List<GameResultBean> GameResulList;
@@ -58,6 +57,8 @@ public class GameResultFragment extends Fragment {
     public VerticalRefreshLayout GameResultRV;
 
     public Spinner GameResultType,GameResultCategory,GameResultDate;
+
+    public TextView NoGame;
 
     public GameResultFragment() {
         // Required empty public constructor
@@ -74,6 +75,8 @@ public class GameResultFragment extends Fragment {
 
         WeakGameResult = new WeakReference<>(this);
 
+        NoGame= view.findViewById(R.id.NoGame);
+
         GameResultRV= view.findViewById(R.id.GameResultRV);
 
         GameResultType= view.findViewById(R.id.GameResultType);
@@ -84,10 +87,13 @@ public class GameResultFragment extends Fragment {
 
 
 
+        NoGame.setVisibility(View.GONE);
 
         GameResulList = new ArrayList<>();
+
         GameResulCount = new ArrayList<>();
-        SportTypeAPI.SportType();//取球種Api
+
+        //SportTypeAPI.SportType();//取球種Api
 
 
 

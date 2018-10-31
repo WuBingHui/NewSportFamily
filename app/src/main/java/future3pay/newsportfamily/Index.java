@@ -2,26 +2,33 @@ package future3pay.newsportfamily;
 
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.media.Image;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
+import com.cy.dialog.BaseDialog;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
 import future3pay.newsportfamily.API.SportTypeAPI;
-import future3pay.newsportfamily.Fragment.BettingFragment;
+import future3pay.newsportfamily.API.UserInfoAPI;
 
 
 public class Index extends AppCompatActivity {
@@ -55,6 +62,7 @@ public static WeakReference<Index> WeakIndex;
         DoMainUrl.GetDoMain();//加載一次domain
         actionbar();
 
+        SportTypeAPI.SportType();//取球種Api
 
 
        // Intent intent=new Intent();
@@ -66,26 +74,37 @@ public static WeakReference<Index> WeakIndex;
        transaction = manager.beginTransaction();
 
         SwitchFragment.init(savedInstanceState,manager,transaction);
+
     }
 
 private void actionbar(){
-    //客製化 ActionBar
-    final ActionBar abar = getSupportActionBar();
-    getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.white));
-    View viewActionBar = getLayoutInflater().inflate(R.layout.actionbar_lable, null);
-    ActionBar.LayoutParams params = new ActionBar.LayoutParams(//Center the textview in the ActionBar !
-            ActionBar.LayoutParams.WRAP_CONTENT,
-            ActionBar.LayoutParams.MATCH_PARENT,
-            Gravity.CENTER);
-    TextView actionbar_textview = (TextView) viewActionBar.findViewById(R.id.actionbar_textview);
-    actionbar_textview.setText(R.string.app_name);
-    abar.setCustomView(viewActionBar, params);
-    abar.setDisplayShowCustomEnabled(true);
-    abar.setDisplayShowTitleEnabled(false);
-    abar.setDisplayHomeAsUpEnabled(false);
-    abar.setHomeButtonEnabled(false);
-//
+
+    //獲取ActionBar對象
+    ActionBar bar = getSupportActionBar();
+    bar.setDisplayShowCustomEnabled(true);
+    View v = LayoutInflater.from(getApplicationContext()).inflate(R.layout.actionbar_index, null);
+    TextView actionbar_textview = (TextView) v.findViewById(R.id.actionbar_textview);
+    Button menu = (Button) v.findViewById(R.id.menu);
+    menu.setOnClickListener(Menu);
+    bar.setCustomView(v, new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT));
 }
+
+
+private Button.OnClickListener Menu = new Button.OnClickListener(){
+
+    @Override
+    public void onClick(View view) {
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        BaseDialog dialog_left = new BaseDialog(Index.this);
+
+        dialog_left.config(R.layout.menu, 0.5f, Gravity.LEFT | Gravity.CENTER, BaseDialog.AnimInType.LEFT,
+                (int)(metrics.widthPixels/1.5), WindowManager.LayoutParams.MATCH_PARENT, true).show();
+
+
+    }
+};
+
 
     private class ButtomTab{
         private void CreateTab(){

@@ -1,11 +1,25 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+
+
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="android:actionBarStyle">@style/MyActionBarStyle</item>
+        <!-- Support library compatibility -->
+        <item name="actionBarStyle"> @style/MyActionBarStyle</item>
+        <!--下段代碼就是去除actionbar 底部陰影的-->
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="MyActionBarStyle" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
+    <item name="android:background">@color/white</item>
+    <!-- Support library compatibility -->
+    <item name="background">@color/white</item>
+
+     <item name="contentInsetStart">0dp</item>
+    <item name="contentInsetEnd">0dp</item>
     </style>
 
 </resources>
