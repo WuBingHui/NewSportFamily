@@ -1,8 +1,10 @@
 package future3pay.newsportfamily.Activity;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +16,7 @@ import java.lang.ref.WeakReference;
 
 import future3pay.newsportfamily.API.LoginAPI;
 import future3pay.newsportfamily.API.ResetPassWordAPI;
+import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.R;
 import future3pay.newsportfamily.UIkit.Loading;
 import future3pay.newsportfamily.UIkit.ToastShow;
@@ -33,8 +36,35 @@ public class LoginActivity extends AppCompatActivity {
 
         WeakLoginActivity = new WeakReference<>(this);
 
+
+
+
+        actionbar();
+
+
         ObjectCreate();
 
+    }
+
+
+
+    private void actionbar(){
+
+        //獲取ActionBar對象
+        ActionBar bar = getSupportActionBar();
+        bar.setDisplayShowCustomEnabled(true);
+        View v = LayoutInflater.from(getApplicationContext()).inflate(R.layout.actionbar_login, null);
+        TextView actionbar_textview = (TextView) v.findViewById(R.id.actionbar_textview);
+        Button back = (Button) v.findViewById(R.id.back);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        bar.setCustomView(v, new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT));
     }
 
 
@@ -114,4 +144,10 @@ public class LoginActivity extends AppCompatActivity {
     };
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        Index.WeakIndex.get().bottomNavigation.setCurrentItem(0);
+    }
 }

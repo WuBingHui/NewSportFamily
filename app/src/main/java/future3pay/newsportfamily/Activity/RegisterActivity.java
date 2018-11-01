@@ -1,8 +1,10 @@
 package future3pay.newsportfamily.Activity;
 
 import android.os.CountDownTimer;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,10 +32,38 @@ public class RegisterActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+
+        actionbar();
+
         WeakRegisterActivity = new WeakReference<>(this);
+
+
+
         ObjectCreate();
 
     }
+
+    private void actionbar(){
+
+        //獲取ActionBar對象
+        ActionBar bar = getSupportActionBar();
+        bar.setDisplayShowCustomEnabled(true);
+        View v = LayoutInflater.from(getApplicationContext()).inflate(R.layout.actionbar_login, null);
+        TextView actionbar_textview = (TextView) v.findViewById(R.id.actionbar_textview);
+        Button back = (Button) v.findViewById(R.id.back);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        bar.setCustomView(v, new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT));
+    }
+
+
 
     private void ObjectCreate() {
 

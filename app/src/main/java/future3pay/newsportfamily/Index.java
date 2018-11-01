@@ -1,5 +1,6 @@
 package future3pay.newsportfamily;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.Image;
@@ -10,6 +11,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
@@ -27,12 +30,17 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import future3pay.newsportfamily.API.GameChampionInfoAPI;
+import future3pay.newsportfamily.API.GameNormalInfoAPI;
 import future3pay.newsportfamily.API.SportTypeAPI;
 import future3pay.newsportfamily.API.UserInfoAPI;
+import future3pay.newsportfamily.Activity.LoginActivity;
+import future3pay.newsportfamily.Fragment.BettingFragment;
+import future3pay.newsportfamily.UIkit.Loading;
 
 
 public class Index extends AppCompatActivity {
-    public String SportType="s-442";
+    public String SportType="s-441";
     public FragmentManager manager = null;
     public FragmentTransaction transaction = null;
 private FrameLayout IndexFrame;
@@ -40,6 +48,8 @@ public SharedPreferences UserInfo ;
 public List<String> GameType;
 public List<String> GameName;
     public List<String> GameCategory;
+    private   BaseDialog DialogMenu;
+    public  AHBottomNavigation bottomNavigation;
 public static WeakReference<Index> WeakIndex;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +75,7 @@ public static WeakReference<Index> WeakIndex;
         SportTypeAPI.SportType();//取球種Api
 
 
-       // Intent intent=new Intent();
-       // intent.setClass(this,LoginActivity.class);
-      // startActivity(intent);
+
 
         //透過下方程式碼，取得Activity中執行的個體。
        manager = getSupportFragmentManager();
@@ -90,25 +98,86 @@ private void actionbar(){
 }
 
 
+//菜單裡面的按鈕產生
 private Button.OnClickListener Menu = new Button.OnClickListener(){
 
     @Override
     public void onClick(View view) {
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        BaseDialog dialog_left = new BaseDialog(Index.this);
-
-        dialog_left.config(R.layout.menu, 0.5f, Gravity.LEFT | Gravity.CENTER, BaseDialog.AnimInType.LEFT,
+         DialogMenu = new BaseDialog(Index.this);
+        DialogMenu.config(R.layout.menu, 0.5f, Gravity.LEFT | Gravity.CENTER, BaseDialog.AnimInType.LEFT,
                 (int)(metrics.widthPixels/1.5), WindowManager.LayoutParams.MATCH_PARENT, true).show();
+
+        LinearLayout Normal = DialogMenu.findViewById(R.id.NormalGame);
+        LinearLayout Champion = DialogMenu.findViewById(R.id.ChampionGame);
+
+
+        for(int i = 0 ;i<GameName.size();i++){
+
+            Button NormalType = new Button(DialogMenu.getContext());
+            Button ChampionType = new Button(DialogMenu.getContext());
+
+            NormalType.setTextColor(Color.parseColor("#218838"));
+            ChampionType.setTextColor(Color.parseColor("#218838"));
+
+            NormalType.setBackgroundColor(Color.parseColor("#ffffff"));
+            ChampionType.setBackgroundColor(Color.parseColor("#ffffff"));
+
+            NormalType.setTextSize(18);
+            ChampionType.setTextSize(18);
+
+            NormalType.setPadding(16,0,0,0);
+            ChampionType.setPadding(16,0,0,0);
+
+            ChampionType.setGravity(Gravity.CENTER | Gravity.START);
+            NormalType.setGravity(Gravity.CENTER | Gravity.START);
+
+            NormalType.setTag("0"+GameType.get(i));
+            ChampionType.setTag("1"+GameType.get(i));
+
+            NormalType.setText(GameName.get(i));
+            ChampionType.setText(GameName.get(i));
+
+            NormalType.setOnClickListener(SportTypeSelect);
+            ChampionType.setOnClickListener(SportTypeSelect);
+
+            Normal.addView(NormalType);
+            Champion.addView(ChampionType);
+
+
+        }
+
+
 
 
     }
 };
 
+    //菜單裡的按鈕選擇後的方法
+    private Button.OnClickListener SportTypeSelect = new Button.OnClickListener(){
+
+        @Override
+        public void onClick(View view) {
+            DialogMenu.dismiss();
+            Loading.start(Index.this);
+            SportType =  view.getTag().toString().substring(1);
+           if( view.getTag().toString().substring(0,1).equals("0")){
+               GameNormalInfoAPI.GameInfo();
+               BettingFragment.WeakBettingFragment.get().GetNormalBetting();
+           }else{
+               GameChampionInfoAPI.GameInfo();
+               BettingFragment.WeakBettingFragment.get().GetChampionBetting();
+           }
+
+        }
+    };
+
+
 
     private class ButtomTab{
         private void CreateTab(){
-            AHBottomNavigation bottomNavigation  = (AHBottomNavigation) findViewById(R.id.BottomNavigation);
+             bottomNavigation  = (AHBottomNavigation) findViewById(R.id.BottomNavigation);
             // Create items
             AHBottomNavigationItem item1 = new AHBottomNavigationItem("一般投注", R.mipmap.betting, R.color.topcolor);
             AHBottomNavigationItem item2 = new AHBottomNavigationItem("場中賽事", R.mipmap.bettingmid,R.color.topcolor);
@@ -159,7 +228,14 @@ private Button.OnClickListener Menu = new Button.OnClickListener(){
                             break;
                         case 3 :
                             if(!wasSelected){
-                                SwitchFragment.selectFragment("MemberFragment");
+                                if(!UserInfo.getString("Token","").equals("")){
+
+                                    SwitchFragment.selectFragment("MemberFragment");
+                                }else{
+                                     Intent intent=new Intent();
+                                     intent.setClass(Index.this,LoginActivity.class);
+                                    startActivity(intent);
+                                }
                             }
                             break;
                     }

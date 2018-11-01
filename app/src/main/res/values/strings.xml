@@ -246,6 +246,7 @@
     <string name="登出">登出</string>
     <string name="邀請碼">邀請碼</string>
     <string name="熱門聯賽">熱門聯賽</string>
+    <string name="冠軍聯賽">冠軍聯賽</string>
 
 
     <array name="Time_list">
@@ -257,7 +258,6 @@
         <item>2月</item>
         <item>3月</item>
     </array>
-
 
 
 </resources>

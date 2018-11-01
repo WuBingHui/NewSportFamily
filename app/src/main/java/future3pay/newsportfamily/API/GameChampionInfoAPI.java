@@ -1,6 +1,7 @@
 package future3pay.newsportfamily.API;
 
 import android.util.Log;
+import android.view.View;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -75,7 +76,7 @@ public class GameChampionInfoAPI {
                                     BettingFragment.WeakBettingFragment.get().GameChampionInfoList.clear();
                                     for(int i = 0; i<content.getJSONArray("game").length();i++ ){
 
-                                            Log.d("aaaaaaaaaaaaa", String.valueOf(content.getJSONArray("game").getJSONObject(i).getJSONArray("gameInfo")));
+
                                         BettingFragment.WeakBettingFragment.get().GameChampionInfoList.add(new GameChampionInfoBean(
 
                                                 content.getJSONArray("game").getJSONObject(i).getString("category"),
@@ -110,6 +111,12 @@ public class GameChampionInfoAPI {
                         Loading.diss();
                         BettingFragment.WeakBettingFragment.get().BettingRV.finishRefreshing();
                         BettingFragment.WeakBettingFragment.get().GameChampionAdapter.notifyDataSetChanged();
+
+                        if( BettingFragment.WeakBettingFragment.get().GameChampionInfoList.size() <=0){
+                            BettingFragment.WeakBettingFragment.get().NoGame.setVisibility(View.VISIBLE);
+                        }else{
+                            BettingFragment.WeakBettingFragment.get().NoGame.setVisibility(View.GONE);
+                        }
 
                     }
                 });

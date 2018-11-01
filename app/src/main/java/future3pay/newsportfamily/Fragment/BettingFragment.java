@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cy.cyrvadapter.adapter.RVAdapter;
@@ -34,6 +35,7 @@ public class BettingFragment extends Fragment {
     public VerticalRefreshLayout BettingRV;
     public  List<GameNormalInfoBean> GameNormalInfoList;
     public  List<GameChampionInfoBean> GameChampionInfoList;
+    public TextView NoGame;
     public BettingFragment() {
         // Required empty public constructor
     }
@@ -52,7 +54,8 @@ public class BettingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_betting, container, false);
         WeakBettingFragment = new WeakReference<>(this);
         BettingRV= view.findViewById(R.id.BettingRV);
-
+        NoGame= view.findViewById(R.id.NoGame);
+        NoGame.setVisibility(View.GONE);
         Loading.start(Index.WeakIndex.get());
 
         GameNormalInfoList = new ArrayList<>();
@@ -87,7 +90,7 @@ public class BettingFragment extends Fragment {
 
 
     //一般賽事
-    private void GetNormalBetting(){
+    public void GetNormalBetting(){
 
         GameNormalAdapter = new RVAdapter<GameNormalInfoBean>(GameNormalInfoList) {
             @Override
@@ -131,7 +134,7 @@ public class BettingFragment extends Fragment {
 
 
     //冠軍賽事
-    private void GetChampionBetting(){
+    public void GetChampionBetting(){
 
         GameChampionAdapter = new RVAdapter<GameChampionInfoBean>(GameChampionInfoList) {
             @Override

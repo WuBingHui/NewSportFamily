@@ -1,5 +1,7 @@
 package future3pay.newsportfamily.API;
 
+import android.view.View;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -84,8 +86,6 @@ public class GameNormalInfoAPI {
 
                                     }
 
-
-
                                 }else{
 
                                     ToastShow.start(  Index.WeakIndex.get(),"賽事獲取失敗");
@@ -107,6 +107,12 @@ public class GameNormalInfoAPI {
                         Loading.diss();
                         BettingFragment.WeakBettingFragment.get().BettingRV.finishRefreshing();
                         BettingFragment.WeakBettingFragment.get().GameNormalAdapter.notifyDataSetChanged();
+
+                        if( BettingFragment.WeakBettingFragment.get().GameNormalInfoList.size() <=0){
+                            BettingFragment.WeakBettingFragment.get().NoGame.setVisibility(View.VISIBLE);
+                        }else{
+                            BettingFragment.WeakBettingFragment.get().NoGame.setVisibility(View.GONE);
+                        }
 
                     }
                 });
