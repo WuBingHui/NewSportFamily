@@ -148,6 +148,8 @@ public class GameResultAPI {
 
                         GameResultFragment.WeakGameResult.get().GetGameResultInfo();
 
+
+
                         GameResultFragment.WeakGameResult.get() .GameResultType.setOnItemSelectedListener(GameResultFragment.WeakGameResult.get().TypeSelect);
 
                         GameResultFragment.WeakGameResult.get() .GameResultCategory.setOnItemSelectedListener(GameResultFragment.WeakGameResult.get().CategorySelect);

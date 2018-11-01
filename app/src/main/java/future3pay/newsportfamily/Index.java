@@ -93,6 +93,7 @@ private void actionbar(){
     View v = LayoutInflater.from(getApplicationContext()).inflate(R.layout.actionbar_index, null);
     TextView actionbar_textview = (TextView) v.findViewById(R.id.actionbar_textview);
     Button menu = (Button) v.findViewById(R.id.menu);
+
     menu.setOnClickListener(Menu);
     bar.setCustomView(v, new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT));
 }
@@ -178,6 +179,7 @@ private Button.OnClickListener Menu = new Button.OnClickListener(){
     private class ButtomTab{
         private void CreateTab(){
              bottomNavigation  = (AHBottomNavigation) findViewById(R.id.BottomNavigation);
+
             // Create items
             AHBottomNavigationItem item1 = new AHBottomNavigationItem("一般投注", R.mipmap.betting, R.color.topcolor);
             AHBottomNavigationItem item2 = new AHBottomNavigationItem("場中賽事", R.mipmap.bettingmid,R.color.topcolor);
@@ -186,9 +188,9 @@ private Button.OnClickListener Menu = new Button.OnClickListener(){
             AHBottomNavigationItem item5 = new AHBottomNavigationItem("我的帳戶", R.mipmap.member, R.color.topcolor);
 
 // Add items
-            bottomNavigation.addItem(item1);
+           bottomNavigation.addItem(item1);
             bottomNavigation.addItem(item2);
-          //  bottomNavigation.addItem(item3);
+         //  bottomNavigation.addItem(item3);
             bottomNavigation.addItem(item4);
             bottomNavigation.addItem(item5);
 //"#3d628c"
