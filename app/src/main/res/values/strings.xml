@@ -247,6 +247,8 @@
     <string name="邀請碼">邀請碼</string>
     <string name="熱門聯賽">熱門聯賽</string>
     <string name="冠軍聯賽">冠軍聯賽</string>
+    <string name="VS">VS</string>
+    <string name="冠軍賽事">冠軍賽事</string>
 
 
     <array name="Time_list">

@@ -76,7 +76,6 @@ public class GameChampionInfoAPI {
                                     BettingFragment.WeakBettingFragment.get().GameChampionInfoList.clear();
                                     for(int i = 0; i<content.getJSONArray("game").length();i++ ){
 
-
                                         BettingFragment.WeakBettingFragment.get().GameChampionInfoList.add(new GameChampionInfoBean(
 
                                                 content.getJSONArray("game").getJSONObject(i).getString("category"),
@@ -114,8 +113,12 @@ public class GameChampionInfoAPI {
 
                         if( BettingFragment.WeakBettingFragment.get().GameChampionInfoList.size() <=0){
                             BettingFragment.WeakBettingFragment.get().NoGame.setVisibility(View.VISIBLE);
+                            BettingFragment.WeakBettingFragment.get().BettingRV.setVisibility(View.GONE);
+                            BettingFragment.WeakBettingFragment.get().BettingDetailRV.setVisibility(View.GONE);
                         }else{
                             BettingFragment.WeakBettingFragment.get().NoGame.setVisibility(View.GONE);
+                            BettingFragment.WeakBettingFragment.get().BettingRV.setVisibility(View.VISIBLE);
+                            BettingFragment.WeakBettingFragment.get().BettingDetailRV.setVisibility(View.GONE);
                         }
 
                     }

@@ -5,8 +5,8 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="topcolor">#218838</color>
-
-
+    <color name="MinsType">#007BFF</color>
+    007BFF
     <!-- Red -->
     <color name="red_50">#FFEBEE</color>
     <color name="red_100">#FFCDD2</color>
@@ -377,7 +377,7 @@
     <color name="DeepPink">#FF1493</color>
     <color name="Fuchsia">#FF00FF</color>
     <color name="Magenta">#FF00FF</color>
-    <color name="Red">#FF0000</color>
+    <color name="Red">#ff0000</color>
     <color name="OldLace">#FDF5E6</color>
     <color name="LightGoldenrodYellow">#FAFAD2</color>
     <color name="Linen">#FAF0E6</color>

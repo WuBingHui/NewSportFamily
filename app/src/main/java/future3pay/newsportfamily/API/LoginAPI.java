@@ -65,13 +65,12 @@ public class LoginAPI {
 
                             if(  content.getInt("result") == 0){
 
-                                Index.WeakIndex.get().UserInfo.edit()
-                                        .putString("Account",username)
-                                        .putString("Token",content.getString("message"))
-                                        .apply();
+                                UserInfoAPI.UserInfo(content.getString("message"));
 
                                 ToastShow.start(LoginActivity.WeakLoginActivity.get(),"登入成功");
-                                    LoginActivity.WeakLoginActivity.get().finish();
+
+                                LoginActivity.WeakLoginActivity.get().finish();
+
                             }else{
 
                                 ToastShow.start(LoginActivity.WeakLoginActivity.get(),"帳號或密碼錯誤");

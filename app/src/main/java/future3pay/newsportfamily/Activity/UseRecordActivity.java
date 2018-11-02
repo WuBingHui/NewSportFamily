@@ -10,18 +10,17 @@ import android.widget.TextView;
 
 import future3pay.newsportfamily.R;
 
-public class UserInfoActivity extends AppCompatActivity {
+public class UseRecordActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_info);
+        setContentView(R.layout.activity_use_record);
 
 
         actionbar();
-
-
     }
+
 
     private void actionbar(){
 
@@ -41,7 +40,6 @@ public class UserInfoActivity extends AppCompatActivity {
         });
 
         bar.setCustomView(v, new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT));
-
     }
 
 }

@@ -10,16 +10,14 @@ import android.widget.TextView;
 
 import future3pay.newsportfamily.R;
 
-public class UserInfoActivity extends AppCompatActivity {
+public class MakeUpPointRecordActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_info);
-
+        setContentView(R.layout.activity_make_up_point_record);
 
         actionbar();
-
 
     }
 
@@ -30,7 +28,7 @@ public class UserInfoActivity extends AppCompatActivity {
         bar.setDisplayShowCustomEnabled(true);
         View v = LayoutInflater.from(getApplicationContext()).inflate(R.layout.actionbar_login, null);
         TextView actionbar_textview = (TextView) v.findViewById(R.id.actionbar_textview);
-        actionbar_textview.setText("使用紀錄");
+        actionbar_textview.setText("補點紀錄");
         Button back = (Button) v.findViewById(R.id.Back);
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +39,6 @@ public class UserInfoActivity extends AppCompatActivity {
         });
 
         bar.setCustomView(v, new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT));
-
     }
 
 }

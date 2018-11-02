@@ -14,7 +14,7 @@
         <com.cy.cyrvadapter.refreshrv.VerticalRefreshLayout
             android:id="@+id/BettingDetailRV"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:background="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,7 +27,7 @@
         <com.cy.cyrvadapter.refreshrv.VerticalRefreshLayout
             android:id="@+id/BettingRV"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:background="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

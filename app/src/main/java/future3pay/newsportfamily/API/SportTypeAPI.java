@@ -93,6 +93,7 @@ public class SportTypeAPI {
                                     ToastShow.start(Index.WeakIndex.get(),"獲取賽事球種失敗");
 
                                 }
+
                             } catch (JSONException e) {
 
                                 e.printStackTrace();

@@ -44,29 +44,27 @@
             app:layout_constraintGuide_percent="0.3" />
 
         <TextView
-            android:id="@+id/textView26"
+            android:id="@+id/WaitOrder"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:text="0"
             android:textColor="@color/topcolor"
             android:textSize="24sp"
-            app:layout_constraintEnd_toStartOf="@+id/textView29"
+            app:layout_constraintEnd_toStartOf="@+id/WaitBonus"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <TextView
-            android:id="@+id/textView29"
+            android:id="@+id/WaitBonus"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:text="0"
             android:textColor="@color/topcolor"
             android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/TodayOrderCount"
-            app:layout_constraintStart_toEndOf="@+id/textView26"
+            app:layout_constraintStart_toEndOf="@+id/WaitOrder"
             app:layout_constraintTop_toTopOf="@+id/guideline" />
 
         <TextView
@@ -75,11 +73,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:text="0"
             android:textColor="@color/topcolor"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView29"
+            app:layout_constraintStart_toEndOf="@+id/WaitBonus"
             app:layout_constraintTop_toTopOf="@+id/guideline" />
 
         <TextView
@@ -90,9 +87,9 @@
             android:text="@string/待出單"
             android:textColor="@color/Black"
             android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/textView29"
-            app:layout_constraintStart_toStartOf="@+id/textView26"
-            app:layout_constraintTop_toBottomOf="@+id/textView26" />
+            app:layout_constraintEnd_toStartOf="@+id/WaitBonus"
+            app:layout_constraintStart_toStartOf="@+id/WaitOrder"
+            app:layout_constraintTop_toBottomOf="@+id/WaitOrder" />
 
         <TextView
             android:id="@+id/textView32"
@@ -103,8 +100,8 @@
             android:textColor="@color/Black"
             android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/TodayOrderCount"
-            app:layout_constraintStart_toStartOf="@+id/textView29"
-            app:layout_constraintTop_toBottomOf="@+id/textView29" />
+            app:layout_constraintStart_toStartOf="@+id/WaitBonus"
+            app:layout_constraintTop_toBottomOf="@+id/WaitBonus" />
 
         <TextView
             android:id="@+id/textView33"
@@ -142,7 +139,7 @@
                 tools:layout_editor_absoluteY="511dp">
 
                 <Button
-                    android:id="@+id/button6"
+                    android:id="@+id/UserInfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -157,7 +154,7 @@
                     android:textSize="18sp" />
 
                 <Button
-                    android:id="@+id/button5"
+                    android:id="@+id/BettingRecord"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -171,7 +168,7 @@
                     android:textSize="18sp" />
 
                 <Button
-                    android:id="@+id/button4"
+                    android:id="@+id/UseRecord"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -185,7 +182,7 @@
                     android:textSize="18sp" />
 
                 <Button
-                    android:id="@+id/button3"
+                    android:id="@+id/MakeUpPointRecord"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -199,7 +196,7 @@
                     android:textSize="18sp" />
 
                 <Button
-                    android:id="@+id/button7"
+                    android:id="@+id/WithdrawalRecord"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -246,7 +243,6 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:gravity="center"
-            android:text="1000"
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/divider10"
@@ -261,7 +257,6 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:gravity="center"
-            android:text="9999"
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/textView34"
@@ -297,13 +292,13 @@
 
         <Button
             android:id="@+id/Logout"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/shape"
             android:text="@string/登出"
-            android:textSize="8sp"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

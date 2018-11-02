@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.Fragment.GameResultFragment;
+import future3pay.newsportfamily.Fragment.MemberFragment;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.UIkit.Loading;
 import future3pay.newsportfamily.UIkit.ToastShow;
@@ -22,7 +23,7 @@ import okhttp3.Response;
 
 public class UserInfoAPI {
 
-    public static void UserInfo(String token){
+    public static void UserInfo(final String token){
 
         OkHttpClient client=new OkHttpClient();
 
@@ -66,6 +67,7 @@ public class UserInfoAPI {
                                 if(content.getInt("result") == 0){
 
                                     Index.WeakIndex.get().UserInfo.edit()
+                                            .putString("Token",token)
                                             .putString("Permission",content.getJSONObject("userInfo").getString("permission"))
                                             .putString("BelongStore",content.getJSONObject("userInfo").getString("belong_store"))
                                             .putString("UserName",content.getJSONObject("userInfo").getString("username"))
@@ -77,7 +79,18 @@ public class UserInfoAPI {
                                             .putString("OriginPoints",content.getJSONObject("userInfo").getString("origin_points"))
                                             .putString("WonPoints",content.getJSONObject("userInfo").getString("won_points"))
                                             .putString("InviteCode",content.getJSONObject("userInfo").getString("invite_code"))
+                                            .putString("OrderProcessing",content.getJSONObject("userInfo").getString("orderProcessing"))
+                                            .putString("OrderDone",content.getJSONObject("userInfo").getString("orderDone"))
+                                            .putString("OrderOfTheDay",content.getJSONObject("userInfo").getString("orderOfTheDay"))
                                             .apply();
+
+
+                                    MemberFragment.WeakMemberFragment.get().FamilyPoint.setText(content.getJSONObject("userInfo").getString("origin_points"));
+                                    MemberFragment.WeakMemberFragment.get().CashPoint.setText(content.getJSONObject("userInfo").getString("won_points"));
+                                    MemberFragment.WeakMemberFragment.get().InviteCode.setText(content.getJSONObject("userInfo").getString("invite_code"));
+                                    MemberFragment.WeakMemberFragment.get().TodayOrderCount.setText(content.getJSONObject("userInfo").getString("orderOfTheDay"));
+                                    MemberFragment.WeakMemberFragment.get().WaitBonus.setText(content.getJSONObject("userInfo").getString("orderDone"));
+                                    MemberFragment.WeakMemberFragment.get().WaitOrder.setText(content.getJSONObject("userInfo").getString("orderProcessing"));
                                 }else{
 
                                     ToastShow.start(Index.WeakIndex.get(),content.getString("message"));

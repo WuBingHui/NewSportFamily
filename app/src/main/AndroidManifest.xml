@@ -22,7 +22,10 @@
         <activity android:name=".Activity.RegisterActivity" />
         <activity android:name=".Activity.LoginActivity" />
         <activity android:name=".Activity.UserInfoActivity" />
-        <activity android:name=".Activity.BettingRecordActivity"></activity>
+        <activity android:name=".Activity.BettingRecordActivity" />
+        <activity android:name=".Activity.UseRecordActivity" />
+        <activity android:name=".Activity.MakeUpPointRecordActivity" />
+        <activity android:name=".Activity.WithdrawalRecordActivity"></activity>
     </application>
 
 </manifest>

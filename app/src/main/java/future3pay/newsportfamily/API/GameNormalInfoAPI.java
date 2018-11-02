@@ -110,8 +110,12 @@ public class GameNormalInfoAPI {
 
                         if( BettingFragment.WeakBettingFragment.get().GameNormalInfoList.size() <=0){
                             BettingFragment.WeakBettingFragment.get().NoGame.setVisibility(View.VISIBLE);
+                            BettingFragment.WeakBettingFragment.get().BettingRV.setVisibility(View.GONE);
+                            BettingFragment.WeakBettingFragment.get().BettingDetailRV.setVisibility(View.GONE);
                         }else{
                             BettingFragment.WeakBettingFragment.get().NoGame.setVisibility(View.GONE);
+                            BettingFragment.WeakBettingFragment.get().BettingRV.setVisibility(View.VISIBLE);
+                            BettingFragment.WeakBettingFragment.get().BettingDetailRV.setVisibility(View.GONE);
                         }
 
                     }
