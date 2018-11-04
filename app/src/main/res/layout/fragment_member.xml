@@ -126,89 +126,101 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
 
+            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline2">
+            app:layout_constraintTop_toBottomOf="@+id/divider14">
 
-            <LinearLayout
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                tools:layout_editor_absoluteX="384dp"
-                tools:layout_editor_absoluteY="511dp">
-
-                <Button
-                    android:id="@+id/UserInfo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/corners"
-                    android:gravity="center"
-                    android:paddingStart="8dp"
-                    android:text="@string/個人資料"
-                    android:textColor="@color/Black"
-                    android:textSize="18sp" />
-
-                <Button
-                    android:id="@+id/BettingRecord"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/corners"
-                    android:gravity="center"
-                    android:paddingStart="8dp"
-                    android:text="@string/投注紀錄"
-                    android:textColor="@color/Black"
-                    android:textSize="18sp" />
+                tools:layout_editor_absoluteY="226dp">
 
                 <Button
                     android:id="@+id/UseRecord"
-                    android:layout_width="match_parent"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/corners"
-                    android:gravity="center"
-                    android:paddingStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/transparent"
+                    android:drawableTop="@mipmap/use"
+                    android:gravity="center|top"
+                    android:paddingTop="8dp"
                     android:text="@string/使用紀錄"
                     android:textColor="@color/Black"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/BettingRecord"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/BettingRecord"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/transparent"
+                    android:drawableTop="@mipmap/fairground"
+                    android:gravity="center|top"
+                    android:paddingTop="8dp"
+                    android:text="@string/投注紀錄"
+                    android:textColor="@color/Black"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@+id/UseRecord"
+                    app:layout_constraintStart_toEndOf="@+id/UserInfo"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/MakeUpPointRecord"
-                    android:layout_width="match_parent"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
-                    android:background="@drawable/corners"
-                    android:gravity="center"
-                    android:paddingStart="8dp"
+                    android:background="@color/transparent"
+                    android:drawableTop="@mipmap/piggy_bank"
+                    android:gravity="center|top"
+                    android:paddingTop="8dp"
                     android:text="@string/補點紀錄"
                     android:textColor="@color/Black"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/UserInfo"
+                    app:layout_constraintStart_toStartOf="@+id/UserInfo"
+                    app:layout_constraintTop_toBottomOf="@+id/UserInfo" />
 
                 <Button
                     android:id="@+id/WithdrawalRecord"
-                    android:layout_width="match_parent"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
-                    android:background="@drawable/corners"
-                    android:gravity="center"
-                    android:paddingStart="8dp"
+                    android:background="@color/transparent"
+                    android:drawableTop="@mipmap/growth"
+                    android:gravity="center|top"
+                    android:paddingTop="8dp"
                     android:text="@string/提領紀錄"
                     android:textColor="@color/Black"
-                    android:textSize="18sp" />
-            </LinearLayout>
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/BettingRecord"
+                    app:layout_constraintStart_toStartOf="@+id/BettingRecord"
+                    app:layout_constraintTop_toBottomOf="@+id/BettingRecord" />
+
+                <Button
+                    android:id="@+id/UserInfo"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/transparent"
+                    android:drawableTop="@mipmap/social_media"
+                    android:gravity="center|top"
+                    android:text="@string/個人資料"
+                    android:textColor="@color/Black"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@+id/BettingRecord"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:paddingTop="8dp" />
+            </android.support.constraint.ConstraintLayout>
         </ScrollView>
 
         <TextView
@@ -312,6 +324,18 @@
             android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <View
+            android:id="@+id/divider14"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/topcolor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     </android.support.constraint.ConstraintLayout>
 

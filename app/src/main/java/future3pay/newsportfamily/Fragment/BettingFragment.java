@@ -98,12 +98,14 @@ public class BettingFragment extends Fragment {
 
         switch (Index.WeakIndex.get().SportRoot){
             case "0":
-                GameNormalInfoAPI.GameInfo();
                 GetNormalBetting();
+                GameNormalInfoAPI.GameInfo();
+
                 break;
             case "1":
-                GameChampionInfoAPI.GameInfo();
                 GetChampionBetting();
+                GameChampionInfoAPI.GameInfo();
+
                 break;
         }
 

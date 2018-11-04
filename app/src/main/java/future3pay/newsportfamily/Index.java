@@ -74,6 +74,8 @@ public class Index extends AppCompatActivity {
         GameCategory = new ArrayList<>();
         IndexFrame = findViewById(R.id.IndexFrame);
 
+
+
         ButtomTab buttomTab = new ButtomTab();
         buttomTab.CreateTab();
 
@@ -82,6 +84,9 @@ public class Index extends AppCompatActivity {
 
         SportTypeAPI.SportType();//取球種Api
 
+        if(!UserInfo.getString("Token","").equals("")){
+            UserInfoAPI.UserInfo(UserInfo.getString("Token",""));
+        }
 
         //透過下方程式碼，取得Activity中執行的個體。
         manager = getSupportFragmentManager();

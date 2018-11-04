@@ -62,6 +62,7 @@ public class UserInfoAPI {
                         try {
                             String json =response.body().string();
                             JSONObject content = new JSONObject(json);
+                            Log.d("aaaaaaaaaaaaa",json);
                         if(response.isSuccessful()){
 
                                 if(content.getInt("result") == 0){
@@ -94,13 +95,15 @@ public class UserInfoAPI {
                                 }else{
 
                                     ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
-
+                                    Index.WeakIndex.get().UserInfo.edit().clear().apply();
+                                    Index.WeakIndex.get().bottomNavigation.setCurrentItem(0);
                                 }
 
                         }else{
 
                             ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
-
+                            Index.WeakIndex.get().UserInfo.edit().clear().apply();
+                            Index.WeakIndex.get().bottomNavigation.setCurrentItem(0);
                         }
                     } catch (JSONException e) {
 
@@ -110,6 +113,7 @@ public class UserInfoAPI {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
                     }
                 });
 
