@@ -5,7 +5,7 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="topcolor">#218838</color>
-    <color name="MinsType">#007BFF</color>
+    <color name="MinsType">#007bff</color>
     007BFF
     <!-- Red -->
     <color name="red_50">#FFEBEE</color>
@@ -223,8 +223,8 @@
     <color name="yellow_500">#FFEB3B</color>
     <color name="yellow_600">#FDD835</color>
     <color name="yellow_700">#FBC02D</color>
-    <color name="yellow_800">#F9A825</color>
-    <color name="yellow_900">#F57F17</color>
+    <color name="yellow_800">#f9a825</color>
+    <color name="yellow_900">#f57f17</color>
     <color name="yellow_A100">#FFFF8D</color>
     <color name="yellow_A200">#FFFF00</color>
     <color name="yellow_A400">#FFEA00</color>

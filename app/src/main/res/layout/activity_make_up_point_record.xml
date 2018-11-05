@@ -6,4 +6,35 @@
     android:layout_height="match_parent"
     tools:context="future3pay.newsportfamily.Activity.MakeUpPointRecordActivity">
 
+    <TextView
+        android:id="@+id/NoDepositRecord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="13dp"
+        android:drawableTop="@mipmap/logo"
+        android:gravity="center"
+        android:text="@string/無使用紀錄"
+        android:textAlignment="center"
+        android:textColor="@color/topcolor"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.cy.cyrvadapter.refreshrv.VerticalRefreshLayout
+        android:id="@+id/DepositRecordRV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </com.cy.cyrvadapter.refreshrv.VerticalRefreshLayout>
 </android.support.constraint.ConstraintLayout>

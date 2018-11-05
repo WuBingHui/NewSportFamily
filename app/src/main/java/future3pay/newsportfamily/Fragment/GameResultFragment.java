@@ -4,16 +4,12 @@ package future3pay.newsportfamily.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cy.cyrvadapter.adapter.RVAdapter;
 import com.cy.cyrvadapter.refreshrv.BaseRefreshLayout;
@@ -22,25 +18,16 @@ import com.cy.cyrvadapter.refreshrv.VerticalRefreshLayout;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.lang.ref.WeakReference;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 
-import future3pay.newsportfamily.API.GameChampionInfoAPI;
 import future3pay.newsportfamily.API.GameResultAPI;
-import future3pay.newsportfamily.API.SportTypeAPI;
-import future3pay.newsportfamily.Bean.GameChampionInfoBean;
 import future3pay.newsportfamily.Bean.GameResultBean;
-import future3pay.newsportfamily.FormaData;
+import future3pay.newsportfamily.FormaTimeData;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.R;
-import future3pay.newsportfamily.UIkit.Loading;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -226,7 +213,7 @@ public class GameResultFragment extends Fragment {
 
                     holder.setText(R.id.GameCode, bean.getCode());
                     holder.setText(R.id.GameCategory, bean.getCategory());
-                    holder.setText(R.id.GameStartTime, FormaData.formatData("MM月dd日 HH:mm", Long.parseLong(bean.getGameStartTime())));
+                    holder.setText(R.id.GameStartTime, FormaTimeData.formatData("MM月dd日 HH:mm", Long.parseLong(bean.getGameStartTime())));
                     holder.setText(R.id.AwayNameBig, bean.getAwayTeam());
                     holder.setText(R.id.HomeNameBig, bean.getHomeTeam());
                     holder.setText(R.id.AwaySum, bean.getAwayScore());
@@ -326,7 +313,7 @@ public class GameResultFragment extends Fragment {
                     if(bean.getBetsType().equals("champion")){
                         holder.setText(R.id.GameCode, bean.getCode());
                         holder.setText(R.id.GameCategory, bean.getCategory());
-                        holder.setText(R.id.GameStartTime, FormaData.formatData("MM月dd日 HH:mm", Long.parseLong(bean.getGameStartTime())));
+                        holder.setText(R.id.GameStartTime, FormaTimeData.formatData("MM月dd日 HH:mm", Long.parseLong(bean.getGameStartTime())));
 
                         try {
 

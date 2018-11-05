@@ -10,6 +10,9 @@ import future3pay.newsportfamily.Bean.GameResultBean;
 import future3pay.newsportfamily.Fragment.GameResultFragment;
 
 public class ArrayRemoveDuplicate {
+
+
+
     public static String[] RemoveDuplicate(List<GameResultBean> array_category) {
         String array[] = new String[array_category.size()];
         for(int i = 0 ; i < array_category.size();i++){
@@ -21,4 +24,6 @@ public class ArrayRemoveDuplicate {
 
         return result;
     }
+
+
 }

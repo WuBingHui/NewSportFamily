@@ -6,4 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".Activity.BettingRecordActivity">
 
+    <TextView
+        android:id="@+id/StartDate"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/corners_3"
+        android:gravity="center"
+        android:hint="@string/請選擇開始時間"
+        app:layout_constraintEnd_toStartOf="@+id/EndDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/EndDate"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/corners_3"
+        android:gravity="center"
+        android:hint="@string/請選擇結束時間"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/StartDate"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

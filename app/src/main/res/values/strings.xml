@@ -254,6 +254,22 @@
     <string name="註冊方式">註冊方式</string>
     <string name="招募店家">招募店家</string>
     <string name="帳戶資訊">帳戶資訊</string>
+    <string name="距離下一場場中賽事">距離下一場場中賽事還有</string>
+
+    <string name="分">分</string>
+    <string name="時">時</string>
+    <string name="天">天</string>
+    <string name="秒">秒</string>
+    <string name="目前無場中賽事">目前無場中賽事</string>
+    <string name="訂單編號">訂單編號</string>
+    <string name="無使用紀錄">無使用紀錄</string>
+    <string name="申請帳戶">申請帳戶</string>
+    <string name="狀態">狀態</string>
+    <string name="申請時間">申請時間</string>
+    <string name="處理時間">處理時間</string>
+    <string name="提領金額">提領金額</string>
+    <string name="請選擇開始時間">請選擇開始時間</string>
+    <string name="請選擇結束時間">請選擇結束時間</string>
 
 
     <array name="Time_list">

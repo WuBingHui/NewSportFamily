@@ -1,13 +1,11 @@
 package future3pay.newsportfamily.Fragment;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -285,7 +283,7 @@ public class BettingFragment extends Fragment {
 
                 holder.setText(R.id.Code, bean.getCode());
                 holder.setText(R.id.Mins, bean.getMins());
-                holder.setText(R.id.StartTime, bean.getGameStartTime());
+                holder.setText(R.id.StartDate, bean.getGameStartTime());
                 holder.setText(R.id.Away, bean.getAwayTeam());
                 holder.setText(R.id.Home, bean.getHomeTeam());
                 switch (bean.getMins()){
@@ -368,7 +366,7 @@ public class BettingFragment extends Fragment {
 
                 holder.setText(R.id.BetsTitle, bean.getBetsTitle());
                 holder.setText(R.id.Mins, bean.getMins());
-                holder.setText(R.id.StartTime, bean.getGameStartTime());
+                holder.setText(R.id.StartDate, bean.getGameStartTime());
                 holder.setText(R.id.MinsType, bean.getCode()).setBackgroundResource(R.id.MinsType,R.drawable.corners_8);
 
             }

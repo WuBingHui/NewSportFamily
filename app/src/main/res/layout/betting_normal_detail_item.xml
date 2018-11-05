@@ -37,7 +37,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/Mins"
-        app:layout_constraintEnd_toStartOf="@+id/StartTime"
+        app:layout_constraintEnd_toStartOf="@+id/StartDate"
         app:layout_constraintStart_toEndOf="@+id/Mins"
         app:layout_constraintTop_toTopOf="@+id/Mins" />
 
@@ -86,7 +86,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView39" />
 
     <TextView
-        android:id="@+id/StartTime"
+        android:id="@+id/StartDate"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="8dp"

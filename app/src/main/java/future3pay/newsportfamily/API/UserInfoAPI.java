@@ -62,7 +62,7 @@ public class UserInfoAPI {
                         try {
                             String json =response.body().string();
                             JSONObject content = new JSONObject(json);
-                            Log.d("aaaaaaaaaaaaa",json);
+
                         if(response.isSuccessful()){
 
                                 if(content.getInt("result") == 0){
