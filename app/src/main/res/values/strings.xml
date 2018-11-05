@@ -222,6 +222,15 @@
         <item>822中國信託</item>
     </array>
 
+
+    <array name="order_status">
+        <item>全部</item>
+    <item>等待處理</item>
+        <item>出單完成</item>
+        <item>已派彩</item>
+        <item>未中獎</item>
+        <item>已取消</item>
+    </array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="加總">加總</string>
@@ -270,6 +279,7 @@
     <string name="提領金額">提領金額</string>
     <string name="請選擇開始時間">請選擇開始時間</string>
     <string name="請選擇結束時間">請選擇結束時間</string>
+    <string name="查詢">查詢</string>
 
 
     <array name="Time_list">

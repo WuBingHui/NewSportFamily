@@ -7,6 +7,40 @@
     tools:context=".Activity.BettingRecordActivity">
 
     <TextView
+        android:id="@+id/NoBettingRecord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="13dp"
+        android:drawableTop="@mipmap/logo"
+        android:gravity="center"
+        android:text="@string/無使用紀錄"
+        android:textAlignment="center"
+        android:textColor="@color/topcolor"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.cy.cyrvadapter.refreshrv.VerticalRefreshLayout
+        android:id="@+id/BettingRecordRV"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/white"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Search">
+
+    </com.cy.cyrvadapter.refreshrv.VerticalRefreshLayout>
+
+    <TextView
         android:id="@+id/StartDate"
         android:layout_width="0dp"
         android:layout_height="35dp"
@@ -16,6 +50,7 @@
         android:background="@drawable/corners_3"
         android:gravity="center"
         android:hint="@string/請選擇開始時間"
+        android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/EndDate"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,13 +59,40 @@
         android:id="@+id/EndDate"
         android:layout_width="0dp"
         android:layout_height="35dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/corners_3"
         android:gravity="center"
         android:hint="@string/請選擇結束時間"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/OrderStatus"
         app:layout_constraintStart_toEndOf="@+id/StartDate"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/OrderStatus"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/corners_has_drop_down"
+        android:entries="@array/order_status"
+        app:layout_constraintBottom_toBottomOf="@+id/EndDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/EndDate"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/Search"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/corners"
+        android:text="@string/查詢"
+        android:textColor="@color/Black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EndDate" />
 </android.support.constraint.ConstraintLayout>
