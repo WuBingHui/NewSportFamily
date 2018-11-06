@@ -25,7 +25,8 @@
         <activity android:name=".Activity.BettingRecordActivity" />
         <activity android:name=".Activity.UseRecordActivity" />
         <activity android:name=".Activity.MakeUpPointRecordActivity" />
-        <activity android:name=".Activity.WithdrawalRecordActivity"></activity>
+        <activity android:name=".Activity.WithdrawalRecordActivity" />
+        <activity android:name=".Activity.BettingRecordDetailActivity"></activity>
     </application>
 
 </manifest>

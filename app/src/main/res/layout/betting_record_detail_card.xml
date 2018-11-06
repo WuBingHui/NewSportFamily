@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:background="@drawable/corners_3">
+
+    <TextView
+        android:id="@+id/textView64"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/編號"
+        app:layout_constraintEnd_toStartOf="@+id/DetailCode"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/DetailCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView64"
+        app:layout_constraintEnd_toStartOf="@+id/textView79"
+        app:layout_constraintStart_toEndOf="@+id/textView64"
+        app:layout_constraintTop_toTopOf="@+id/textView64" />
+
+    <TextView
+        android:id="@+id/textView79"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/聯盟2"
+        app:layout_constraintBottom_toBottomOf="@+id/DetailCode"
+        app:layout_constraintEnd_toStartOf="@+id/DetailCategory"
+        app:layout_constraintStart_toEndOf="@+id/DetailCode"
+        app:layout_constraintTop_toTopOf="@+id/DetailCode" />
+
+    <TextView
+        android:id="@+id/DetailCategory"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="213"
+        android:textAlignment="center"
+        android:textColor="@color/Black"
+        app:layout_constraintEnd_toStartOf="@+id/textView85"
+        app:layout_constraintStart_toEndOf="@+id/textView79"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView85"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/訂單狀態"
+        app:layout_constraintEnd_toStartOf="@+id/DetailStatus"
+        app:layout_constraintStart_toEndOf="@+id/DetailCategory"
+        app:layout_constraintTop_toTopOf="@+id/DetailCategory" />
+
+    <TextView
+        android:id="@+id/DetailStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="@color/amber_800"
+        app:layout_constraintBottom_toBottomOf="@+id/textView85"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView85"
+        app:layout_constraintTop_toTopOf="@+id/textView85" />
+
+    <TextView
+        android:id="@+id/textView89"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/開賽時間"
+        app:layout_constraintEnd_toStartOf="@+id/DetailTime"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DetailCategory" />
+
+    <TextView
+        android:id="@+id/DetailTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="2018-11-06 04:00"
+        android:textAlignment="center"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView89"
+        app:layout_constraintEnd_toStartOf="@+id/textView94"
+        app:layout_constraintStart_toEndOf="@+id/textView89"
+        app:layout_constraintTop_toTopOf="@+id/textView89" />
+
+    <TextView
+        android:id="@+id/textView92"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/比賽隊伍"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView89" />
+
+    <TextView
+        android:id="@+id/DetailTeam"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/corners_3"
+        android:text="畢爾包(客) @ 皇家西班牙人(主)"
+        android:textAlignment="center"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView92"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView92"
+        app:layout_constraintTop_toTopOf="@+id/textView92" />
+
+    <TextView
+        android:id="@+id/textView94"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/選項"
+        app:layout_constraintBottom_toBottomOf="@+id/DetailTime"
+        app:layout_constraintEnd_toStartOf="@+id/DetailSelect"
+        app:layout_constraintStart_toEndOf="@+id/DetailTime"
+        app:layout_constraintTop_toTopOf="@+id/DetailTime" />
+
+    <TextView
+        android:id="@+id/DetailSelect"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView94"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView94"
+        app:layout_constraintTop_toTopOf="@+id/textView94" />
+
+    <TextView
+        android:id="@+id/textView96"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/corners_2"
+        android:text="@string/全場結果"
+        android:textAlignment="center"
+        android:textColor="@color/Black"
+        app:layout_constraintEnd_toStartOf="@+id/textView97"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DetailTeam" />
+
+    <TextView
+        android:id="@+id/textView97"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/corners_2"
+        android:text="@string/玩法"
+        android:textAlignment="center"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView96"
+        app:layout_constraintEnd_toStartOf="@+id/textView98"
+        app:layout_constraintStart_toEndOf="@+id/textView96"
+        app:layout_constraintTop_toTopOf="@+id/textView96" />
+
+    <TextView
+        android:id="@+id/textView98"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/corners_2"
+        android:text="@string/賠率"
+        android:textAlignment="center"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView97"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView97"
+        app:layout_constraintTop_toTopOf="@+id/textView97" />
+
+    <TextView
+        android:id="@+id/DetailResult"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@color/topcolor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView96"
+        app:layout_constraintStart_toStartOf="@+id/textView96"
+        app:layout_constraintTop_toBottomOf="@+id/textView96" />
+
+    <TextView
+        android:id="@+id/DetailPlay"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@color/topcolor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView97"
+        app:layout_constraintStart_toStartOf="@+id/textView97"
+        app:layout_constraintTop_toBottomOf="@+id/textView97" />
+
+    <TextView
+        android:id="@+id/DetailOdd"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@color/topcolor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView98"
+        app:layout_constraintStart_toStartOf="@+id/textView98"
+        app:layout_constraintTop_toBottomOf="@+id/textView98" />
+</android.support.constraint.ConstraintLayout>

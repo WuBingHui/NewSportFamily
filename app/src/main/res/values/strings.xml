@@ -225,7 +225,7 @@
 
     <array name="order_status">
         <item>全部</item>
-    <item>等待處理</item>
+        <item>等待處理</item>
         <item>出單完成</item>
         <item>已派彩</item>
         <item>未中獎</item>
@@ -280,6 +280,29 @@
     <string name="請選擇開始時間">請選擇開始時間</string>
     <string name="請選擇結束時間">請選擇結束時間</string>
     <string name="查詢">查詢</string>
+    <string name="派彩金額">派彩金額</string>
+    <string name="小計">小計</string>
+    <string name="玩法種類">玩法種類</string>
+    <string name="派彩金額1">派彩金額(家族幣/現金幣)</string>
+    <string name="下單時間">下單時間</string>
+    <string name="投注金額">投注金額</string>
+    <string name="全場結果">全場結果</string>
+    <string name="訂單資訊">訂單資訊</string>
+    <string name="投注種類">投注種類</string>
+    <string name="投注組合">投注組合</string>
+    <string name="單組金額">單組金額</string>
+    <string name="若全數過關最高可得">若全數過關最高可得</string>
+    <string name="失敗原因">失敗原因</string>
+    <string name="投注時間">投注時間</string>
+    <string name="編號">編號</string>
+    <string name="聯盟2">聯盟</string>
+    <string name="訂單狀態">訂單狀態</string>
+    <string name="開賽時間">開賽時間</string>
+    <string name="比賽隊伍">比賽隊伍</string>
+    <string name="選項">選項</string>
+
+    <string name="玩法">玩法</string>
+    <string name="賠率">賠率</string>
 
 
     <array name="Time_list">
