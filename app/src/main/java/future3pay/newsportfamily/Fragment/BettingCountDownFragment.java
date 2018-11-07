@@ -51,7 +51,7 @@ public class BettingCountDownFragment extends Fragment {
 
     public TextView CountDownAway, CountDownHome, DayTenDigits, DayDigits, HourTenDigits, HourDigits, MinTenDigits, MinDigits, SecTenDigits, SecDigits, NoCountDown;
 
-    public ScheduledExecutorService scheduledThreadPool;
+    public ScheduledExecutorService scheduledThreadPool,scheduledThreadPool2;
 
     public ConstraintLayout CountdownNext;
 
@@ -91,13 +91,33 @@ public class BettingCountDownFragment extends Fragment {
         NoCountDown.setVisibility(View.GONE);
         CountDownRV.setVisibility(View.GONE);
 
-        GameConutDownActiveAPI.GameConutDownActive();
+
+
+
+        StartActiveAPI();
+
+
         GameActive();
         GmaeNext();
 
         return view;
 
     }
+
+    public void StartActiveAPI(){
+        scheduledThreadPool2 = Executors.newScheduledThreadPool(5);
+        scheduledThreadPool2.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+
+                GameConutDownActiveAPI.GameConutDownActive();
+            }
+
+        }, 0, 2, TimeUnit.SECONDS);
+
+    }
+
+
 
     //場中倒數計時
     public void GmaeNext() {
@@ -121,7 +141,8 @@ public class BettingCountDownFragment extends Fragment {
                         public void run() {
 
                             if (day <= 0 && hour <= 0 && min <= 0 && sec <= 0) {
-                                GameConutDownActiveAPI.GameConutDownActive();//啟動正在進行的場中
+                                StartActiveAPI();//啟動正在進行的場中
+                                scheduledThreadPool.shutdown();
                             }else{
                                 if (!String.valueOf(DayTenDigits.getText()).equals(String.format("%02d", day).substring(0, 1))) {
                                     DayTenDigits.setText(String.format("%02d", day).substring(0, 1));

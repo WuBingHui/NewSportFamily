@@ -83,25 +83,17 @@ public class NormalGameOddDialog {
                             Button odd = new Button(dialog.getContext());
                             odd.setLayoutParams(params);
                             odd.setGravity(Gravity.CENTER_HORIZONTAL);
-                            odd.setBackground(BtnBk);
-                            odd.setText(content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("name") + "\n" + content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("odds"));
+                            //odd.setBackground(BtnBk);
+                            odd.setText(content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("name")+content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("outComeConditions") + "\n" + content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("odds"));
 
-
-                            if ( j % 3 == 0  && content.getJSONObject(i).getJSONArray("codes").length() > 3) {
-
-
-                                 scrollView = new HorizontalScrollView(dialog.getContext());
-                                 linearLayout = new LinearLayout(dialog.getContext());
-                                linearLayout.setVerticalGravity(LinearLayout.HORIZONTAL);
-                                scrollView.addView(linearLayout);
-                                linearLayout.addView(odd);
-                                OddInterFace.addView(scrollView);
-                            } else {
-                                linearLayout.addView(odd);
-                               // OddInterFace.addView(scrollView);
+                            if(content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("status").equals("active")){
+                                odd.setEnabled(true);
+                            }else{
+                                odd.setEnabled(false);
                             }
+                                linearLayout.addView(odd);
                         }
-
+                        OddInterFace.addView(scrollView);
 
 
                     }

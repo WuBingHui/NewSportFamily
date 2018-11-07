@@ -77,6 +77,7 @@ public class GameConutDownActiveAPI {
                                         BettingCountDownFragment.WeakBettingCountDown.get().CountdownNext.setVisibility(View.GONE);
                                         BettingCountDownFragment.WeakBettingCountDown.get().CountDownRV.setVisibility(View.VISIBLE);
                                         BettingCountDownFragment.WeakBettingCountDown.get().GameCountDownActiveList.clear();
+
                                         for (int i = 0; i < content.getJSONArray("liveGames").length(); i++) {
 
                                             BettingCountDownFragment.WeakBettingCountDown.get().GameCountDownActiveList.add(new GameCountDownActiveBean(
@@ -87,9 +88,11 @@ public class GameConutDownActiveAPI {
                                         }
 
                                     } else {
+
                                         BettingCountDownFragment.WeakBettingCountDown.get().CountdownNext.setVisibility(View.VISIBLE);
                                         BettingCountDownFragment.WeakBettingCountDown.get().CountDownRV.setVisibility(View.GONE);
                                         GameConutDownAPI.GameConutDown();
+                                        BettingCountDownFragment.WeakBettingCountDown.get().scheduledThreadPool2.shutdown();
                                     }
 
 
@@ -111,12 +114,13 @@ public class GameConutDownActiveAPI {
 
                         }
                         if (BettingCountDownFragment.WeakBettingCountDown.get().GameCountDownActiveList.size() <= 0) {
-                            BettingCountDownFragment.WeakBettingCountDown.get().CountdownNext.setVisibility(View.GONE);
-                            BettingCountDownFragment.WeakBettingCountDown.get().CountDownRV.setVisibility(View.VISIBLE);
-                        } else {
                             BettingCountDownFragment.WeakBettingCountDown.get().CountdownNext.setVisibility(View.VISIBLE);
                             BettingCountDownFragment.WeakBettingCountDown.get().CountDownRV.setVisibility(View.GONE);
+                        } else {
+                            BettingCountDownFragment.WeakBettingCountDown.get().CountdownNext.setVisibility(View.GONE);
+                            BettingCountDownFragment.WeakBettingCountDown.get().CountDownRV.setVisibility(View.VISIBLE);
                         }
+                        BettingCountDownFragment.WeakBettingCountDown.get().CountDownRV.finishRefreshing();
                         BettingCountDownFragment.WeakBettingCountDown.get().GameCountDownActiveAdapter.notifyDataSetChanged();
                     }
                 });
