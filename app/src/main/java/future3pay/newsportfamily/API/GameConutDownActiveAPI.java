@@ -8,6 +8,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import future3pay.newsportfamily.Activity.BettingRecordDetailActivity;
+import future3pay.newsportfamily.Bean.GameCountDownActiveBean;
 import future3pay.newsportfamily.Bean.GameCountDownBean;
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.Fragment.BettingCountDownFragment;
@@ -67,21 +69,28 @@ public class GameConutDownActiveAPI {
                                 String json = response.body().string();
                                 JSONObject content = new JSONObject(json);
 
+
                                 if (content.getInt("result") == 0) {
 
-                                    if(content.getJSONArray("liveGames").length() > 0){
+                                    if (content.getJSONArray("liveGames").length() > 0) {
+
+                                        BettingCountDownFragment.WeakBettingCountDown.get().CountdownNext.setVisibility(View.GONE);
                                         BettingCountDownFragment.WeakBettingCountDown.get().CountDownRV.setVisibility(View.VISIBLE);
+                                        BettingCountDownFragment.WeakBettingCountDown.get().GameCountDownActiveList.clear();
                                         for (int i = 0; i < content.getJSONArray("liveGames").length(); i++) {
 
-                                            Log.d("aaaaaaaaaa",content.getJSONArray("liveGames").getJSONObject(i).getString("awayTeam"));
+                                            BettingCountDownFragment.WeakBettingCountDown.get().GameCountDownActiveList.add(new GameCountDownActiveBean(
+                                                    content.getJSONArray("liveGames").getJSONObject(i).getJSONArray("result").toString(),
+                                                    content.getJSONArray("liveGames").getJSONObject(i).getJSONArray("game").toString()
+                                            ));
 
                                         }
-                                    }else{
+
+                                    } else {
                                         BettingCountDownFragment.WeakBettingCountDown.get().CountdownNext.setVisibility(View.VISIBLE);
                                         BettingCountDownFragment.WeakBettingCountDown.get().CountDownRV.setVisibility(View.GONE);
                                         GameConutDownAPI.GameConutDown();
                                     }
-
 
 
                                 } else {
@@ -101,8 +110,14 @@ public class GameConutDownActiveAPI {
                             ToastShow.start(BettingCountDownFragment.WeakBettingCountDown.get().getActivity(), "場中賽事獲取失敗");
 
                         }
-
-
+                        if (BettingCountDownFragment.WeakBettingCountDown.get().GameCountDownActiveList.size() <= 0) {
+                            BettingCountDownFragment.WeakBettingCountDown.get().CountdownNext.setVisibility(View.GONE);
+                            BettingCountDownFragment.WeakBettingCountDown.get().CountDownRV.setVisibility(View.VISIBLE);
+                        } else {
+                            BettingCountDownFragment.WeakBettingCountDown.get().CountdownNext.setVisibility(View.VISIBLE);
+                            BettingCountDownFragment.WeakBettingCountDown.get().CountDownRV.setVisibility(View.GONE);
+                        }
+                        BettingCountDownFragment.WeakBettingCountDown.get().GameCountDownActiveAdapter.notifyDataSetChanged();
                     }
                 });
 

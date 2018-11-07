@@ -67,7 +67,7 @@ public class BettingRecordDetailActivity extends AppCompatActivity {
 
         Loading.start(this);
         GetRecord();
-        BettingRecordDetailAPI.BettingRecordDetail(Index.WeakIndex.get().UserInfo.getString("Token", ""),intent.getStringExtra("order") );
+        BettingRecordDetailAPI.BettingRecordDetail(Index.WeakIndex.get().UserInfo.getString("Token", ""), intent.getStringExtra("order"));
     }
 
     private void actionbar() {
@@ -97,14 +97,14 @@ public class BettingRecordDetailActivity extends AppCompatActivity {
             @Override
             public void bindDataToView(RVViewHolder holder, int position, BettingRecordDetailBean bean, boolean isSelected) {
 
-                DetailOrderNo.setText("#"+bean.getOrderNo());
-                DetailBettingType .setText(bean.getBetsType());
+                DetailOrderNo.setText("#" + bean.getOrderNo());
+                DetailBettingType.setText(bean.getBetsType());
                 DetailBettingCombination.setText(bean.getCombination());
                 DetailBettingSingleAmount.setText(bean.getSingleAmount());
-                DetailBettingAmount .setText(bean.getAmount());
+                DetailBettingAmount.setText(bean.getAmount());
                 DetailBettingReason.setText(bean.getErrorReason());
                 DetailBettingPayout.setText(bean.getPayout());
-                DetailBettingDate .setText(bean.getBetsTime());
+                DetailBettingDate.setText(bean.getBetsTime());
 
                 try {
 

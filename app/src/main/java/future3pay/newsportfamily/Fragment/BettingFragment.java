@@ -3,6 +3,7 @@ package future3pay.newsportfamily.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,21 +29,22 @@ import future3pay.newsportfamily.Bean.GameNormalInfoBean;
 import future3pay.newsportfamily.Bean.GameNormalInfoDetailBean;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.R;
+import future3pay.newsportfamily.UIkit.ChampionGameOddDialog;
 import future3pay.newsportfamily.UIkit.Loading;
+import future3pay.newsportfamily.UIkit.NormalGameOddDialog;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class BettingFragment extends Fragment {
-    public static WeakReference<BettingFragment> WeakBettingFragment;
 
+    public static WeakReference<BettingFragment> WeakBettingFragment;
 
     public RVAdapter<GameNormalInfoBean> GameNormalAdapter;
     public RVAdapter<GameChampionInfoBean> GameChampionAdapter;
     public RVAdapter<GameNormalInfoDetailBean> GameNormalDetailAdapter;
     public RVAdapter<GameChampionInfoDetailBean> GameChampionDetailAdapter;
-
 
     public VerticalRefreshLayout BettingRV;
     public VerticalRefreshLayout BettingDetailRV;
@@ -75,36 +77,31 @@ public class BettingFragment extends Fragment {
         BettingDetailRV= view.findViewById(R.id.BettingDetailRV);
         NoGame= view.findViewById(R.id.NoGame);
 
-
-
         BettingDetailRV.setVisibility(View.GONE);
 
-
         NoGame.setVisibility(View.GONE);
-
-
 
         Loading.start(Index.WeakIndex.get());
 
         GameNormalInfoList = new ArrayList<>();
+
         GameChampionInfoList = new ArrayList<>();
 
         GameNormalInfoDetailList = new ArrayList<>();
+
         GameChampionInfoDetailList = new ArrayList<>();
 
-
-
         switch (Index.WeakIndex.get().SportRoot){
+
             case "0":
                 GetNormalBetting();
                 GameNormalInfoAPI.GameInfo();
-
                 break;
             case "1":
                 GetChampionBetting();
                 GameChampionInfoAPI.GameInfo();
-
                 break;
+
         }
 
 
@@ -281,9 +278,9 @@ public class BettingFragment extends Fragment {
             @Override
             public void bindDataToView(RVViewHolder holder, int position, GameNormalInfoDetailBean bean, boolean isSelected) {
 
+                holder.setText(R.id.StartDate, bean.getGameStartTime());
                 holder.setText(R.id.Code, bean.getCode());
                 holder.setText(R.id.Mins, bean.getMins());
-                holder.setText(R.id.StartDate, bean.getGameStartTime());
                 holder.setText(R.id.Away, bean.getAwayTeam());
                 holder.setText(R.id.Home, bean.getHomeTeam());
                 switch (bean.getMins()){
@@ -304,6 +301,7 @@ public class BettingFragment extends Fragment {
 
             @Override
             public int getItemLayoutID(int position, GameNormalInfoDetailBean bean) {
+
                 return R.layout.betting_normal_detail_item;
 
             }
@@ -311,7 +309,10 @@ public class BettingFragment extends Fragment {
 
             @Override
             public void onItemClick(int position, GameNormalInfoDetailBean bean) {
-                Toast.makeText(Index.WeakIndex.get(),bean.getCategory(),Toast.LENGTH_SHORT).show();
+
+
+                NormalGameOddDialog.NormalGameOdd(bean.getBets(),bean.getCode(),bean.getMins(),bean.getAwayTeam(),bean.getHomeTeam());
+
 
             }
 
@@ -381,7 +382,8 @@ public class BettingFragment extends Fragment {
 
             @Override
             public void onItemClick(int position, GameChampionInfoDetailBean bean) {
-                Toast.makeText(Index.WeakIndex.get(),bean.getCategory(),Toast.LENGTH_SHORT).show();
+
+                ChampionGameOddDialog.ChampionGameOdd(bean.getCodes());
 
             }
 
