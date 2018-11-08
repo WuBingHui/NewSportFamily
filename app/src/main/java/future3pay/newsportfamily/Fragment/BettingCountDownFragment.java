@@ -105,6 +105,7 @@ public class BettingCountDownFragment extends Fragment {
     }
 
     public void StartActiveAPI(){
+
         scheduledThreadPool2 = Executors.newScheduledThreadPool(5);
         scheduledThreadPool2.scheduleAtFixedRate(new Runnable() {
             @Override
@@ -200,10 +201,9 @@ public class BettingCountDownFragment extends Fragment {
 
 
                     //Result.getJSONObject(position).getString("type");
+                   // Result.getJSONObject(position).getString("status");
 
-                    // Result.getJSONObject(position).getString("status");
-
-                    // Result.getJSONObject(position).getString("id");
+                    //Result.getJSONObject(position).getString("id");
 
 
                     holder.setText(R.id.GameCode, Result.getJSONObject(position).getString("code"));

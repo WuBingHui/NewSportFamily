@@ -9,16 +9,13 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 import future3pay.newsportfamily.Activity.BettingRecordActivity;
-import future3pay.newsportfamily.Activity.WithdrawalRecordActivity;
 import future3pay.newsportfamily.Bean.BettingRecordBean;
-import future3pay.newsportfamily.Bean.WithdrawalRecordBean;
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.UIkit.Loading;
 import future3pay.newsportfamily.UIkit.ToastShow;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -73,7 +70,7 @@ public class BettingRecordAPI {
                         try {
                             String json = response.body().string();
                             JSONObject content = new JSONObject(json);
-                                Log.d("aaaaaaaaaaa", String.valueOf(content));
+
                             if (response.isSuccessful()) {
 
                                 if (content.getInt("result") == 0) {
@@ -89,11 +86,13 @@ public class BettingRecordAPI {
                                             ));
                                         }
                                     }else{
+
                                         BettingRecordActivity.WeakBettingRecord.get().PurseTotal.setText("0");
                                         BettingRecordActivity.WeakBettingRecord.get().BetsTotal.setText("0");
                                         BettingRecordActivity.WeakBettingRecord.get().SubTotal.setText("0");
                                         BettingRecordActivity.WeakBettingRecord.get().BettingRecordRV.setVisibility(View.GONE);
                                         BettingRecordActivity.WeakBettingRecord.get().NoBettingRecord.setVisibility(View.VISIBLE);
+
                                     }
 
                                 } else {

@@ -28,7 +28,11 @@ import android.widget.TextView;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
+import com.cy.cyrvadapter.adapter.RVAdapter;
+import com.cy.cyrvadapter.refreshrv.BaseRefreshLayout;
+import com.cy.cyrvadapter.refreshrv.VerticalRefreshLayout;
 import com.cy.dialog.BaseDialog;
+import com.sevenheaven.segmentcontrol.SegmentControl;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -39,8 +43,12 @@ import future3pay.newsportfamily.API.GameNormalInfoAPI;
 import future3pay.newsportfamily.API.SportTypeAPI;
 import future3pay.newsportfamily.API.UserInfoAPI;
 import future3pay.newsportfamily.Activity.LoginActivity;
+import future3pay.newsportfamily.Bean.GameChampionInfoDetailBean;
+import future3pay.newsportfamily.Bean.GameNormalInfoBean;
+import future3pay.newsportfamily.Bean.ShopCarInfoBean;
 import future3pay.newsportfamily.Fragment.BettingFragment;
 import future3pay.newsportfamily.UIkit.Loading;
+import future3pay.newsportfamily.UIkit.ToastShow;
 
 
 public class Index extends AppCompatActivity {
@@ -53,10 +61,18 @@ public class Index extends AppCompatActivity {
     public List<String> GameType;
     public List<String> GameName;
     public List<String> GameCategory;
+    public List<ShopCarInfoBean> ShopCarInfoList;
+
+    public RVAdapter<ShopCarInfoBean> ShopCarAdapter;
+
+    public VerticalRefreshLayout ShopCarRV;
+
+    private SegmentControl ShopCarPlaySelect;
     private BaseDialog DialogMenu;
     public AHBottomNavigation bottomNavigation;
-    public TextView actionbar_textview;
-    public Button menu, back;
+    public TextView actionbar_textview,BettingPayout,BettingSum,BettingWon;
+
+    public Button menu, back,shop,RemoveAll,SendOrder;
     public ScrollView MenuScroll;
     public static WeakReference<Index> WeakIndex;
 
@@ -75,6 +91,7 @@ public class Index extends AppCompatActivity {
         GameType = new ArrayList<>();
         GameName = new ArrayList<>();
         GameCategory = new ArrayList<>();
+        ShopCarInfoList= new ArrayList<>();
         IndexFrame = findViewById(R.id.IndexFrame);
 
 
@@ -108,26 +125,52 @@ public class Index extends AppCompatActivity {
         actionbar_textview = (TextView) v.findViewById(R.id.actionbar_textview);
         menu = (Button) v.findViewById(R.id.menu);
         back = (Button) v.findViewById(R.id.back);
-
+        shop= (Button) v.findViewById(R.id.shop);
         back.setVisibility(View.GONE);
 
         back.setOnClickListener(Back);
         menu.setOnClickListener(Menu);
-
+        shop.setOnClickListener(Shop);
         bar.setCustomView(v, new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT));
     }
+
+    //返回聯賽列表
+    private Button.OnClickListener Shop = new Button.OnClickListener() {
+
+        @Override
+        public void onClick(View view) {
+            if(ShopCarInfoList.size()>0){
+
+                BaseDialog   dialog = new BaseDialog(Index.this);
+                dialog.config(R.layout.shop_car, true).show();
+                ShopCarRV= dialog.findViewById(R.id.ShopCarRV);
+                ShopCarPlaySelect= dialog.findViewById(R.id.ShopCarPlaySelect);
+                BettingPayout= dialog.findViewById(R.id.BettingPayout);
+                BettingSum= dialog.findViewById(R.id.BettingSum);
+                BettingWon= dialog.findViewById(R.id.BettingWon);
+                RemoveAll= dialog.findViewById(R.id.RemoveAll);
+                SendOrder= dialog.findViewById(R.id.SendOrder);
+
+            }else{
+                ToastShow.start(Index.this,"無投注資料");
+            }
+
+        }
+    };
 
     //返回聯賽列表
     private Button.OnClickListener Back = new Button.OnClickListener() {
 
         @Override
         public void onClick(View view) {
+
             actionbar_textview.setText("運彩家族");
             back.setVisibility(View.GONE);
             menu.setVisibility(View.VISIBLE);
             bottomNavigation.setVisibility(View.VISIBLE);
             BettingFragment.WeakBettingFragment.get().BettingRV.setVisibility(View.VISIBLE);
             BettingFragment.WeakBettingFragment.get().BettingDetailRV.setVisibility(View.GONE);
+
         }
     };
 
@@ -137,8 +180,6 @@ public class Index extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
-
-
 
             DisplayMetrics metrics = new DisplayMetrics();
             getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -328,6 +369,53 @@ public class Index extends AppCompatActivity {
     }
     ///
 
+    //購物車
+    public void ShopCar(){
+
+
+
+        ShopCarAdapter = new RVAdapter<ShopCarInfoBean>(ShopCarInfoList) {
+                @Override
+                public void bindDataToView(RVViewHolder holder, int position, ShopCarInfoBean bean, boolean isSelected) {
+
+
+
+                }
+
+
+                @Override
+                public int getItemLayoutID(int position, ShopCarInfoBean bean) {
+                    return R.layout.betting_item;
+
+                }
+
+
+                @Override
+                public void onItemClick(int position, ShopCarInfoBean bean) {
+
+
+
+
+                }
+
+            };
+
+        ShopCarRV.setAdapter(Index.this,ShopCarAdapter,  getResources().getColor(R.color.topcolor),
+                    new BaseRefreshLayout.OnCYRefreshListener() {
+                        @Override
+                        public void onRefresh() {
+
+                            ShopCarAdapter.notifyDataSetChanged();
+                            ShopCarRV.finishRefreshing();
+                        }
+                    });
+
+
+
+
+
+
+    }
 
 
 }

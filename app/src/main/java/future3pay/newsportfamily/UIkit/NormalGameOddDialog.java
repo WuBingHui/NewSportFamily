@@ -1,23 +1,19 @@
 package future3pay.newsportfamily.UIkit;
 
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextSwitcher;
 import android.widget.TextView;
 
 import com.cy.dialog.BaseDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.w3c.dom.Text;
 
+import future3pay.newsportfamily.API.AddBettingToShopCarAPI;
 import future3pay.newsportfamily.Fragment.BettingFragment;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.R;
@@ -25,7 +21,7 @@ import future3pay.newsportfamily.R;
 public class NormalGameOddDialog {
 
 
-    public static void NormalGameOdd(final String bets, final String code, final String mins, final String away, final String home) {
+    public static void NormalGameOdd(final String bets, final String code, final String mins, final String away, final String home , final String ni) {
 
 
         BettingFragment.WeakBettingFragment.get().getActivity().runOnUiThread(new Runnable() {
@@ -33,7 +29,7 @@ public class NormalGameOddDialog {
             public void run() {
 
                 BaseDialog dialog = new BaseDialog(BettingFragment.WeakBettingFragment.get().getActivity());
-                dialog.config(R.layout.normal_game_odd_dialog, true).show();
+                dialog.config(R.layout.game_odd_dialog, true).show();
 
                 TextView GameType = dialog.findViewById(R.id.GameType);
 
@@ -67,33 +63,62 @@ public class NormalGameOddDialog {
                         PlayMethod.setText(content.getJSONObject(i).getJSONObject("betsTitle").getString("title"));
                         PlayMethod.setTextSize(18);
                         OddInterFace.addView(PlayMethod);
-                        HorizontalScrollView scrollView = new HorizontalScrollView(dialog.getContext());
 
+                        HorizontalScrollView scrollView = new HorizontalScrollView(dialog.getContext());
                         LinearLayout linearLayout = new LinearLayout(dialog.getContext());
                         linearLayout.setVerticalGravity(LinearLayout.HORIZONTAL);
                         scrollView.addView(linearLayout);
-                        Drawable BtnBk = Index.WeakIndex.get().getResources().getDrawable(R.drawable.corners_3);
+                        OddInterFace.addView(scrollView);
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.MATCH_PARENT);
 
-                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                                ConstraintLayout.LayoutParams.WRAP_CONTENT);
                         params.setMargins(0, 16, 16, 0);
 
                         for (int j = 0; j < content.getJSONObject(i).getJSONArray("codes").length(); j++) {
 
+
+
                             Button odd = new Button(dialog.getContext());
+                            odd.setText(content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("name")+content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("outComeConditions") + "\n" + content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("odds"));
+                            odd.setTag("{\"ni\":\"" +ni + "\",\"name\":\"" + content.getJSONObject(i).getJSONObject("betsTitle").getString("titleCode") + "\",\"Id\":\"" + ni + "_" + content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("id") + "\"}");
+                            odd.setBackgroundResource(R.drawable.corners_3);
                             odd.setLayoutParams(params);
                             odd.setGravity(Gravity.CENTER_HORIZONTAL);
-                            //odd.setBackground(BtnBk);
-                            odd.setText(content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("name")+content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("outComeConditions") + "\n" + content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("odds"));
-
+                            odd.setOnClickListener(bet);
                             if(content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("status").equals("active")){
+
                                 odd.setEnabled(true);
+
                             }else{
+
                                 odd.setEnabled(false);
+
                             }
+
+
+                            if(j %3 ==0 && j!= 0 && content.getJSONObject(i).getJSONArray("codes").length() >3){
+
+                                scrollView = new HorizontalScrollView(dialog.getContext());
+                                linearLayout = new LinearLayout(dialog.getContext());
+                                linearLayout.setVerticalGravity(LinearLayout.HORIZONTAL);
+                                scrollView.addView(linearLayout);
+                                OddInterFace.addView(scrollView);
                                 linearLayout.addView(odd);
+
+                            }else{
+
+                                linearLayout.addView(odd);
+
+                            }
+
+
+
+
+
                         }
-                        OddInterFace.addView(scrollView);
+
+
+
 
 
                     }
@@ -112,5 +137,28 @@ public class NormalGameOddDialog {
 
     }
 
+
+    public static Button.OnClickListener bet = new Button.OnClickListener(){
+
+        @Override
+        public void onClick(View view) {
+
+
+            if(!Index.WeakIndex.get().UserInfo.getString("Token","").equals("")){
+                if(Index.WeakIndex.get().ShopCarInfoList.size() <= 8){
+                    Loading.start(BettingFragment.WeakBettingFragment.get().getActivity());
+                    AddBettingToShopCarAPI.AddBettingToShopCar(Index.WeakIndex.get().UserInfo.getString("Token",""),String.valueOf(view.getTag()));
+                }else{
+                    ToastShow.start(Index.WeakIndex.get(),"投注最多8筆!");
+                }
+            }else{
+                ToastShow.start(Index.WeakIndex.get(),"尚未登入");
+            }
+
+
+
+        }
+
+    };
 
 }

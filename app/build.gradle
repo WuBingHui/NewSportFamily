@@ -34,4 +34,5 @@ dependencies {
     implementation 'com.squareup.okio:okio:1.14.0'
     implementation 'com.github.AnJiaoDe:BaseDialog:V1.1.2'
     implementation 'com.github.AnJiaoDe:RecyclerViewAdapter:V2.3.0'
+    implementation 'com.7heaven.widgets:segmentcontrol:1.17'
 }

@@ -9,12 +9,15 @@ import android.widget.Toast;
 import com.cy.dialog.progress.CYProgressDialog;
 
 public class ToastShow extends  Activity {
-
+   private static Toast str;
     public static void  start(final Context context, final String message){
         new Activity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast str =  Toast.makeText(context,message,Toast.LENGTH_LONG);
+                if(str != null){
+                    str.cancel();
+                }
+                 str =  Toast.makeText(context,message,Toast.LENGTH_SHORT);
                 str.setGravity(Gravity.CENTER,0,0);
                 str.show();
             }

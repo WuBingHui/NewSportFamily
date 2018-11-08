@@ -3,9 +3,10 @@ package future3pay.newsportfamily;
 import android.util.Log;
 
 public class DoMainUrl {
+
     private volatile static DoMainUrl INSTANCE; //聲明成 volatile
-    public static String Register,PhoneSms,ResetPassWord,Login,Info,SportsType,GameInfo,GameResult,GameChampionInfo,GameCountDown,GameActive,BettingRecord,BettingRecordDetail,PointRecord,DepositRecord,DrawRecord ;
-    String domain = "https://fet555888.tw";
+    public static String Register,PhoneSms,ResetPassWord,Login,Info,SportsType,GameInfo,GameResult,GameChampionInfo,GameCountDown,GameActive,BettingRecord,BettingRecordDetail,PointRecord,DepositRecord,DrawRecord,AddBettingToShopCar,RemoveBettingFromShopCar,RemoveAllBettingFromShopCar,CheckBettingFromShopCar,SendBettingFromShopCar;
+   private final String domain = "https://fet555888.tw";
     private DoMainUrl (){
 
         Register =  domain+"/api/mobile/register";//一般註冊會員
@@ -24,9 +25,11 @@ public class DoMainUrl {
         PointRecord = domain+"/api/mobile/get/member/points/records";//點數使用紀錄
         DepositRecord = domain+"/api/mobile/get/member/points/deposit-record";//補點紀錄
         DrawRecord = domain+"/api/mobile/get/member/points/draw-record";//提領紀錄
-
-
-
+        AddBettingToShopCar = domain+"/api/mobile/get/member/betting/shopcar";//新增投注選項進購物車
+        RemoveBettingFromShopCar = domain+"/api/mobile/get/member/betting/shopcar/clean-one";//刪除購物車單筆投注選項
+        RemoveAllBettingFromShopCar = domain+"/api/mobile/get/member/betting/shopcar/clean-up";//刪除購物車全部投注選項
+        CheckBettingFromShopCar = domain+"/api/mobile/get/member/betting/shopcar";//取得投注資料檢查訂單
+        SendBettingFromShopCar = domain+"/api/mobile/get/member/betting/check/order";//確認訂單資訊 送出訂單
 
     }
 

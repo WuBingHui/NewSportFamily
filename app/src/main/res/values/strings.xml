@@ -303,6 +303,12 @@
 
     <string name="玩法">玩法</string>
     <string name="賠率">賠率</string>
+    <string name="我接受">我接受</string>
+    <string name="運彩家族會員條款">運彩家族會員條款</string>
+    <string name="投注單">投注單</string>
+    <string name="最高可能中">最高可能中</string>
+    <string name="清除">清除</string>
+    <string name="投注">投注</string>
 
 
     <array name="Time_list">

@@ -409,10 +409,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/corners"
             android:text="@string/立即註冊"
@@ -420,7 +418,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/VerifyCode" />
+            app:layout_constraintTop_toBottomOf="@+id/AgreeCheckBox" />
 
         <TextView
             android:id="@+id/AccountNotice"
@@ -512,6 +510,30 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView14"
             app:layout_constraintTop_toTopOf="@+id/textView14" />
+
+        <CheckBox
+            android:id="@+id/AgreeCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/我接受"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/VerifyCode" />
+
+        <TextView
+            android:id="@+id/PrivacyPolicy"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@string/運彩家族會員條款"
+            android:textAlignment="center"
+            android:textColor="@color/MinsType"
+            app:layout_constraintBottom_toBottomOf="@+id/AgreeCheckBox"
+            app:layout_constraintStart_toEndOf="@+id/AgreeCheckBox"
+            app:layout_constraintTop_toTopOf="@+id/AgreeCheckBox"
+            app:layout_constraintVertical_bias="0.0" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

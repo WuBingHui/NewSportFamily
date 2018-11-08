@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="16dp"
+    android:background="@drawable/corners_3"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <com.cy.cyrvadapter.refreshrv.VerticalRefreshLayout
+            android:id="@+id/ShopCarRV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/white"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ShopCarPlaySelect">
+
+        </com.cy.cyrvadapter.refreshrv.VerticalRefreshLayout>
+
+
+        <TextView
+            android:id="@+id/textView87"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/投注單"
+            android:textAlignment="center"
+            android:textColor="@color/Black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.sevenheaven.segmentcontrol.SegmentControl xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/ShopCarPlaySelect"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            android:textSize="16sp"
+            app:boundWidth="1dp"
+            app:cornerRadius="5dp"
+            app:horizonGap="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView87"
+            app:normalColor="#FFFFFF"
+            app:selectedColor="@color/topcolor"
+            app:separatorWidth="1dp"
+            app:texts="單場|過關|過關組合"
+            app:verticalGap="10dp" />
+
+        <TextView
+            android:id="@+id/textView93"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="1 個組合 每組投注金額 10 元＊ "
+            android:textColor="@color/Black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ShopCarRV" />
+
+        <EditText
+            android:id="@+id/BettingPayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/corners_3"
+            android:ems="10"
+            android:gravity="center|right"
+            android:inputType="phone"
+            android:paddingEnd="4dp"
+            android:text="12313333"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/Black"
+            app:layout_constraintBottom_toBottomOf="@+id/textView93"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView93"
+            app:layout_constraintTop_toTopOf="@+id/textView93" />
+
+        <LinearLayout
+            android:id="@+id/ComboTypeSelect"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView93"></LinearLayout>
+
+        <TextView
+            android:id="@+id/textView95"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/小計"
+            android:textColor="@color/Black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/ComboTypeSelect"
+            app:layout_constraintTop_toBottomOf="@+id/ComboTypeSelect" />
+
+        <TextView
+            android:id="@+id/BettingSum"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/Black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView95"
+            app:layout_constraintEnd_toEndOf="@+id/ComboTypeSelect"
+            app:layout_constraintStart_toEndOf="@+id/textView95"
+            app:layout_constraintTop_toTopOf="@+id/textView95" />
+
+        <TextView
+            android:id="@+id/textView100"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/最高可能中"
+            android:textColor="@color/Black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/ComboTypeSelect"
+            app:layout_constraintTop_toBottomOf="@+id/textView95" />
+
+        <TextView
+            android:id="@+id/BettingWon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="0"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/Red"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView100"
+            app:layout_constraintTop_toTopOf="@+id/textView100" />
+
+        <TextView
+            android:id="@+id/textView102"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="您在本站下注時的賠率與台灣運彩實際出單時的賠率誤差在+-0.3內會正常出單(其餘退單)，而您的賠率是以本站顯示賠率為準。"
+            android:textColor="@color/Red"
+            app:layout_constraintEnd_toEndOf="@+id/BettingWon"
+            app:layout_constraintStart_toStartOf="@+id/textView100"
+            app:layout_constraintTop_toBottomOf="@+id/textView100" />
+
+        <Button
+            android:id="@+id/RemoveAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/corners_3"
+            android:text="@string/清除"
+            android:textColor="@color/Black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/SendOrder"
+            app:layout_constraintStart_toStartOf="@+id/textView102"
+            app:layout_constraintTop_toBottomOf="@+id/textView102" />
+
+        <Button
+            android:id="@+id/SendOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/corners"
+            android:text="@string/投注"
+            android:textColor="@color/Black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textView102"
+            app:layout_constraintStart_toEndOf="@+id/RemoveAll"
+            app:layout_constraintTop_toBottomOf="@+id/textView102" />
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

@@ -311,7 +311,7 @@ public class BettingFragment extends Fragment {
             public void onItemClick(int position, GameNormalInfoDetailBean bean) {
 
 
-                NormalGameOddDialog.NormalGameOdd(bean.getBets(),bean.getCode(),bean.getMins(),bean.getAwayTeam(),bean.getHomeTeam());
+                NormalGameOddDialog.NormalGameOdd(bean.getBets(),bean.getCode(),bean.getMins(),bean.getAwayTeam(),bean.getHomeTeam(),bean.getNi());
 
 
             }
@@ -383,7 +383,7 @@ public class BettingFragment extends Fragment {
             @Override
             public void onItemClick(int position, GameChampionInfoDetailBean bean) {
 
-                ChampionGameOddDialog.ChampionGameOdd(bean.getCodes());
+                ChampionGameOddDialog.ChampionGameOdd(bean.getCodes(),bean.getCode(),bean.getBetsTitle());
 
             }
 
