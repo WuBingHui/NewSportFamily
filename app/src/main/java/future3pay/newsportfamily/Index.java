@@ -40,6 +40,8 @@ import java.util.List;
 
 import future3pay.newsportfamily.API.GameChampionInfoAPI;
 import future3pay.newsportfamily.API.GameNormalInfoAPI;
+import future3pay.newsportfamily.API.RemoveAllBettingFromShopCarAPI;
+import future3pay.newsportfamily.API.RemoveSingleItemBettingAPI;
 import future3pay.newsportfamily.API.SportTypeAPI;
 import future3pay.newsportfamily.API.UserInfoAPI;
 import future3pay.newsportfamily.Activity.LoginActivity;
@@ -134,11 +136,12 @@ public class Index extends AppCompatActivity {
         bar.setCustomView(v, new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT));
     }
 
-    //返回聯賽列表
+
     private Button.OnClickListener Shop = new Button.OnClickListener() {
 
         @Override
         public void onClick(View view) {
+
             if(ShopCarInfoList.size()>0){
 
                 BaseDialog   dialog = new BaseDialog(Index.this);
@@ -150,9 +153,28 @@ public class Index extends AppCompatActivity {
                 BettingWon= dialog.findViewById(R.id.BettingWon);
                 RemoveAll= dialog.findViewById(R.id.RemoveAll);
                 SendOrder= dialog.findViewById(R.id.SendOrder);
+                RemoveAll.setOnClickListener(remove);
 
+                ShopCar();
             }else{
                 ToastShow.start(Index.this,"無投注資料");
+            }
+
+        }
+    };
+
+
+
+    private Button.OnClickListener remove = new Button.OnClickListener() {
+
+        @Override
+        public void onClick(View view) {
+            if( Index.WeakIndex.get().ShopCarInfoList.size() >0){
+                Loading.start(Index.this);
+                RemoveAllBettingFromShopCarAPI.RemoveAllBettingFromShopCar(UserInfo.getString("Token",""));
+
+            }else{
+                ToastShow.start(Index.WeakIndex.get(),"無訂單紀錄");
             }
 
         }
@@ -385,7 +407,7 @@ public class Index extends AppCompatActivity {
 
                 @Override
                 public int getItemLayoutID(int position, ShopCarInfoBean bean) {
-                    return R.layout.betting_item;
+                    return R.layout.shop_car_card;
 
                 }
 
@@ -393,8 +415,8 @@ public class Index extends AppCompatActivity {
                 @Override
                 public void onItemClick(int position, ShopCarInfoBean bean) {
 
-
-
+                    Loading.start(Index.this);
+                    RemoveSingleItemBettingAPI.RemoveSingleItemBetting(UserInfo.getString("Token",""),position,bean.getItem());
 
                 }
 

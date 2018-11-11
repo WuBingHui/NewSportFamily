@@ -18,6 +18,7 @@ import com.cy.cyrvadapter.refreshrv.VerticalRefreshLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
@@ -37,6 +38,7 @@ import future3pay.newsportfamily.FormaTimeData;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.R;
 import future3pay.newsportfamily.UIkit.Loading;
+import future3pay.newsportfamily.UIkit.NormalGameOddDialog;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,13 +53,15 @@ public class BettingCountDownFragment extends Fragment {
 
     public TextView CountDownAway, CountDownHome, DayTenDigits, DayDigits, HourTenDigits, HourDigits, MinTenDigits, MinDigits, SecTenDigits, SecDigits, NoCountDown;
 
-    public ScheduledExecutorService scheduledThreadPool,scheduledThreadPool2;
+    public ScheduledExecutorService scheduledThreadPool,scheduledThreadPool2,scheduledThreadPool3;
 
     public ConstraintLayout CountdownNext;
 
     public RVAdapter<GameCountDownActiveBean> GameCountDownActiveAdapter;
 
     public VerticalRefreshLayout CountDownRV;
+
+    private String OldOdd="";
 
 
     public BettingCountDownFragment() {
@@ -88,10 +92,11 @@ public class BettingCountDownFragment extends Fragment {
         CountdownNext = view.findViewById(R.id.CountdownNext);
         CountDownRV = view.findViewById(R.id.CountDownRV);
 
+        CountdownNext.setVisibility(View.GONE);
         NoCountDown.setVisibility(View.GONE);
         CountDownRV.setVisibility(View.GONE);
 
-
+        Loading.start(Index.WeakIndex.get());
 
 
         StartActiveAPI();
@@ -104,12 +109,12 @@ public class BettingCountDownFragment extends Fragment {
 
     }
 
-    public void StartActiveAPI(){
+    public  void StartActiveAPI(){
 
         scheduledThreadPool2 = Executors.newScheduledThreadPool(5);
         scheduledThreadPool2.scheduleAtFixedRate(new Runnable() {
             @Override
-            public void run() {
+            public synchronized void run() {
 
                 GameConutDownActiveAPI.GameConutDownActive();
             }
@@ -195,103 +200,106 @@ public class BettingCountDownFragment extends Fragment {
             public void bindDataToView(RVViewHolder holder, int position, GameCountDownActiveBean bean, boolean isSelected) {
 
 
-                try {
 
-                    JSONArray Result = new JSONArray(bean.getResult());
+                    try {
 
-
-                    //Result.getJSONObject(position).getString("type");
-                   // Result.getJSONObject(position).getString("status");
-
-                    //Result.getJSONObject(position).getString("id");
+                        JSONArray Result = new JSONArray(bean.getResult());
 
 
-                    holder.setText(R.id.GameCode, Result.getJSONObject(position).getString("code"));
-                    holder.setText(R.id.GameCategory, Result.getJSONObject(position).getString("category"));
-                    holder.setText(R.id.AwayNameBig, Result.getJSONObject(position).getString("away_team"));
-                    holder.setText(R.id.HomeNameBig, Result.getJSONObject(position).getString("home_team"));
-                    holder.setText(R.id.AwaySum, Result.getJSONObject(position).getString("away_score"));
-                    holder.setText(R.id.HomeSum, Result.getJSONObject(position).getString("home_score"));
-                    holder.setText(R.id.AwayNameSmall, Result.getJSONObject(position).getString("away_team"));
-                    holder.setText(R.id.HomeNameSmall, Result.getJSONObject(position).getString("home_team"));
-                    holder.setText(R.id.Sum, Integer.valueOf(Result.getJSONObject(position).getString("away_score")) + Integer.valueOf(Result.getJSONObject(position).getString("home_score")));
-                    if (Integer.valueOf(Result.getJSONObject(position).getString("away_score")) > Integer.valueOf(Result.getJSONObject(position).getString("home_score"))) {
+                        //Result.getJSONObject(position).getString("type");
+                        // Result.getJSONObject(position).getString("status");
 
-                        holder.setText(R.id.WhoWin, "客勝" + String.valueOf(Integer.valueOf(Result.getJSONObject(position).getString("away_score")) - Integer.valueOf(Result.getJSONObject(position).getString("home_score"))) + "分");
-                        holder.setTextColor(R.id.AwayNameBig, Color.parseColor("#218838"));
-                        holder.setTextColor(R.id.AwaySum, Color.parseColor("#218838"));
-                        holder.setTextColor(R.id.HomeNameBig, Color.parseColor("#000000"));
-                        holder.setTextColor(R.id.HomeSum, Color.parseColor("#000000"));
+                        //Result.getJSONObject(position).getString("id");
 
-                    } else {
 
-                        if (Integer.valueOf(Result.getJSONObject(position).getString("away_score")) < Integer.valueOf(Result.getJSONObject(position).getString("home_score"))) {
-                            holder.setText(R.id.WhoWin, "主勝" + String.valueOf(Integer.valueOf(Result.getJSONObject(position).getString("home_score")) - Integer.valueOf(Result.getJSONObject(position).getString("away_score"))) + "分");
-                            holder.setTextColor(R.id.HomeNameBig, Color.parseColor("#218838"));
-                            holder.setTextColor(R.id.HomeSum, Color.parseColor("#218838"));
-                            holder.setTextColor(R.id.AwayNameBig, Color.parseColor("#000000"));
-                            holder.setTextColor(R.id.AwaySum, Color.parseColor("#000000"));
-                        } else {
+                        holder.setText(R.id.GameCode, Result.getJSONObject(position).getString("code"));
+                        holder.setText(R.id.GameCategory, Result.getJSONObject(position).getString("category"));
+                        holder.setText(R.id.AwayNameBig, Result.getJSONObject(position).getString("away_team"));
+                        holder.setText(R.id.HomeNameBig, Result.getJSONObject(position).getString("home_team"));
+                        holder.setText(R.id.AwaySum, Result.getJSONObject(position).getString("away_score"));
+                        holder.setText(R.id.HomeSum, Result.getJSONObject(position).getString("home_score"));
+                        holder.setText(R.id.AwayNameSmall, Result.getJSONObject(position).getString("away_team"));
+                        holder.setText(R.id.HomeNameSmall, Result.getJSONObject(position).getString("home_team"));
+                        holder.setText(R.id.Sum, Integer.valueOf(Result.getJSONObject(position).getString("away_score")) + Integer.valueOf(Result.getJSONObject(position).getString("home_score")));
+                        if (Integer.valueOf(Result.getJSONObject(position).getString("away_score")) > Integer.valueOf(Result.getJSONObject(position).getString("home_score"))) {
 
-                            holder.setText(R.id.WhoWin, "和局");
+                            holder.setText(R.id.WhoWin, "客勝" + String.valueOf(Integer.valueOf(Result.getJSONObject(position).getString("away_score")) - Integer.valueOf(Result.getJSONObject(position).getString("home_score"))) + "分");
+                            holder.setTextColor(R.id.AwayNameBig, Color.parseColor("#218838"));
+                            holder.setTextColor(R.id.AwaySum, Color.parseColor("#218838"));
                             holder.setTextColor(R.id.HomeNameBig, Color.parseColor("#000000"));
                             holder.setTextColor(R.id.HomeSum, Color.parseColor("#000000"));
-                            holder.setTextColor(R.id.AwayNameBig, Color.parseColor("#000000"));
-                            holder.setTextColor(R.id.AwaySum, Color.parseColor("#000000"));
 
+                        } else {
+
+                            if (Integer.valueOf(Result.getJSONObject(position).getString("away_score")) < Integer.valueOf(Result.getJSONObject(position).getString("home_score"))) {
+                                holder.setText(R.id.WhoWin, "主勝" + String.valueOf(Integer.valueOf(Result.getJSONObject(position).getString("home_score")) - Integer.valueOf(Result.getJSONObject(position).getString("away_score"))) + "分");
+                                holder.setTextColor(R.id.HomeNameBig, Color.parseColor("#218838"));
+                                holder.setTextColor(R.id.HomeSum, Color.parseColor("#218838"));
+                                holder.setTextColor(R.id.AwayNameBig, Color.parseColor("#000000"));
+                                holder.setTextColor(R.id.AwaySum, Color.parseColor("#000000"));
+                            } else {
+
+                                holder.setText(R.id.WhoWin, "和局");
+                                holder.setTextColor(R.id.HomeNameBig, Color.parseColor("#000000"));
+                                holder.setTextColor(R.id.HomeSum, Color.parseColor("#000000"));
+                                holder.setTextColor(R.id.AwayNameBig, Color.parseColor("#000000"));
+                                holder.setTextColor(R.id.AwaySum, Color.parseColor("#000000"));
+
+                            }
                         }
+
+
+                        SetScoreColor(holder, R.id.AwayOne, R.id.HomeOne, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("1")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("1")));
+                        SetScoreColor(holder, R.id.AwayTwo, R.id.HomeTwo, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("2")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("2")));
+                        SetScoreColor(holder, R.id.AwayThree, R.id.HomeThree, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("3")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("3")));
+                        SetScoreColor(holder, R.id.AwayFour, R.id.HomeFour, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("4")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("4")));
+                        SetScoreColor(holder, R.id.AwayFive, R.id.HomeFive, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("5")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("5")));
+                        SetScoreColor(holder, R.id.AwaySix, R.id.HomeSix, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("6")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("6")));
+                        SetScoreColor(holder, R.id.AwaySeven, R.id.HomeSeven, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("7")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("7")));
+                        SetScoreColor(holder, R.id.AwayEight, R.id.HomeEight, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("8")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("8")));
+                        SetScoreColor(holder, R.id.AwayNine, R.id.HomeNine, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("9")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("9")));
+                        SetScoreColor(holder, R.id.AwayOT, R.id.HomeOT, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("10")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("10")));
+
+                        SetScoreShow(holder, R.id.AwayOne, R.id.HomeOne, R.id.One, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("1")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("1")));
+                        SetScoreShow(holder, R.id.AwayTwo, R.id.HomeTwo, R.id.Two, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("2")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("2")));
+                        SetScoreShow(holder, R.id.AwayThree, R.id.HomeThree, R.id.Three, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("3")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("3")));
+                        SetScoreShow(holder, R.id.AwayFour, R.id.HomeFour, R.id.Four, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("4")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("4")));
+                        SetScoreShow(holder, R.id.AwayFive, R.id.HomeFive, R.id.Five, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("5")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("5")));
+                        SetScoreShow(holder, R.id.AwaySix, R.id.HomeSix, R.id.Six, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("6")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("6")));
+                        SetScoreShow(holder, R.id.AwaySeven, R.id.HomeSeven, R.id.Seven, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("7")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("7")));
+                        SetScoreShow(holder, R.id.AwayEight, R.id.HomeEight, R.id.Eight, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("8")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("8")));
+                        SetScoreShow(holder, R.id.AwayNine, R.id.HomeNine, R.id.Nine, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("9")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("9")));
+                        SetScoreShow(holder, R.id.AwayOT, R.id.HomeOT, R.id.OT, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("10")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("10")));
+
+
+                        holder.setText(R.id.AwayOne, Result.getJSONObject(position).getJSONObject("away_period").getString("1"));
+                        holder.setText(R.id.AwayTwo, Result.getJSONObject(position).getJSONObject("away_period").getString("2"));
+                        holder.setText(R.id.AwayThree, Result.getJSONObject(position).getJSONObject("away_period").getString("3"));
+                        holder.setText(R.id.AwayFour, Result.getJSONObject(position).getJSONObject("away_period").getString("4"));
+                        holder.setText(R.id.AwayFive, Result.getJSONObject(position).getJSONObject("away_period").getString("5"));
+                        holder.setText(R.id.AwaySix, Result.getJSONObject(position).getJSONObject("away_period").getString("6"));
+                        holder.setText(R.id.AwaySeven, Result.getJSONObject(position).getJSONObject("away_period").getString("7"));
+                        holder.setText(R.id.AwayEight, Result.getJSONObject(position).getJSONObject("away_period").getString("8"));
+                        holder.setText(R.id.AwayNine, Result.getJSONObject(position).getJSONObject("away_period").getString("9"));
+                        holder.setText(R.id.AwayOT, Result.getJSONObject(position).getJSONObject("away_period").getString("10"));
+
+                        holder.setText(R.id.HomeOne, Result.getJSONObject(position).getJSONObject("home_period").getString("1"));
+                        holder.setText(R.id.HomeTwo, Result.getJSONObject(position).getJSONObject("home_period").getString("2"));
+                        holder.setText(R.id.HomeThree, Result.getJSONObject(position).getJSONObject("home_period").getString("3"));
+                        holder.setText(R.id.HomeFour, Result.getJSONObject(position).getJSONObject("home_period").getString("4"));
+                        holder.setText(R.id.HomeFive, Result.getJSONObject(position).getJSONObject("home_period").getString("5"));
+                        holder.setText(R.id.HomeSix, Result.getJSONObject(position).getJSONObject("home_period").getString("6"));
+                        holder.setText(R.id.HomeSeven, Result.getJSONObject(position).getJSONObject("home_period").getString("7"));
+                        holder.setText(R.id.HomeEight, Result.getJSONObject(position).getJSONObject("home_period").getString("8"));
+                        holder.setText(R.id.HomeNine, Result.getJSONObject(position).getJSONObject("home_period").getString("9"));
+                        holder.setText(R.id.HomeOT, Result.getJSONObject(position).getJSONObject("home_period").getString("10"));
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
 
 
-                    SetScoreColor(holder, R.id.AwayOne, R.id.HomeOne, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("1")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("1")));
-                    SetScoreColor(holder, R.id.AwayTwo, R.id.HomeTwo, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("2")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("2")));
-                    SetScoreColor(holder, R.id.AwayThree, R.id.HomeThree, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("3")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("3")));
-                    SetScoreColor(holder, R.id.AwayFour, R.id.HomeFour, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("4")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("4")));
-                    SetScoreColor(holder, R.id.AwayFive, R.id.HomeFive, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("5")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("5")));
-                    SetScoreColor(holder, R.id.AwaySix, R.id.HomeSix, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("6")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("6")));
-                    SetScoreColor(holder, R.id.AwaySeven, R.id.HomeSeven, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("7")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("7")));
-                    SetScoreColor(holder, R.id.AwayEight, R.id.HomeEight, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("8")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("8")));
-                    SetScoreColor(holder, R.id.AwayNine, R.id.HomeNine, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("9")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("9")));
-                    SetScoreColor(holder, R.id.AwayOT, R.id.HomeOT, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("10")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("10")));
-
-                    SetScoreShow(holder, R.id.AwayOne, R.id.HomeOne, R.id.One, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("1")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("1")));
-                    SetScoreShow(holder, R.id.AwayTwo, R.id.HomeTwo, R.id.Two, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("2")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("2")));
-                    SetScoreShow(holder, R.id.AwayThree, R.id.HomeThree, R.id.Three, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("3")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("3")));
-                    SetScoreShow(holder, R.id.AwayFour, R.id.HomeFour, R.id.Four, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("4")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("4")));
-                    SetScoreShow(holder, R.id.AwayFive, R.id.HomeFive, R.id.Five, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("5")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("5")));
-                    SetScoreShow(holder, R.id.AwaySix, R.id.HomeSix, R.id.Six, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("6")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("6")));
-                    SetScoreShow(holder, R.id.AwaySeven, R.id.HomeSeven, R.id.Seven, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("7")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("7")));
-                    SetScoreShow(holder, R.id.AwayEight, R.id.HomeEight, R.id.Eight, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("8")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("8")));
-                    SetScoreShow(holder, R.id.AwayNine, R.id.HomeNine, R.id.Nine, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("9")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("9")));
-                    SetScoreShow(holder, R.id.AwayOT, R.id.HomeOT, R.id.OT, Integer.parseInt(Result.getJSONObject(position).getJSONObject("away_period").getString("10")), Integer.parseInt(Result.getJSONObject(position).getJSONObject("home_period").getString("10")));
-
-
-                    holder.setText(R.id.AwayOne, Result.getJSONObject(position).getJSONObject("away_period").getString("1"));
-                    holder.setText(R.id.AwayTwo, Result.getJSONObject(position).getJSONObject("away_period").getString("2"));
-                    holder.setText(R.id.AwayThree, Result.getJSONObject(position).getJSONObject("away_period").getString("3"));
-                    holder.setText(R.id.AwayFour, Result.getJSONObject(position).getJSONObject("away_period").getString("4"));
-                    holder.setText(R.id.AwayFive, Result.getJSONObject(position).getJSONObject("away_period").getString("5"));
-                    holder.setText(R.id.AwaySix, Result.getJSONObject(position).getJSONObject("away_period").getString("6"));
-                    holder.setText(R.id.AwaySeven, Result.getJSONObject(position).getJSONObject("away_period").getString("7"));
-                    holder.setText(R.id.AwayEight, Result.getJSONObject(position).getJSONObject("away_period").getString("8"));
-                    holder.setText(R.id.AwayNine, Result.getJSONObject(position).getJSONObject("away_period").getString("9"));
-                    holder.setText(R.id.AwayOT, Result.getJSONObject(position).getJSONObject("away_period").getString("10"));
-
-                    holder.setText(R.id.HomeOne, Result.getJSONObject(position).getJSONObject("home_period").getString("1"));
-                    holder.setText(R.id.HomeTwo, Result.getJSONObject(position).getJSONObject("home_period").getString("2"));
-                    holder.setText(R.id.HomeThree, Result.getJSONObject(position).getJSONObject("home_period").getString("3"));
-                    holder.setText(R.id.HomeFour, Result.getJSONObject(position).getJSONObject("home_period").getString("4"));
-                    holder.setText(R.id.HomeFive, Result.getJSONObject(position).getJSONObject("home_period").getString("5"));
-                    holder.setText(R.id.HomeSix, Result.getJSONObject(position).getJSONObject("home_period").getString("6"));
-                    holder.setText(R.id.HomeSeven, Result.getJSONObject(position).getJSONObject("home_period").getString("7"));
-                    holder.setText(R.id.HomeEight, Result.getJSONObject(position).getJSONObject("home_period").getString("8"));
-                    holder.setText(R.id.HomeNine, Result.getJSONObject(position).getJSONObject("home_period").getString("9"));
-                    holder.setText(R.id.HomeOT, Result.getJSONObject(position).getJSONObject("home_period").getString("10"));
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
 
 
             }
@@ -305,7 +313,40 @@ public class BettingCountDownFragment extends Fragment {
 
 
             @Override
-            public void onItemClick(int position, GameCountDownActiveBean bean) {
+            public void onItemClick(final int position, final GameCountDownActiveBean bean) {
+                OldOdd= "";
+                scheduledThreadPool3 = Executors.newScheduledThreadPool(5);
+                scheduledThreadPool3.scheduleAtFixedRate(new Runnable() {
+                    @Override
+                    public synchronized void run() {
+
+                        try {
+
+
+                            JSONArray content = new JSONArray( GameCountDownActiveList.get(position).getGame());
+                                if(!content.getJSONObject(position).getJSONArray("bets").toString().equals(OldOdd)){
+                                  //  Log.d("aaaaaaaaaaaaaaaa",OldOdd);
+                                   // Log.d("aaaaaaaaaaaaaaaa",content.getJSONObject(position).getJSONArray("bets").toString());
+                                     //Log.d("aaaaaaaaaaaaaaaa","賠率變化啦");
+                                    OldOdd = content.getJSONObject(position).getJSONArray("bets").toString();
+                                    NormalGameOddDialog.NormalGameOdd(content.getJSONObject(position).getJSONArray("bets").toString(),content.getJSONObject(position).getString("code"),content.getJSONObject(position).getString("mins"),content.getJSONObject(position).getString("awayTeam"),content.getJSONObject(position).getString("homeTeam"),content.getJSONObject(position).getString("ni"));
+
+                                }
+                            } catch (JSONException e) {
+
+                                e.printStackTrace();
+
+                            }
+
+
+                    }
+
+                }, 0, 2, TimeUnit.SECONDS);
+
+
+
+
+
 
 
             }
@@ -318,6 +359,7 @@ public class BettingCountDownFragment extends Fragment {
                     public void onRefresh() {
 
                         GameConutDownActiveAPI.GameConutDownActive();
+
                     }
 
                 });
@@ -375,4 +417,31 @@ public class BettingCountDownFragment extends Fragment {
 
     }
 
+
+
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        scheduledThreadPool3.shutdownNow();
+        scheduledThreadPool.shutdownNow();
+        scheduledThreadPool2.shutdownNow();
+        scheduledThreadPool3= null;
+        scheduledThreadPool= null;
+        scheduledThreadPool2 = null;
+        System.gc();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        scheduledThreadPool3.shutdownNow();
+        scheduledThreadPool.shutdownNow();
+        scheduledThreadPool2.shutdownNow();
+        scheduledThreadPool3= null;
+        scheduledThreadPool= null;
+        scheduledThreadPool2 = null;
+        System.gc();
+    }
 }

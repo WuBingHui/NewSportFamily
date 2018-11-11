@@ -14,6 +14,7 @@ import future3pay.newsportfamily.Bean.GameCountDownBean;
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.Fragment.BettingCountDownFragment;
 import future3pay.newsportfamily.Index;
+import future3pay.newsportfamily.UIkit.Loading;
 import future3pay.newsportfamily.UIkit.ToastShow;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -42,11 +43,11 @@ public class GameConutDownActiveAPI {
 
                 Index.WeakIndex.get().runOnUiThread(new Runnable() {
                     @Override
-                    public void run() {
+                    public synchronized void run() {
 
                         //告知使用者連線失敗
                         ToastShow.start(BettingCountDownFragment.WeakBettingCountDown.get().getActivity(), "無網路狀態，請檢查您的行動網路是否開啟");
-
+                        Loading.diss();
 
                     }
 
@@ -58,9 +59,11 @@ public class GameConutDownActiveAPI {
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
 
-                BettingCountDownFragment.WeakBettingCountDown.get().getActivity().runOnUiThread(new Runnable() {
+
+
+                 BettingCountDownFragment.WeakBettingCountDown.get().getActivity().runOnUiThread(new Runnable() {
                     @Override
-                    public void run() {
+                    public synchronized void run() {
 
                         if (response.isSuccessful()) {
 
@@ -69,10 +72,11 @@ public class GameConutDownActiveAPI {
                                 String json = response.body().string();
                                 JSONObject content = new JSONObject(json);
 
-
+                              //  Log.d("aaaaaaaaaaaaaaa", String.valueOf(content));
                                 if (content.getInt("result") == 0) {
 
-                                    if (content.getJSONArray("liveGames").length() > 0) {
+                                    if (content.getJSONArray("liveGames").length() > 0  ) {
+
 
                                         BettingCountDownFragment.WeakBettingCountDown.get().CountdownNext.setVisibility(View.GONE);
                                         BettingCountDownFragment.WeakBettingCountDown.get().CountDownRV.setVisibility(View.VISIBLE);
@@ -92,7 +96,7 @@ public class GameConutDownActiveAPI {
                                         BettingCountDownFragment.WeakBettingCountDown.get().CountdownNext.setVisibility(View.VISIBLE);
                                         BettingCountDownFragment.WeakBettingCountDown.get().CountDownRV.setVisibility(View.GONE);
                                         GameConutDownAPI.GameConutDown();
-                                        BettingCountDownFragment.WeakBettingCountDown.get().scheduledThreadPool2.shutdown();
+                                        BettingCountDownFragment.WeakBettingCountDown.get().scheduledThreadPool2.shutdownNow();
                                     }
 
 
@@ -116,10 +120,13 @@ public class GameConutDownActiveAPI {
                         if (BettingCountDownFragment.WeakBettingCountDown.get().GameCountDownActiveList.size() <= 0) {
                             BettingCountDownFragment.WeakBettingCountDown.get().CountdownNext.setVisibility(View.VISIBLE);
                             BettingCountDownFragment.WeakBettingCountDown.get().CountDownRV.setVisibility(View.GONE);
+                            GameConutDownAPI.GameConutDown();
+                            BettingCountDownFragment.WeakBettingCountDown.get().scheduledThreadPool2.shutdownNow();
                         } else {
                             BettingCountDownFragment.WeakBettingCountDown.get().CountdownNext.setVisibility(View.GONE);
                             BettingCountDownFragment.WeakBettingCountDown.get().CountDownRV.setVisibility(View.VISIBLE);
                         }
+                        Loading.diss();
                         BettingCountDownFragment.WeakBettingCountDown.get().CountDownRV.finishRefreshing();
                         BettingCountDownFragment.WeakBettingCountDown.get().GameCountDownActiveAdapter.notifyDataSetChanged();
                     }
@@ -130,6 +137,10 @@ public class GameConutDownActiveAPI {
         });
 
     }
+
+
+
+
 
 
 }

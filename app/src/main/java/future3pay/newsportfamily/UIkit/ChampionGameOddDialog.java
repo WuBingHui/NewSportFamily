@@ -54,7 +54,6 @@ public class ChampionGameOddDialog {
                     OddInterFace.addView(scrollView);
                     for (int i = 0; i < content.length(); i++) {
 
-
                         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                                 LinearLayout.LayoutParams.MATCH_PARENT);
 

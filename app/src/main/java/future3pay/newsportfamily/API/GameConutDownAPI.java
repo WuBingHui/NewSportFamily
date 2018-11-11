@@ -43,12 +43,12 @@ public class GameConutDownAPI {
 
                 Index.WeakIndex.get().runOnUiThread(new Runnable() {
                     @Override
-                    public void run() {
+                    public synchronized void run() {
 
                         //告知使用者連線失敗
                         ToastShow.start(BettingCountDownFragment.WeakBettingCountDown.get().getActivity(), "無網路狀態，請檢查您的行動網路是否開啟");
 
-
+                        Loading.diss();
                     }
 
                 });
@@ -59,9 +59,11 @@ public class GameConutDownAPI {
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
 
+
+
                 BettingCountDownFragment.WeakBettingCountDown.get().getActivity().runOnUiThread(new Runnable() {
                     @Override
-                    public void run() {
+                    public synchronized void run() {
 
                         if (response.isSuccessful()) {
 
@@ -110,7 +112,7 @@ public class GameConutDownAPI {
                             BettingCountDownFragment.WeakBettingCountDown.get().CountdownNext.setVisibility(View.VISIBLE);
                         }
 
-
+                        Loading.diss();
                     }
                 });
 
@@ -119,6 +121,7 @@ public class GameConutDownAPI {
         });
 
     }
+
 
 
 }

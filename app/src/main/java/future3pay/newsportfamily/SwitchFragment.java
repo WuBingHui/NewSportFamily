@@ -76,7 +76,7 @@ public class SwitchFragment extends AppCompatActivity {
             transaction.add(R.id.IndexFrame, GameResultFragment, "GameResultFragment");
             transaction.add(R.id.IndexFrame, MemberFragment, "MemberFragment");
 
-            transaction.show(BettingFragment).hide(BettingCountDownFragment).hide(GameResultFragment).hide(MemberFragment).commitAllowingStateLoss();
+            transaction.show(BettingFragment).detach(BettingCountDownFragment).hide(GameResultFragment).hide(MemberFragment).commitAllowingStateLoss();
 
         }else{
 
@@ -89,7 +89,7 @@ public class SwitchFragment extends AppCompatActivity {
 
 
 
-            transaction.show(BettingFragment).hide(BettingCountDownFragment).hide(GameResultFragment).hide(MemberFragment).commitAllowingStateLoss();
+            transaction.show(BettingFragment).detach(BettingCountDownFragment).hide(GameResultFragment).hide(MemberFragment).commitAllowingStateLoss();
 
         }
     }
@@ -114,16 +114,16 @@ public class SwitchFragment extends AppCompatActivity {
         switch (tag)
         {
             case "BettingFragment":
-                m_transaction.show(BettingFragment).hide(BettingCountDownFragment).hide(GameResultFragment).hide(MemberFragment).commitAllowingStateLoss();
+                m_transaction.show(BettingFragment).detach(BettingCountDownFragment).hide(GameResultFragment).hide(MemberFragment).commitAllowingStateLoss();
                 break;
             case "BettingCountDownFragment":
-                m_transaction.hide(BettingFragment).show(BettingCountDownFragment).hide(GameResultFragment).hide(MemberFragment).commitAllowingStateLoss();
+                m_transaction.hide(BettingFragment).attach(BettingCountDownFragment).hide(GameResultFragment).hide(MemberFragment).commitAllowingStateLoss();
                 break;
             case "GameResultFragment":
-                m_transaction.hide(BettingFragment).hide(BettingCountDownFragment).show(GameResultFragment).hide(MemberFragment).commitAllowingStateLoss();
+                m_transaction.hide(BettingFragment).detach(BettingCountDownFragment).show(GameResultFragment).hide(MemberFragment).commitAllowingStateLoss();
                 break;
             case "MemberFragment":
-                m_transaction.hide(BettingFragment).hide(BettingCountDownFragment).hide(GameResultFragment).show(MemberFragment).commitAllowingStateLoss();
+                m_transaction.hide(BettingFragment).detach(BettingCountDownFragment).hide(GameResultFragment).show(MemberFragment).commitAllowingStateLoss();
                 break;
 
         }
