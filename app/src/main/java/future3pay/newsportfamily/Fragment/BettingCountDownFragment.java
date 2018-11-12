@@ -148,7 +148,7 @@ public class BettingCountDownFragment extends Fragment {
 
                             if (day <= 0 && hour <= 0 && min <= 0 && sec <= 0) {
                                 StartActiveAPI();//啟動正在進行的場中
-                                scheduledThreadPool.shutdown();
+                                scheduledThreadPool.shutdownNow();
                             }else{
                                 if (!String.valueOf(DayTenDigits.getText()).equals(String.format("%02d", day).substring(0, 1))) {
                                     DayTenDigits.setText(String.format("%02d", day).substring(0, 1));

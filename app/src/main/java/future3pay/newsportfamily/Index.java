@@ -489,7 +489,7 @@ public class Index extends AppCompatActivity {
 
         ShopCarAdapter = new RVAdapter<ShopCarInfoBean>(ShopCarInfoList) {
             @Override
-            public void bindDataToView(final RVViewHolder holder, final int position, ShopCarInfoBean bean, boolean isSelected) {
+            public void bindDataToView(final RVViewHolder holder, final int position, final ShopCarInfoBean bean, boolean isSelected) {
 
                 try {
 
@@ -501,26 +501,39 @@ public class Index extends AppCompatActivity {
                     holder.setText(R.id.BettingItemOdd, bean.getItem().getString("Odd"));
                     holder.itemView.findViewById(R.id.BettingItemB).setTag("0");
 
+                    holder.itemView.findViewById(R.id.RemoveBettingItem).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            try {
+                                Loading.start(Index.this);
+                                RemoveSingleItemBettingAPI.RemoveSingleItemBetting(UserInfo.getString("Token", ""), position, bean.getItem().getString("Item"));
+                            } catch (JSONException e) {
+                                Loading.diss();
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
                     holder.itemView.findViewById(R.id.BettingItemB).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             Drawable B_On = getResources().getDrawable(R.color.topcolor);
-
+                           // Log.d("aaaaaaaaaaaaaa", String.valueOf(position));
                             if (view.getTag().toString().equals("0")) {
                                 view.setTag("1");
-                                HasB.add(position+1);
+                                //HasB.add(position+1);
                                 holder.itemView.findViewById(R.id.BettingItemB).setBackground(B_On);
 
                                 holder.setTextColor(R.id.BettingItemB, R.color.white);
                             } else {
                                 view.setTag("0");
-                                HasB.set(position+1,0);
+                                //HasB.set(position+1,0);
                                 holder.itemView.findViewById(R.id.BettingItemB).setBackground(null);
 
                                 holder.setTextColor(R.id.BettingItemB, R.color.black);
                             }
-                           // BettingSum.setText(String.valueOf(Integer.valueOf(BettingPayout.getText().toString()) * 10));
-                           // BettingWon.setText(String.valueOf(BettingRule.PassingTheCombination(Integer.valueOf(BettingPayout.getText().toString()))));
+                            //BettingSum.setText(String.valueOf(Integer.valueOf(BettingPayout.getText().toString()) * 10));
+                            //BettingWon.setText(String.valueOf(BettingRule.PassingTheCombination(Integer.valueOf(BettingPayout.getText().toString()))));
                         }
                     });
 
@@ -550,13 +563,7 @@ public class Index extends AppCompatActivity {
             @Override
             public void onItemClick(int position, ShopCarInfoBean bean) {
 
-                try {
-                    Loading.start(Index.this);
-                    RemoveSingleItemBettingAPI.RemoveSingleItemBetting(UserInfo.getString("Token", ""), position, bean.getItem().getString("Item"));
-                } catch (JSONException e) {
-                    Loading.diss();
-                    e.printStackTrace();
-                }
+
 
             }
 

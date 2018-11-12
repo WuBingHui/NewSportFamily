@@ -67,7 +67,7 @@ private  static   int sum = 0;
 
             for (int i = 1; i <= com.length; i++) {
                 boolean open = true;
-                for(int j = 1 ; j <=Index.WeakIndex.get().HasB.size();j++){
+                for(int j = 0 ; j < Index.WeakIndex.get().HasB.size();j++){
                     if(Index.WeakIndex.get().HasB.get(j).equals(i)){
                          open=false;
                     }
