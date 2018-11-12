@@ -20,7 +20,7 @@ public class ChampionGameOddDialog {
 
 
 
-    public static void ChampionGameOdd(final String bets, final String code, final String title) {
+    public static void ChampionGameOdd(final String bets, final String code, final String title,final String mins,final  String category,final  String time) {
 
 
         BettingFragment.WeakBettingFragment.get().getActivity().runOnUiThread(new Runnable() {
@@ -61,7 +61,14 @@ public class ChampionGameOddDialog {
 
                             Button odd = new Button(dialog.getContext());
                             odd.setText(content.getJSONObject(i).getString("id")+content.getJSONObject(i).getString("option-zh") + "\n" + content.getJSONObject(i).getString("odds"));
-                            odd.setTag("{\"ni\":\"" +content.getJSONObject(i).getString("ni") + "\",\"name\":\"" + content.getJSONObject(i).getString("num") + "\",\"Id\":\"" + content.getJSONObject(i).getString("ni") + "_" + content.getJSONObject(i).getString("id") + "\"}");
+                        String Title = code +" "+ title;
+                        String StartTime =time;
+                        String Category = category;
+                        String Mins = mins;
+                        String Select =content.getJSONObject(i).getString("id")+content.getJSONObject(i).getString("option-zh");
+                        String Odd = content.getJSONObject(i).getString("odds");
+                        String Item ="{\"ni\":\"" +content.getJSONObject(i).getString("ni") + "\",\"name\":\"" + content.getJSONObject(i).getString("name") + "\",\"Id\":\"" + content.getJSONObject(i).getString("ni") + "_" + content.getJSONObject(i).getString("num") + "\"}";
+                            odd.setTag("{"+"\"Title\":\""+Title+"\","+"\"StartTime\":\""+StartTime+"\","+"\"Category\":\""+Category+"\","+"\"Mins\":\""+Mins+"\","+"\"Select\":\""+Select+"\","+"\"Odd\":\""+Odd+"\","+"\"Item\":"+Item+"}");
                             odd.setBackgroundResource(R.drawable.corners_3);
                             odd.setLayoutParams(params);
                             odd.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -97,7 +104,7 @@ public class ChampionGameOddDialog {
                     }
 
                 } catch (JSONException e) {
-
+                   // Log.d("aaaaaaaaaaaaaaaaaaa",e.toString());
                     e.printStackTrace();
 
                 }

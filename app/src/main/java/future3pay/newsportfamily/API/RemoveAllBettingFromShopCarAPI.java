@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 import future3pay.newsportfamily.Bean.ShopCarInfoBean;
+import future3pay.newsportfamily.BettingRule;
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.Fragment.BettingFragment;
 import future3pay.newsportfamily.Index;
@@ -77,6 +78,9 @@ public class RemoveAllBettingFromShopCarAPI {
 
                                             ToastShow.start(Index.WeakIndex.get(),"已清空");
                                             Index.WeakIndex.get().ShopCarInfoList.clear();
+                                    Index.WeakIndex.get().BettingSum.setText("0");
+                                    Index.WeakIndex.get().BettingWon.setText("0");
+                                    Index.WeakIndex.get().ComboTypeSelect.removeAllViews();
                                             Index.WeakIndex.get().ShopCarAdapter.notifyDataSetChanged();
 
 

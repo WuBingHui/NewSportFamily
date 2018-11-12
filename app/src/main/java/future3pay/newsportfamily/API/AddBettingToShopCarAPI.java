@@ -27,7 +27,7 @@ import okhttp3.Response;
 public class AddBettingToShopCarAPI {
 
 
-    public static void AddBettingToShopCar(String token, final String item){
+    public static void AddBettingToShopCar(String token, final String item,final  JSONObject ItemInfo){
 
         OkHttpClient client=new OkHttpClient();
 
@@ -75,13 +75,14 @@ public class AddBettingToShopCarAPI {
 
                             String json =response.body().string();
                             JSONObject content = new JSONObject(json);
-
+                           // Log.d("aaaaaaaaaaaaaaaaa", String.valueOf(content));
+                           // Log.d("aaaaaaaaaaaaaaaaa", "["+item+"]");
                         if(response.isSuccessful()){
 
 
                                 if(content.getInt("result") == 0){
 
-                                    Index.WeakIndex.get().ShopCarInfoList.add(new ShopCarInfoBean(item));
+                                    Index.WeakIndex.get().ShopCarInfoList.add(new ShopCarInfoBean(ItemInfo));
                                     ToastShow.start(BettingFragment.WeakBettingFragment.get().getActivity(),"加入成功");
 
                                 }else{
@@ -104,6 +105,7 @@ public class AddBettingToShopCarAPI {
                         }
                         } catch (JSONException e) {
 
+                         // Log.d("aaaaaaaaaaaaaaaaa",e.toString());
                             e.printStackTrace();
                             ToastShow.start(BettingFragment.WeakBettingFragment.get().getActivity(),"伺服器無回應");
 

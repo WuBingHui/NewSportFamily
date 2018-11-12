@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import future3pay.newsportfamily.BettingRule;
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.UIkit.Loading;
@@ -80,7 +81,22 @@ public class RemoveSingleItemBettingAPI {
 
                                     Index.WeakIndex.get().ShopCarInfoList.remove(position);
 
+                                    switch (Index.WeakIndex.get().Play){
 
+                                        case 0:
+                                            Index.WeakIndex.get().BettingSum.setText(String.valueOf(Integer.valueOf(Index.WeakIndex.get().BettingPayout.getText().toString()) * 10*Index.WeakIndex.get().ShopCarInfoList.size()));
+                                            Index.WeakIndex.get().BettingWon.setText(String.valueOf(BettingRule.Single(Integer.valueOf(Index.WeakIndex.get().BettingPayout.getText().toString()))));
+                                            break;
+                                        case 1:
+                                            Index.WeakIndex.get().BettingSum.setText(String.valueOf(Integer.valueOf(Index.WeakIndex.get().BettingPayout.getText().toString()) * 10));
+                                            Index.WeakIndex.get().BettingWon.setText(String.valueOf(BettingRule.Passing(Integer.valueOf(Index.WeakIndex.get().BettingPayout.getText().toString()))));
+                                            break;
+                                        case 2:
+                                            Index.WeakIndex.get().BettingSum.setText(String.valueOf(Integer.valueOf(Index.WeakIndex.get().BettingPayout.getText().toString()) * 10));
+                                            Index.WeakIndex.get().BettingWon.setText(String.valueOf(BettingRule.PassingTheCombination(Integer.valueOf(Index.WeakIndex.get().BettingPayout.getText().toString()))));
+                                            break;
+
+                                    }
                                     Index.WeakIndex.get().ShopCarAdapter.notifyDataSetChanged();
 
 

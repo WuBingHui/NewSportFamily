@@ -1,22 +1,24 @@
 package future3pay.newsportfamily.Bean;
 
+import org.json.JSONObject;
+
 public class ShopCarInfoBean {
 
-    private String Item;
+    private JSONObject Item;
 
 
 
-    public ShopCarInfoBean(String Item){
+    public ShopCarInfoBean(JSONObject Item){
         this.Item= Item;
 
 
     }
 
-    public String getItem() {
+    public JSONObject getItem() {
         return Item;
     }
 
-    public void setItem(String item) {
+    public void setItem(JSONObject item) {
         Item = item;
     }
 

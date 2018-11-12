@@ -7,21 +7,20 @@
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginEnd="8dp"
-    android:layout_marginBottom="8dp"
     android:background="@drawable/corners_3">
 
     <ImageView
         android:id="@+id/RemoveBettingItem"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_marginEnd="8dp"
         android:background="@mipmap/cancle"
-        app:layout_constraintBottom_toBottomOf="@+id/textView91"
+        app:layout_constraintBottom_toBottomOf="@+id/BettingItemTitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView91" />
+        app:layout_constraintTop_toTopOf="@+id/BettingItemTitle" />
 
     <TextView
-        android:id="@+id/textView91"
+        android:id="@+id/BettingItemTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -30,7 +29,7 @@
         android:textColor="@color/topcolor"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/RemoveBettingItem"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/BettingItemB"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
@@ -41,10 +40,10 @@
         android:background="@color/grey_400"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView91" />
+        app:layout_constraintTop_toBottomOf="@+id/BettingItemTitle" />
 
     <TextView
-        android:id="@+id/textView99"
+        android:id="@+id/BettingItemTime"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -52,12 +51,12 @@
         android:text="2018-11-08 18:30"
         android:textAlignment="center"
         android:textColor="@color/Black"
-        app:layout_constraintEnd_toStartOf="@+id/textView101"
+        app:layout_constraintEnd_toStartOf="@+id/BettingItemCategory"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider24" />
 
     <TextView
-        android:id="@+id/textView101"
+        android:id="@+id/BettingItemCategory"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -66,11 +65,11 @@
         android:textAlignment="center"
         android:textColor="@color/Black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView99"
+        app:layout_constraintStart_toEndOf="@+id/BettingItemTime"
         app:layout_constraintTop_toBottomOf="@+id/divider24" />
 
     <TextView
-        android:id="@+id/textView103"
+        android:id="@+id/BettingItemMins"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginStart="8dp"
@@ -83,10 +82,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView99" />
+        app:layout_constraintTop_toBottomOf="@+id/BettingItemTime" />
 
     <TextView
-        android:id="@+id/textView104"
+        android:id="@+id/BettingItemSelect"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -94,21 +93,31 @@
         android:text="不讓分 安養KGC"
         android:textAlignment="center"
         android:textColor="@color/Black"
-        app:layout_constraintBottom_toBottomOf="@+id/textView103"
-        app:layout_constraintEnd_toStartOf="@+id/textView105"
-        app:layout_constraintStart_toEndOf="@+id/textView103"
-        app:layout_constraintTop_toTopOf="@+id/textView103" />
+        app:layout_constraintBottom_toBottomOf="@+id/BettingItemMins"
+        app:layout_constraintEnd_toStartOf="@+id/BettingItemOdd"
+        app:layout_constraintStart_toEndOf="@+id/BettingItemMins"
+        app:layout_constraintTop_toTopOf="@+id/BettingItemMins" />
 
     <TextView
-        android:id="@+id/textView105"
+        android:id="@+id/BettingItemOdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="1.5"
         android:textAlignment="center"
         android:textColor="@color/orange_400"
-        app:layout_constraintBottom_toBottomOf="@+id/textView104"
+        app:layout_constraintBottom_toBottomOf="@+id/BettingItemSelect"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView104"
-        app:layout_constraintTop_toTopOf="@+id/textView104" />
+        app:layout_constraintStart_toEndOf="@+id/BettingItemSelect"
+        app:layout_constraintTop_toTopOf="@+id/BettingItemSelect" />
+
+    <Button
+        android:id="@+id/BettingItemB"
+        android:layout_width="30dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:text="B"
+        app:layout_constraintBottom_toTopOf="@+id/divider24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

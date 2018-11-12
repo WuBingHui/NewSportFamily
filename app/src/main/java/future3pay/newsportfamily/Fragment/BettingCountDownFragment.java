@@ -329,7 +329,7 @@ public class BettingCountDownFragment extends Fragment {
                                    // Log.d("aaaaaaaaaaaaaaaa",content.getJSONObject(position).getJSONArray("bets").toString());
                                      //Log.d("aaaaaaaaaaaaaaaa","賠率變化啦");
                                     OldOdd = content.getJSONObject(position).getJSONArray("bets").toString();
-                                    NormalGameOddDialog.NormalGameOdd(content.getJSONObject(position).getJSONArray("bets").toString(),content.getJSONObject(position).getString("code"),content.getJSONObject(position).getString("mins"),content.getJSONObject(position).getString("awayTeam"),content.getJSONObject(position).getString("homeTeam"),content.getJSONObject(position).getString("ni"));
+                                    NormalGameOddDialog.NormalGameOdd(content.getJSONObject(position).getJSONArray("bets").toString(),content.getJSONObject(position).getString("code"),content.getJSONObject(position).getString("mins"),content.getJSONObject(position).getString("awayTeam"),content.getJSONObject(position).getString("homeTeam"),content.getJSONObject(position).getString("ni"),content.getJSONObject(position).getString("category"),content.getJSONObject(position).getString("gameStartTime"));
 
                                 }
                             } catch (JSONException e) {

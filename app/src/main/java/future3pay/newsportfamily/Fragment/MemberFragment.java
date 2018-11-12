@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
 
+import future3pay.newsportfamily.API.UserInfoAPI;
 import future3pay.newsportfamily.Activity.BettingRecordActivity;
 import future3pay.newsportfamily.Activity.MakeUpPointRecordActivity;
 import future3pay.newsportfamily.Activity.UseRecordActivity;
@@ -70,7 +71,7 @@ public class MemberFragment extends Fragment {
         WithdrawalRecord.setOnClickListener(withdrawalRecord);
 
 
-
+        UserInfoAPI.UserInfo(Index.WeakIndex.get().UserInfo.getString("Token",""));
 
         return view;
     }

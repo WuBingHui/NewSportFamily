@@ -14,6 +14,7 @@ import com.cy.dialog.BaseDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import future3pay.newsportfamily.API.AddBettingToShopCarAPI;
 import future3pay.newsportfamily.Fragment.BettingCountDownFragment;
@@ -24,7 +25,7 @@ import future3pay.newsportfamily.R;
 public class NormalGameOddDialog {
 
     private static BaseDialog dialog;
-    public static void NormalGameOdd(final String bets, final String code, final String mins, final String away, final String home , final String ni) {
+    public static void NormalGameOdd(final String bets, final String code, final String mins, final String away, final String home , final String ni,final  String category,final String time) {
 
 
         Index.WeakIndex.get().runOnUiThread(new Runnable() {
@@ -87,7 +88,14 @@ public class NormalGameOddDialog {
 
                                 Button odd = new Button(dialog.getContext());
                                 odd.setText(content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("name")+content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("outComeConditions") + "\n" + content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("odds"));
-                                odd.setTag("{\"ni\":\"" +ni + "\",\"name\":\"" + content.getJSONObject(i).getJSONObject("betsTitle").getString("titleCode") + "\",\"Id\":\"" + ni + "_" + content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("id") + "\"}");
+                                String Title = code + " " + away + "VS" + home;
+                                String StartTime =time;
+                                String Category = category;
+                                String Mins = content.getJSONObject(i).getString("mins");
+                                String Select =content.getJSONObject(i).getJSONObject("betsTitle").getString("title")+" "+ content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("name")+content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("outComeConditions");
+                                String Odd = content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("odds");
+                                String Item ="{\"ni\":\"" +ni + "\",\"name\":\"" + content.getJSONObject(i).getJSONObject("betsTitle").getString("titleCode") + "\",\"Id\":\"" + ni + "_" + content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("id") + "\"}";
+                                odd.setTag("{"+"\"Title\":\""+Title+"\","+"\"StartTime\":\""+StartTime+"\","+"\"Category\":\""+Category+"\","+"\"Mins\":\""+Mins+"\","+"\"Select\":\""+Select+"\","+"\"Odd\":\""+Odd+"\","+"\"Item\":"+Item+"}");
                                 odd.setBackgroundResource(R.drawable.corners_3);
                                 odd.setLayoutParams(params);
                                 odd.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -150,16 +158,23 @@ public class NormalGameOddDialog {
 
             if(!Index.WeakIndex.get().UserInfo.getString("Token","").equals("")){
                 if(Index.WeakIndex.get().ShopCarInfoList.size() <= 8){
-                    Loading.start(Index.WeakIndex.get());
-                    AddBettingToShopCarAPI.AddBettingToShopCar(Index.WeakIndex.get().UserInfo.getString("Token",""),String.valueOf(view.getTag()));
+
+                    try {
+                        JSONObject content = new JSONObject(view.getTag().toString());
+                        Loading.start(Index.WeakIndex.get());
+                        AddBettingToShopCarAPI.AddBettingToShopCar(Index.WeakIndex.get().UserInfo.getString("Token",""),String.valueOf(content.getString("Item")),content);
+
+                    } catch (JSONException e) {
+                       // Log.d("aaaaaaaaaaaaaaaaaaaaaa",e.toString());
+                        e.printStackTrace();
+                    }
+
                 }else{
                     ToastShow.start(Index.WeakIndex.get(),"投注最多8筆!");
                 }
             }else{
                 ToastShow.start(Index.WeakIndex.get(),"尚未登入");
             }
-
-
 
         }
 
@@ -170,9 +185,13 @@ public class NormalGameOddDialog {
 
         @Override
         public void onCancel(DialogInterface dialogInterface) {
+
             dialog = null;
-            if(BettingCountDownFragment.WeakBettingCountDown.get().scheduledThreadPool3 != null){
+
+            if(BettingCountDownFragment.WeakBettingCountDown != null && BettingCountDownFragment.WeakBettingCountDown.get().scheduledThreadPool3 != null){
+
                 BettingCountDownFragment.WeakBettingCountDown.get().scheduledThreadPool3.shutdownNow();
+
             }
 
         }

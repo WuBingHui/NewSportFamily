@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +13,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -24,6 +27,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
@@ -33,6 +37,8 @@ import com.cy.cyrvadapter.refreshrv.BaseRefreshLayout;
 import com.cy.cyrvadapter.refreshrv.VerticalRefreshLayout;
 import com.cy.dialog.BaseDialog;
 import com.sevenheaven.segmentcontrol.SegmentControl;
+
+import org.json.JSONException;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -63,8 +69,9 @@ public class Index extends AppCompatActivity {
     public List<String> GameType;
     public List<String> GameName;
     public List<String> GameCategory;
+    public List<Integer> HasB;
     public List<ShopCarInfoBean> ShopCarInfoList;
-
+    public  BaseDialog ShopDialog;
     public RVAdapter<ShopCarInfoBean> ShopCarAdapter;
 
     public VerticalRefreshLayout ShopCarRV;
@@ -72,10 +79,11 @@ public class Index extends AppCompatActivity {
     private SegmentControl ShopCarPlaySelect;
     private BaseDialog DialogMenu;
     public AHBottomNavigation bottomNavigation;
-    public TextView actionbar_textview,BettingPayout,BettingSum,BettingWon;
-
-    public Button menu, back,shop,RemoveAll,SendOrder;
+    public TextView actionbar_textview, BettingPayout, BettingSum, BettingWon;
+    public LinearLayout ComboTypeSelect;
+    public Button menu, back, shop, RemoveAll, SendOrder;
     public ScrollView MenuScroll;
+    public int Play = 0;
     public static WeakReference<Index> WeakIndex;
 
     @Override
@@ -87,15 +95,16 @@ public class Index extends AppCompatActivity {
 
         MenuScroll = findViewById(R.id.MenuScroll);
 
+
         UserInfo = PreferenceManager
                 .getDefaultSharedPreferences(this);
 
         GameType = new ArrayList<>();
         GameName = new ArrayList<>();
         GameCategory = new ArrayList<>();
-        ShopCarInfoList= new ArrayList<>();
+        ShopCarInfoList = new ArrayList<>();
+        HasB=new ArrayList<>();
         IndexFrame = findViewById(R.id.IndexFrame);
-
 
 
         ButtomTab buttomTab = new ButtomTab();
@@ -106,8 +115,8 @@ public class Index extends AppCompatActivity {
 
         SportTypeAPI.SportType();//取球種Api
 
-        if(!UserInfo.getString("Token","").equals("")){
-            UserInfoAPI.UserInfo(UserInfo.getString("Token",""));
+        if (!UserInfo.getString("Token", "").equals("")) {
+            UserInfoAPI.UserInfo(UserInfo.getString("Token", ""));
         }
 
         //透過下方程式碼，取得Activity中執行的個體。
@@ -127,14 +136,42 @@ public class Index extends AppCompatActivity {
         actionbar_textview = (TextView) v.findViewById(R.id.actionbar_textview);
         menu = (Button) v.findViewById(R.id.menu);
         back = (Button) v.findViewById(R.id.back);
-        shop= (Button) v.findViewById(R.id.shop);
+        shop = (Button) v.findViewById(R.id.shop);
         back.setVisibility(View.GONE);
 
         back.setOnClickListener(Back);
         menu.setOnClickListener(Menu);
         shop.setOnClickListener(Shop);
         bar.setCustomView(v, new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT));
+
     }
+
+    private SegmentControl.OnSegmentControlClickListener SelectPlay = new SegmentControl.OnSegmentControlClickListener() {
+
+        @Override
+        public void onSegmentControlClick(int index) {
+
+            switch (index) {
+                case 0:
+                    Play = 0;
+                    BettingSum.setText(String.valueOf(Integer.valueOf(BettingPayout.getText().toString()) * 10*ShopCarInfoList.size()));
+                    BettingWon.setText(String.valueOf(BettingRule.Single(Integer.valueOf(BettingPayout.getText().toString()))));
+                    break;
+                case 1:
+                    Play = 1;
+                    BettingSum.setText(String.valueOf(Integer.valueOf(BettingPayout.getText().toString()) * 10));
+                    BettingWon.setText(String.valueOf(BettingRule.Passing(Integer.valueOf(BettingPayout.getText().toString()))));
+                    break;
+                case 2:
+                    Play = 2;
+                    BettingSum.setText(String.valueOf(Integer.valueOf(BettingPayout.getText().toString()) * 10));
+                    BettingWon.setText(String.valueOf(BettingRule.PassingTheCombination(Integer.valueOf(BettingPayout.getText().toString()))));
+                    break;
+            }
+            ShopCarAdapter.notifyDataSetChanged();
+        }
+
+    };
 
 
     private Button.OnClickListener Shop = new Button.OnClickListener() {
@@ -142,39 +179,95 @@ public class Index extends AppCompatActivity {
         @Override
         public void onClick(View view) {
 
-            if(ShopCarInfoList.size()>0){
+            if (ShopCarInfoList.size() > 0) {
 
-                BaseDialog   dialog = new BaseDialog(Index.this);
-                dialog.config(R.layout.shop_car, true).show();
-                ShopCarRV= dialog.findViewById(R.id.ShopCarRV);
-                ShopCarPlaySelect= dialog.findViewById(R.id.ShopCarPlaySelect);
-                BettingPayout= dialog.findViewById(R.id.BettingPayout);
-                BettingSum= dialog.findViewById(R.id.BettingSum);
-                BettingWon= dialog.findViewById(R.id.BettingWon);
-                RemoveAll= dialog.findViewById(R.id.RemoveAll);
-                SendOrder= dialog.findViewById(R.id.SendOrder);
+                Play =0;
+
+                 ShopDialog = new BaseDialog(Index.this);
+                ShopDialog.config(R.layout.shop_car, true).show();
+                ShopCarRV = ShopDialog.findViewById(R.id.ShopCarRV);
+                ShopCarPlaySelect = ShopDialog.findViewById(R.id.ShopCarPlaySelect);
+                BettingPayout = ShopDialog.findViewById(R.id.BettingPayout);
+                BettingSum = ShopDialog.findViewById(R.id.BettingSum);
+                BettingWon = ShopDialog.findViewById(R.id.BettingWon);
+                RemoveAll = ShopDialog.findViewById(R.id.RemoveAll);
+                SendOrder = ShopDialog.findViewById(R.id.SendOrder);
+                ComboTypeSelect=ShopDialog.findViewById(R.id.ComboTypeSelect);
                 RemoveAll.setOnClickListener(remove);
+                ShopCarPlaySelect.setOnSegmentControlClickListener(SelectPlay);
+
+                BettingSum.setText(String.valueOf(Integer.valueOf(BettingPayout.getText().toString()) * 10*ShopCarInfoList.size()));
+                BettingWon.setText(String.valueOf(BettingRule.Single(Integer.valueOf(BettingPayout.getText().toString()))));
+
+                BettingPayout.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                        if (!String.valueOf(BettingPayout.getText()).equals("")) {
+
+                            if (Integer.valueOf(BettingPayout.getText().toString()) * 10 <= 100000) {
+
+                                switch (Play){
+
+                                    case 0:
+                                        BettingSum.setText(String.valueOf(Integer.valueOf(BettingPayout.getText().toString()) * 10*ShopCarInfoList.size()));
+                                        BettingWon.setText(String.valueOf(BettingRule.Single(Integer.valueOf(BettingPayout.getText().toString()))));
+                                        break;
+                                    case 1:
+                                        BettingSum.setText(String.valueOf(Integer.valueOf(BettingPayout.getText().toString()) * 10));
+                                        BettingWon.setText(String.valueOf(BettingRule.Passing(Integer.valueOf(BettingPayout.getText().toString()))));
+                                        break;
+                                    case 2:
+                                        BettingSum.setText(String.valueOf(Integer.valueOf(BettingPayout.getText().toString()) * 10));
+                                        BettingWon.setText(String.valueOf(BettingRule.PassingTheCombination(Integer.valueOf(BettingPayout.getText().toString()))));
+                                        break;
+
+                                }
+
+
+                            } else {
+                                BettingPayout.setText("10");
+                                BettingSum.setText(String.valueOf(Integer.valueOf(BettingPayout.getText().toString()) * 10));
+                                ToastShow.start(Index.this, "最多投注10萬");
+                            }
+                        } else {
+                            BettingPayout.setText("10");
+                        }
+
+
+                    }
+
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count,
+                                                  int after) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
 
                 ShopCar();
-            }else{
-                ToastShow.start(Index.this,"無投注資料");
+            } else {
+                ToastShow.start(Index.this, "無投注資料");
             }
 
         }
     };
 
 
-
     private Button.OnClickListener remove = new Button.OnClickListener() {
 
         @Override
         public void onClick(View view) {
-            if( Index.WeakIndex.get().ShopCarInfoList.size() >0){
+            if (Index.WeakIndex.get().ShopCarInfoList.size() > 0) {
                 Loading.start(Index.this);
-                RemoveAllBettingFromShopCarAPI.RemoveAllBettingFromShopCar(UserInfo.getString("Token",""));
+                RemoveAllBettingFromShopCarAPI.RemoveAllBettingFromShopCar(UserInfo.getString("Token", ""));
 
-            }else{
-                ToastShow.start(Index.WeakIndex.get(),"無訂單紀錄");
+            } else {
+                ToastShow.start(Index.WeakIndex.get(), "無訂單紀錄");
             }
 
         }
@@ -248,8 +341,8 @@ public class Index extends AppCompatActivity {
 
             }
 
-
         }
+
     };
 
     //菜單裡的按鈕選擇後的方法
@@ -257,13 +350,14 @@ public class Index extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
+
             SportRoot = view.getTag().toString().substring(0, 1);
             DialogMenu.dismiss();
             Loading.start(Index.this);
 
             SportType = view.getTag().toString().substring(1);
 
-            switch (SportRoot){
+            switch (SportRoot) {
                 case "0":
                     GameNormalInfoAPI.GameInfo();
                     BettingFragment.WeakBettingFragment.get().GetNormalBetting();
@@ -273,7 +367,6 @@ public class Index extends AppCompatActivity {
                     BettingFragment.WeakBettingFragment.get().GetChampionBetting();
                     break;
             }
-
 
 
         }
@@ -392,49 +485,93 @@ public class Index extends AppCompatActivity {
     ///
 
     //購物車
-    public void ShopCar(){
-
-
+    public void ShopCar() {
 
         ShopCarAdapter = new RVAdapter<ShopCarInfoBean>(ShopCarInfoList) {
-                @Override
-                public void bindDataToView(RVViewHolder holder, int position, ShopCarInfoBean bean, boolean isSelected) {
+            @Override
+            public void bindDataToView(final RVViewHolder holder, final int position, ShopCarInfoBean bean, boolean isSelected) {
 
+                try {
 
+                    holder.setText(R.id.BettingItemTitle, bean.getItem().getString("Title"));
+                    holder.setText(R.id.BettingItemTime, bean.getItem().getString("StartTime"));
+                    holder.setText(R.id.BettingItemCategory, bean.getItem().getString("Category"));
+                    holder.setText(R.id.BettingItemMins, bean.getItem().getString("Mins"));
+                    holder.setText(R.id.BettingItemSelect, bean.getItem().getString("Select"));
+                    holder.setText(R.id.BettingItemOdd, bean.getItem().getString("Odd"));
+                    holder.itemView.findViewById(R.id.BettingItemB).setTag("0");
 
-                }
-
-
-                @Override
-                public int getItemLayoutID(int position, ShopCarInfoBean bean) {
-                    return R.layout.shop_car_card;
-
-                }
-
-
-                @Override
-                public void onItemClick(int position, ShopCarInfoBean bean) {
-
-                    Loading.start(Index.this);
-                    RemoveSingleItemBettingAPI.RemoveSingleItemBetting(UserInfo.getString("Token",""),position,bean.getItem());
-
-                }
-
-            };
-
-        ShopCarRV.setAdapter(Index.this,ShopCarAdapter,  getResources().getColor(R.color.topcolor),
-                    new BaseRefreshLayout.OnCYRefreshListener() {
+                    holder.itemView.findViewById(R.id.BettingItemB).setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onRefresh() {
+                        public void onClick(View view) {
+                            Drawable B_On = getResources().getDrawable(R.color.topcolor);
 
-                            ShopCarAdapter.notifyDataSetChanged();
-                            ShopCarRV.finishRefreshing();
+                            if (view.getTag().toString().equals("0")) {
+                                view.setTag("1");
+                                HasB.add(position+1);
+                                holder.itemView.findViewById(R.id.BettingItemB).setBackground(B_On);
+
+                                holder.setTextColor(R.id.BettingItemB, R.color.white);
+                            } else {
+                                view.setTag("0");
+                                HasB.set(position+1,0);
+                                holder.itemView.findViewById(R.id.BettingItemB).setBackground(null);
+
+                                holder.setTextColor(R.id.BettingItemB, R.color.black);
+                            }
+                           // BettingSum.setText(String.valueOf(Integer.valueOf(BettingPayout.getText().toString()) * 10));
+                           // BettingWon.setText(String.valueOf(BettingRule.PassingTheCombination(Integer.valueOf(BettingPayout.getText().toString()))));
                         }
                     });
 
+                    if (Play == 2) {
+                        holder.itemView.findViewById(R.id.BettingItemB).setVisibility(View.VISIBLE);
+                    } else {
+                        holder.itemView.findViewById(R.id.BettingItemB).setVisibility(View.GONE);
+                    }
 
 
+                } catch (JSONException e) {
 
+                    e.printStackTrace();
+                }
+
+            }
+
+
+            @Override
+            public int getItemLayoutID(int position, ShopCarInfoBean bean) {
+
+                return R.layout.shop_car_card;
+
+            }
+
+
+            @Override
+            public void onItemClick(int position, ShopCarInfoBean bean) {
+
+                try {
+                    Loading.start(Index.this);
+                    RemoveSingleItemBettingAPI.RemoveSingleItemBetting(UserInfo.getString("Token", ""), position, bean.getItem().getString("Item"));
+                } catch (JSONException e) {
+                    Loading.diss();
+                    e.printStackTrace();
+                }
+
+            }
+
+        };
+
+        ShopCarRV.setAdapter(Index.this, ShopCarAdapter, getResources().getColor(R.color.topcolor),
+                new BaseRefreshLayout.OnCYRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+
+                        ShopCarAdapter.notifyDataSetChanged();
+                        ShopCarRV.finishRefreshing();
+
+                    }
+                });
 
 
     }
