@@ -93,7 +93,14 @@ public class UserInfoAPI {
                                     MemberFragment.WeakMemberFragment.get().WaitBonus.setText(content.getJSONObject("userInfo").getString("orderDone"));
                                     MemberFragment.WeakMemberFragment.get().WaitOrder.setText(content.getJSONObject("userInfo").getString("orderProcessing"));
                                 }else{
+                                    //信箱未驗證
+                                    if(content.getInt("result") == 4) {
 
+                                    }
+                                    //手機未驗證
+                                    if(content.getInt("result") == 5){
+
+                                    }
                                     ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
                                     Index.WeakIndex.get().UserInfo.edit().clear().apply();
                                     Index.WeakIndex.get().bottomNavigation.setCurrentItem(0);

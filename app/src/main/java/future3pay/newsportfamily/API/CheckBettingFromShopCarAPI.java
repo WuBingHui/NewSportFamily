@@ -1,13 +1,10 @@
 package future3pay.newsportfamily.API;
 
-import android.util.Log;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
-import future3pay.newsportfamily.BettingRule;
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.UIkit.Loading;
@@ -19,9 +16,10 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class RemoveSingleItemBettingAPI {
+public class CheckBettingFromShopCarAPI {
 
-    public static void RemoveSingleItemBetting(String token, final int position,String item){
+
+    public static void CheckBettingFromShopCar(String token,String amount,String payout,String combo,String combination,String column,String item){
 
         OkHttpClient client=new OkHttpClient();
 
@@ -29,10 +27,15 @@ public class RemoveSingleItemBettingAPI {
         //構建FormBody，傳入要提交的參數
         FormBody formBody = new FormBody
                 .Builder()
+                .add("amount",amount)
+                .add("payout",payout)
+                .add("combo",combo)
+                .add("combination",combination)
+                .add("column",column)
                 .add("item","["+item+"]")
                 .build();
         Request request=new Request.Builder()
-                .url(DoMainUrl.RemoveBettingFromShopCar)
+                .url(DoMainUrl.CheckBettingFromShopCar)
                 .header("Accept","application/json")
                 .header("authorization", "bearer " + token)
                 .post(formBody)
@@ -43,11 +46,11 @@ public class RemoveSingleItemBettingAPI {
             public void onFailure(Call call, IOException e) {
 
 
-                Index.WeakIndex.get().runOnUiThread(new Runnable() {
+               Index.WeakIndex.get().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
 
-
+                        Loading.diss();
                         //告知使用者連線失敗
                         ToastShow.start(Index.WeakIndex.get(),"無網路狀態，請檢查您的行動網路是否開啟");
 
@@ -76,29 +79,7 @@ public class RemoveSingleItemBettingAPI {
                                 if(content.getInt("result") == 0){
 
 
-                                    ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
 
-
-                                    Index.WeakIndex.get().ShopCarInfoList.remove(position);
-
-                                    switch (Index.WeakIndex.get().Play){
-
-                                        case 0:
-                                            Index.WeakIndex.get().BettingSum.setText(String.valueOf(Integer.valueOf(Index.WeakIndex.get().BettingPayout.getText().toString()) * 10*Index.WeakIndex.get().ShopCarInfoList.size()));
-                                            Index.WeakIndex.get().BettingWon.setText(String.valueOf(BettingRule.Single(Integer.valueOf(Index.WeakIndex.get().BettingPayout.getText().toString()))));
-                                            break;
-                                        case 1:
-                                            Index.WeakIndex.get().BettingSum.setText(String.valueOf(Integer.valueOf(Index.WeakIndex.get().BettingPayout.getText().toString()) * 10));
-                                            Index.WeakIndex.get().BettingWon.setText(String.valueOf(BettingRule.Passing(Integer.valueOf(Index.WeakIndex.get().BettingPayout.getText().toString()))));
-                                            break;
-                                        case 2:
-                                            Index.WeakIndex.get().BettingSum.setText(String.valueOf(Integer.valueOf(Index.WeakIndex.get().BettingPayout.getText().toString()) * 10));
-                                            BettingRule.PassingTheCombination(Integer.valueOf(Index.WeakIndex.get().BettingPayout.getText().toString()));
-                                            Index.WeakIndex.get().BettingWon.setText("0");
-                                            break;
-
-                                    }
-                                    Index.WeakIndex.get().ShopCarAdapter.notifyDataSetChanged();
 
 
 
@@ -112,8 +93,15 @@ public class RemoveSingleItemBettingAPI {
                             }else{
 
                                 if(content.getInt("result") == 3){
-
                                     Index.WeakIndex.get().UserInfo.edit().clear().apply();
+
+                                }
+                                if(content.getInt("result") == 4){
+
+
+                                }
+                                if(content.getInt("result") == 5){
+
 
                                 }
 
@@ -141,5 +129,4 @@ public class RemoveSingleItemBettingAPI {
 
 
     }
-
 }

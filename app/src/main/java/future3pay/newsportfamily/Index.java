@@ -44,6 +44,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import future3pay.newsportfamily.API.CheckBettingFromShopCarAPI;
 import future3pay.newsportfamily.API.GameChampionInfoAPI;
 import future3pay.newsportfamily.API.GameNormalInfoAPI;
 import future3pay.newsportfamily.API.RemoveAllBettingFromShopCarAPI;
@@ -71,7 +72,7 @@ public class Index extends AppCompatActivity {
     public List<String> GameCategory;
     public List<Integer> HasB;
     public List<ShopCarInfoBean> ShopCarInfoList;
-    public  BaseDialog ShopDialog;
+    public BaseDialog ShopDialog;
     public RVAdapter<ShopCarInfoBean> ShopCarAdapter;
 
     public VerticalRefreshLayout ShopCarRV;
@@ -83,7 +84,8 @@ public class Index extends AppCompatActivity {
     public LinearLayout ComboTypeSelect;
     public Button menu, back, shop, RemoveAll, SendOrder;
     public ScrollView MenuScroll;
-    public int Play = 0;
+    public int Play = 0, B_Count = 0;
+    public List<String> combination;
     public static WeakReference<Index> WeakIndex;
 
     @Override
@@ -103,7 +105,8 @@ public class Index extends AppCompatActivity {
         GameName = new ArrayList<>();
         GameCategory = new ArrayList<>();
         ShopCarInfoList = new ArrayList<>();
-        HasB=new ArrayList<>();
+        combination = new ArrayList<>();
+        HasB = new ArrayList<>();
         IndexFrame = findViewById(R.id.IndexFrame);
 
 
@@ -154,7 +157,7 @@ public class Index extends AppCompatActivity {
             switch (index) {
                 case 0:
                     Play = 0;
-                    BettingSum.setText(String.valueOf(Integer.valueOf(BettingPayout.getText().toString()) * 10*ShopCarInfoList.size()));
+                    BettingSum.setText(String.valueOf(Integer.valueOf(BettingPayout.getText().toString()) * 10 * ShopCarInfoList.size()));
                     BettingWon.setText(String.valueOf(BettingRule.Single(Integer.valueOf(BettingPayout.getText().toString()))));
                     break;
                 case 1:
@@ -165,7 +168,8 @@ public class Index extends AppCompatActivity {
                 case 2:
                     Play = 2;
                     BettingSum.setText(String.valueOf(Integer.valueOf(BettingPayout.getText().toString()) * 10));
-                    BettingWon.setText(String.valueOf(BettingRule.PassingTheCombination(Integer.valueOf(BettingPayout.getText().toString()))));
+                    BettingRule.PassingTheCombination(Integer.valueOf(BettingPayout.getText().toString()));
+                    BettingWon.setText("0");
                     break;
             }
             ShopCarAdapter.notifyDataSetChanged();
@@ -181,9 +185,9 @@ public class Index extends AppCompatActivity {
 
             if (ShopCarInfoList.size() > 0) {
 
-                Play =0;
+                Play = 0;
 
-                 ShopDialog = new BaseDialog(Index.this);
+                ShopDialog = new BaseDialog(Index.this);
                 ShopDialog.config(R.layout.shop_car, true).show();
                 ShopCarRV = ShopDialog.findViewById(R.id.ShopCarRV);
                 ShopCarPlaySelect = ShopDialog.findViewById(R.id.ShopCarPlaySelect);
@@ -192,11 +196,12 @@ public class Index extends AppCompatActivity {
                 BettingWon = ShopDialog.findViewById(R.id.BettingWon);
                 RemoveAll = ShopDialog.findViewById(R.id.RemoveAll);
                 SendOrder = ShopDialog.findViewById(R.id.SendOrder);
-                ComboTypeSelect=ShopDialog.findViewById(R.id.ComboTypeSelect);
+                ComboTypeSelect = ShopDialog.findViewById(R.id.ComboTypeSelect);
+                SendOrder.setOnClickListener(betting);
                 RemoveAll.setOnClickListener(remove);
                 ShopCarPlaySelect.setOnSegmentControlClickListener(SelectPlay);
 
-                BettingSum.setText(String.valueOf(Integer.valueOf(BettingPayout.getText().toString()) * 10*ShopCarInfoList.size()));
+                BettingSum.setText(String.valueOf(Integer.valueOf(BettingPayout.getText().toString()) * 10 * ShopCarInfoList.size()));
                 BettingWon.setText(String.valueOf(BettingRule.Single(Integer.valueOf(BettingPayout.getText().toString()))));
 
                 BettingPayout.addTextChangedListener(new TextWatcher() {
@@ -207,10 +212,10 @@ public class Index extends AppCompatActivity {
 
                             if (Integer.valueOf(BettingPayout.getText().toString()) * 10 <= 100000) {
 
-                                switch (Play){
+                                switch (Play) {
 
                                     case 0:
-                                        BettingSum.setText(String.valueOf(Integer.valueOf(BettingPayout.getText().toString()) * 10*ShopCarInfoList.size()));
+                                        BettingSum.setText(String.valueOf(Integer.valueOf(BettingPayout.getText().toString()) * 10 * ShopCarInfoList.size()));
                                         BettingWon.setText(String.valueOf(BettingRule.Single(Integer.valueOf(BettingPayout.getText().toString()))));
                                         break;
                                     case 1:
@@ -219,7 +224,8 @@ public class Index extends AppCompatActivity {
                                         break;
                                     case 2:
                                         BettingSum.setText(String.valueOf(Integer.valueOf(BettingPayout.getText().toString()) * 10));
-                                        BettingWon.setText(String.valueOf(BettingRule.PassingTheCombination(Integer.valueOf(BettingPayout.getText().toString()))));
+                                        BettingRule.PassingTheCombination(Integer.valueOf(BettingPayout.getText().toString()));
+                                        BettingWon.setText("0");
                                         break;
 
                                 }
@@ -486,6 +492,10 @@ public class Index extends AppCompatActivity {
 
     //購物車
     public void ShopCar() {
+        B_Count = 0;
+        for (int i = 0; i < 8; i++) {
+            HasB.add(-1);
+        }
 
         ShopCarAdapter = new RVAdapter<ShopCarInfoBean>(ShopCarInfoList) {
             @Override
@@ -517,23 +527,33 @@ public class Index extends AppCompatActivity {
                     holder.itemView.findViewById(R.id.BettingItemB).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+
                             Drawable B_On = getResources().getDrawable(R.color.topcolor);
-                           // Log.d("aaaaaaaaaaaaaa", String.valueOf(position));
+
                             if (view.getTag().toString().equals("0")) {
+
                                 view.setTag("1");
-                                //HasB.add(position+1);
+
+                                HasB.set(position, position);
+
+                                B_Count++;
                                 holder.itemView.findViewById(R.id.BettingItemB).setBackground(B_On);
-
                                 holder.setTextColor(R.id.BettingItemB, R.color.white);
-                            } else {
-                                view.setTag("0");
-                                //HasB.set(position+1,0);
-                                holder.itemView.findViewById(R.id.BettingItemB).setBackground(null);
 
+                            } else {
+
+                                view.setTag("0");
+                                HasB.set(position, -1);
+                                B_Count--;
+                                holder.itemView.findViewById(R.id.BettingItemB).setBackground(null);
                                 holder.setTextColor(R.id.BettingItemB, R.color.black);
+
                             }
-                            //BettingSum.setText(String.valueOf(Integer.valueOf(BettingPayout.getText().toString()) * 10));
-                            //BettingWon.setText(String.valueOf(BettingRule.PassingTheCombination(Integer.valueOf(BettingPayout.getText().toString()))));
+
+                            BettingSum.setText(String.valueOf(Integer.valueOf(BettingPayout.getText().toString()) * 10));
+                            BettingRule.PassingTheCombination(Integer.valueOf(BettingPayout.getText().toString()));
+                            BettingWon.setText("0");
+
                         }
                     });
 
@@ -564,7 +584,6 @@ public class Index extends AppCompatActivity {
             public void onItemClick(int position, ShopCarInfoBean bean) {
 
 
-
             }
 
         };
@@ -582,6 +601,57 @@ public class Index extends AppCompatActivity {
 
 
     }
+
+
+    private Button.OnClickListener betting = new Button.OnClickListener() {
+
+        @Override
+        public void onClick(View view) {
+
+            if (ShopCarInfoList.size() > 0) {
+                String combo = "";
+                String column = "0";
+                String item = "";
+                String combination = "";
+                switch (Play) {
+                    case 0:
+                        combo = "Single";
+                        column = "0";
+                        combination = "1 X " + ShopCarInfoList.size();
+                        break;
+                    case 1:
+                        combo = "Mulite";
+                        column = "0";
+                        combination = ShopCarInfoList.size() + " X 1";
+                        break;
+                    case 2:
+                        combo = "Combo";
+                        break;
+                }
+                for (int i = 0; i < ShopCarInfoList.size(); i++) {
+                    try {
+
+                            if (i == ShopCarInfoList.size()-1) {
+                                item = item + ShopCarInfoList.get(i).getItem().getString("Item");
+                            }else{
+                                item = item + ShopCarInfoList.get(i).getItem().getString("Item") + ",";
+                            }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+
+                //CheckBettingFromShopCarAPI.CheckBettingFromShopCar(UserInfo.getString("Token",""),BettingSum.getText().toString(),BettingWon.getText().toString(),combo,combination);
+            } else {
+                ToastShow.start(Index.this, "無投注賽事記錄");
+            }
+
+        }
+    };
 
 
 }
