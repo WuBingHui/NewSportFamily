@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:background="@drawable/corners_3">
+
+    <TextView
+        android:id="@+id/textView107"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/賽事編號"
+        android:textColor="@color/Black"
+        app:layout_constraintEnd_toStartOf="@+id/ShopCarCardNo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider26" />
+
+    <TextView
+        android:id="@+id/ShopCarCardNo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/corners_3"
+        android:textAlignment="center"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView107"
+        app:layout_constraintEnd_toStartOf="@+id/textView110"
+        app:layout_constraintStart_toEndOf="@+id/textView107"
+        app:layout_constraintTop_toTopOf="@+id/textView107" />
+
+    <TextView
+        android:id="@+id/textView110"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/過關數"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/ShopCarCardNo"
+        app:layout_constraintEnd_toStartOf="@+id/ShopCarCardMins"
+        app:layout_constraintStart_toEndOf="@+id/ShopCarCardNo"
+        app:layout_constraintTop_toTopOf="@+id/ShopCarCardNo" />
+
+    <TextView
+        android:id="@+id/ShopCarCardMins"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/corners_3"
+        android:textAlignment="center"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView110"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView110"
+        app:layout_constraintTop_toTopOf="@+id/textView110" />
+
+    <TextView
+        android:id="@+id/ShopCarCardCategory"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/Black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider26"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/grey_400"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ShopCarCardCategory" />
+
+    <TextView
+        android:id="@+id/textView113"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/客隊"
+        android:textColor="@color/Black"
+        app:layout_constraintEnd_toStartOf="@+id/ShopCarCardAway"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView107" />
+
+    <TextView
+        android:id="@+id/textView114"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/主隊"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/ShopCarCardAway"
+        app:layout_constraintEnd_toStartOf="@+id/ShopCarCardHome"
+        app:layout_constraintStart_toEndOf="@+id/ShopCarCardAway"
+        app:layout_constraintTop_toTopOf="@+id/ShopCarCardAway" />
+
+    <TextView
+        android:id="@+id/ShopCarCardAway"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/corners_3"
+        android:textAlignment="center"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView113"
+        app:layout_constraintEnd_toStartOf="@+id/textView114"
+        app:layout_constraintStart_toEndOf="@+id/textView113"
+        app:layout_constraintTop_toTopOf="@+id/textView113" />
+
+    <TextView
+        android:id="@+id/ShopCarCardHome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/corners_3"
+        android:textAlignment="center"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView114"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView114"
+        app:layout_constraintTop_toTopOf="@+id/textView114" />
+
+    <TextView
+        android:id="@+id/textView117"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/玩法"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/ShopCarCardCategory"
+        app:layout_constraintStart_toEndOf="@+id/ShopCarCardCategory"
+        app:layout_constraintTop_toTopOf="@+id/ShopCarCardCategory" />
+
+    <TextView
+        android:id="@+id/ShopCarCardPlay"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/corners_3"
+        android:textAlignment="center"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView117"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView117"
+        app:layout_constraintTop_toTopOf="@+id/textView117" />
+
+    <TextView
+        android:id="@+id/textView119"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/投注選項"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ShopCarCardSelect"
+        app:layout_constraintStart_toStartOf="@+id/textView113"
+        app:layout_constraintTop_toBottomOf="@+id/textView113" />
+
+    <TextView
+        android:id="@+id/ShopCarCardSelect"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/corners_3"
+        android:textAlignment="center"
+        android:textColor="@color/topcolor"
+        app:layout_constraintBottom_toBottomOf="@+id/textView119"
+        app:layout_constraintEnd_toStartOf="@+id/textView121"
+        app:layout_constraintStart_toEndOf="@+id/textView119"
+        app:layout_constraintTop_toTopOf="@+id/textView119" />
+
+    <TextView
+        android:id="@+id/textView121"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/賠率"
+        android:textColor="@color/Black"
+        app:layout_constraintBottom_toBottomOf="@+id/ShopCarCardSelect"
+        app:layout_constraintEnd_toStartOf="@+id/ShopCarCardOdd"
+        app:layout_constraintStart_toEndOf="@+id/ShopCarCardSelect"
+        app:layout_constraintTop_toTopOf="@+id/ShopCarCardSelect" />
+
+    <TextView
+        android:id="@+id/ShopCarCardOdd"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/corners_3"
+        android:textAlignment="center"
+        android:textColor="@color/Red"
+        app:layout_constraintBottom_toBottomOf="@+id/textView121"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView121"
+        app:layout_constraintTop_toTopOf="@+id/textView121" />
+</android.support.constraint.ConstraintLayout>

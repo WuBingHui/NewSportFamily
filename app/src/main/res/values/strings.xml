@@ -309,6 +309,16 @@
     <string name="最高可能中">最高可能中</string>
     <string name="清除">清除</string>
     <string name="投注">投注</string>
+    <string name="請確認您的訂單">請確認您的訂單</string>
+    <string name="投注聲明">投注聲明</string>
+    <string name="確認送出">確認送出</string>
+    <string name="取消">取消</string>
+    <string name="注意">注意</string>
+    <string name="賽事編號">賽事編號</string>
+    <string name="過關數">過關數</string>
+    <string name="客隊">客隊</string>
+    <string name="主隊">主隊</string>
+    <string name="投注選項">投注選項</string>
 
 
     <array name="Time_list">

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -20,9 +21,11 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -39,6 +42,7 @@ import com.cy.dialog.BaseDialog;
 import com.sevenheaven.segmentcontrol.SegmentControl;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -70,6 +74,7 @@ public class Index extends AppCompatActivity {
     public List<String> GameType;
     public List<String> GameName;
     public List<String> GameCategory;
+    public List<String> ColumnList;
     public List<Integer> HasB;
     public List<ShopCarInfoBean> ShopCarInfoList;
     public BaseDialog ShopDialog;
@@ -85,7 +90,8 @@ public class Index extends AppCompatActivity {
     public Button menu, back, shop, RemoveAll, SendOrder;
     public ScrollView MenuScroll;
     public int Play = 0, B_Count = 0;
-    public List<String> combination;
+    public   String column = "0", combo = "",combination = "",item = "";
+    public CheckBox[] ComboCheckBox;
     public static WeakReference<Index> WeakIndex;
 
     @Override
@@ -105,8 +111,11 @@ public class Index extends AppCompatActivity {
         GameName = new ArrayList<>();
         GameCategory = new ArrayList<>();
         ShopCarInfoList = new ArrayList<>();
-        combination = new ArrayList<>();
+        ColumnList = new ArrayList<>();
         HasB = new ArrayList<>();
+
+        ComboCheckBox = new CheckBox[8];
+
         IndexFrame = findViewById(R.id.IndexFrame);
 
 
@@ -495,6 +504,7 @@ public class Index extends AppCompatActivity {
         B_Count = 0;
         for (int i = 0; i < 8; i++) {
             HasB.add(-1);
+            ColumnList.add("");
         }
 
         ShopCarAdapter = new RVAdapter<ShopCarInfoBean>(ShopCarInfoList) {
@@ -503,13 +513,21 @@ public class Index extends AppCompatActivity {
 
                 try {
 
-                    holder.setText(R.id.BettingItemTitle, bean.getItem().getString("Title"));
-                    holder.setText(R.id.BettingItemTime, bean.getItem().getString("StartTime"));
-                    holder.setText(R.id.BettingItemCategory, bean.getItem().getString("Category"));
-                    holder.setText(R.id.BettingItemMins, bean.getItem().getString("Mins"));
-                    holder.setText(R.id.BettingItemSelect, bean.getItem().getString("Select"));
-                    holder.setText(R.id.BettingItemOdd, bean.getItem().getString("Odd"));
-                    holder.itemView.findViewById(R.id.BettingItemB).setTag("0");
+                    final JSONObject content = new JSONObject(bean.getItem().getString("Item"));
+
+                    if(holder.getTVText(R.id.BettingItemTitle).equals("")&&holder.getTVText(R.id.BettingItemTime).equals("")&&holder.getTVText(R.id.BettingItemCategory).equals("")&&holder.getTVText(R.id.BettingItemMins).equals("")&&holder.getTVText(R.id.BettingItemSelect).equals("")&&holder.getTVText(R.id.BettingItemOdd).equals("")){
+                        holder.setText(R.id.BettingItemTitle, bean.getItem().getString("Title"));
+                        holder.setText(R.id.BettingItemTime, bean.getItem().getString("StartTime"));
+                        holder.setText(R.id.BettingItemCategory, bean.getItem().getString("Category"));
+                        holder.setText(R.id.BettingItemMins, bean.getItem().getString("Mins"));
+                        holder.setText(R.id.BettingItemSelect, bean.getItem().getString("Select"));
+                        holder.setText(R.id.BettingItemOdd, bean.getItem().getString("Odd"));
+                    }
+
+                    if(holder.itemView.findViewById(R.id.BettingItemB).getTag() == null){
+                        holder.itemView.findViewById(R.id.BettingItemB).setTag("{"+"\"open\":\""+"0"+"\","+"\"column\":"+"{\"column\":\""+content.getString("Id")+"-"+bean.getItem().getString("Odd")+"\"}"+"}");
+                    }
+
 
                     holder.itemView.findViewById(R.id.RemoveBettingItem).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -525,14 +543,20 @@ public class Index extends AppCompatActivity {
                     });
 
                     holder.itemView.findViewById(R.id.BettingItemB).setOnClickListener(new View.OnClickListener() {
+
                         @Override
                         public void onClick(View view) {
 
+                            try {
+
                             Drawable B_On = getResources().getDrawable(R.color.topcolor);
+                            JSONObject tag = new JSONObject(view.getTag().toString());
 
-                            if (view.getTag().toString().equals("0")) {
+                            if (tag.getString("open").equals("0")) {
 
-                                view.setTag("1");
+                                view.setTag("{"+"\"open\":\""+"1"+"\","+"\"column\":"+"{\"column\":\""+content.getString("Id")+"-"+bean.getItem().getString("Odd")+"\"}"+"}");
+
+                                ColumnList.set(position,tag.getJSONObject("column").toString());
 
                                 HasB.set(position, position);
 
@@ -542,7 +566,8 @@ public class Index extends AppCompatActivity {
 
                             } else {
 
-                                view.setTag("0");
+                                view.setTag("{"+"\"open\":\""+"0"+"\","+"\"column\":"+"{\"column\":\""+content.getString("Id")+"-"+bean.getItem().getString("Odd")+"\"}"+"}");
+                                ColumnList.set(position,"");
                                 HasB.set(position, -1);
                                 B_Count--;
                                 holder.itemView.findViewById(R.id.BettingItemB).setBackground(null);
@@ -553,6 +578,11 @@ public class Index extends AppCompatActivity {
                             BettingSum.setText(String.valueOf(Integer.valueOf(BettingPayout.getText().toString()) * 10));
                             BettingRule.PassingTheCombination(Integer.valueOf(BettingPayout.getText().toString()));
                             BettingWon.setText("0");
+
+                        } catch (JSONException e) {
+
+                            e.printStackTrace();
+                        }
 
                         }
                     });
@@ -602,17 +632,18 @@ public class Index extends AppCompatActivity {
 
     }
 
-
+    //送出購物車投注的按鈕
     private Button.OnClickListener betting = new Button.OnClickListener() {
 
         @Override
         public void onClick(View view) {
 
             if (ShopCarInfoList.size() > 0) {
-                String combo = "";
-                String column = "0";
-                String item = "";
-                String combination = "";
+                Loading.start(Index.this);
+                 combo = "";
+                 combination = "";
+                 item = "";
+
                 switch (Play) {
                     case 0:
                         combo = "Single";
@@ -626,26 +657,67 @@ public class Index extends AppCompatActivity {
                         break;
                     case 2:
                         combo = "Combo";
+
+                        ////選擇幾關幾組
+                        for (CheckBox aCombo_checkbox : ComboCheckBox) {
+
+                            if (aCombo_checkbox != null && aCombo_checkbox.isChecked()) {
+
+                                try {
+
+                                    JSONObject content = new JSONObject( aCombo_checkbox.getTag().toString());
+                                    combination = combination+content.getString("pass")+" X "+content.getString("count")+",";
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                        if(!combination.equals("")){
+                            combination = combination.substring(0,combination.length()-1);
+                        }
+                        ////
+
+                        //選擇立住
+
+                            column="";
+                            int count=0;
+                            for(int i = 0; i <ColumnList.size();i++){
+                                if(!ColumnList.get(i).equals("")){
+                                    count++;
+
+                                        column = column + ColumnList.get(i)+",";
+
+                                }
+                            }
+                        if(count==0){
+                            column="0";
+                        }else{
+                            column = "["+column.substring(0,column.length()-1)+"]";
+                        }
+                       ////
+
                         break;
                 }
+
+
                 for (int i = 0; i < ShopCarInfoList.size(); i++) {
+
                     try {
 
-                            if (i == ShopCarInfoList.size()-1) {
+                            if (i == (ShopCarInfoList.size()-1)) {
                                 item = item + ShopCarInfoList.get(i).getItem().getString("Item");
                             }else{
                                 item = item + ShopCarInfoList.get(i).getItem().getString("Item") + ",";
                             }
 
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
                 }
 
-
-
-                //CheckBettingFromShopCarAPI.CheckBettingFromShopCar(UserInfo.getString("Token",""),BettingSum.getText().toString(),BettingWon.getText().toString(),combo,combination);
+                CheckBettingFromShopCarAPI.CheckBettingFromShopCar(UserInfo.getString("Token",""),BettingSum.getText().toString(),BettingWon.getText().toString(),combo,combination,column,item);
             } else {
                 ToastShow.start(Index.this, "無投注賽事記錄");
             }

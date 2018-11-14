@@ -1,12 +1,11 @@
 package future3pay.newsportfamily.API;
 
-import android.util.Log;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
+import future3pay.newsportfamily.Activity.CheckShopCarActivity;
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.UIkit.Loading;
@@ -20,10 +19,10 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class CheckBettingFromShopCarAPI {
+public class SendBettingFromShopCarAPI {
 
 
-    public static void CheckBettingFromShopCar(String token, final String amount, final String payout, final String combo, final String combination, final String column, final String item){
+    public static void SendBettingFromShopCar(String token){
 
         OkHttpClient client=new OkHttpClient();
 
@@ -32,15 +31,9 @@ public class CheckBettingFromShopCarAPI {
         //構建FormBody，傳入要提交的參數
         FormBody formBody = new FormBody
                 .Builder()
-                .add("amount",amount)
-                .add("payout",payout)
-                .add("combo",combo)
-                .add("combination",combination)
-                .add("column",column)
-                .add("item","["+item+"]")
                 .build();
         Request request=new Request.Builder()
-                .url(DoMainUrl.CheckBettingFromShopCar)
+                .url(DoMainUrl.SendBettingFromShopCar)
                 .header("Accept","application/json")
                 .header("authorization", "bearer " + token)
                 .post(formBody)
@@ -73,50 +66,27 @@ public class CheckBettingFromShopCarAPI {
                     @Override
                     public void run() {
 
-                        Log.d("aaaaaaaaaaaaaaaaaa", amount);
-                        Log.d("aaaaaaaaaaaaaaaaaa", payout);
-                        Log.d("aaaaaaaaaaaaaaaaaa", combo);
-                        Log.d("aaaaaaaaaaaaaaaaaa", combination);
-                        Log.d("aaaaaaaaaaaaaaaaaa", column);
-                        Log.d("aaaaaaaaaaaaaaaaaa", item);
-
                         try {
 
                             String json =response.body().string();
                             JSONObject content = new JSONObject(json);
-                            Log.d("aaaaaaaaaaaaaaaaaa", String.valueOf(content));
+
                             if(response.isSuccessful()){
 
 
                                 if(content.getInt("result") == 0){
-
-                                    StatmentDialog.Statment();
-
+                                    CheckShopCarActivity.WeakCheckShopCar.get().finish();
+                                    Index.WeakIndex.get().ShopCarInfoList.clear();
+                                    ToastShow.start(Index.WeakIndex.get(),"投注訂單已送出");
                                 }else{
 
-
                                     if(content.getInt("result") == 3){
+
                                         Index.WeakIndex.get().UserInfo.edit().clear().apply();
 
                                     }
 
-                                    if(content.getInt("result") == 4){
-
-
-                                    }
-
-                                    if(content.getInt("result") == 5){
-
-
-                                    }
-                                    String message = "";
-                                    for(int i = 0 ; i <content.getString("message").length();i++){
-                                        if( VerifyData.VerifyChiness(content.getString("message").substring(i,i+1))){
-                                            message = message +content.getString("message").substring(i,i+1);
-                                        }
-
-                                    }
-                                    ToastShow.start(Index.WeakIndex.get(),message);
+                                    ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
                                     Index.WeakIndex.get().ShopCarInfoList.clear();
                                 }
 
@@ -128,27 +98,11 @@ public class CheckBettingFromShopCarAPI {
 
                                 }
 
-                                if(content.getInt("result") == 4){
-
-
-                                }
-
-                                if(content.getInt("result") == 5){
-
-
-                                }
-
-                                String message = "";
-                                for(int i = 0 ; i <content.getString("message").length();i++){
-                                    if( VerifyData.VerifyChiness(content.getString("message").substring(i,i+1))){
-                                        message = message +content.getString("message").substring(i,i+1);
-                                    }
-                                }
-                                ToastShow.start(Index.WeakIndex.get(),message);
+                                ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
                                 Index.WeakIndex.get().ShopCarInfoList.clear();
                             }
                         } catch (JSONException e) {
-                            Log.d("aaaaaaaaaaaaaaaaaa",e.toString());
+
                             e.printStackTrace();
                             ToastShow.start(Index.WeakIndex.get(),"伺服器無回應");
 

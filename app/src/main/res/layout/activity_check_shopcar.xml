@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        tools:context="future3pay.newsportfamily.Activity.CheckShopCarActivity">
+
+        <TextView
+            android:id="@+id/textView91"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/請確認您的訂單"
+            android:textColor="@color/Black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView99"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/投注種類"
+            android:textColor="@color/Black"
+            app:layout_constraintStart_toStartOf="@+id/divider25"
+            app:layout_constraintTop_toBottomOf="@+id/divider25" />
+
+        <View
+            android:id="@+id/divider25"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/grey_400"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView91" />
+
+        <TextView
+            android:id="@+id/textView101"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/投注組合"
+            android:textColor="@color/Black"
+            app:layout_constraintStart_toStartOf="@+id/textView99"
+            app:layout_constraintTop_toBottomOf="@+id/textView99" />
+
+        <TextView
+            android:id="@+id/textView103"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/單組金額"
+            android:textColor="@color/Black"
+            app:layout_constraintStart_toStartOf="@+id/textView101"
+            app:layout_constraintTop_toBottomOf="@+id/textView101" />
+
+        <TextView
+            android:id="@+id/textView104"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/投注金額"
+            android:textColor="@color/Black"
+            app:layout_constraintStart_toStartOf="@+id/textView103"
+            app:layout_constraintTop_toBottomOf="@+id/textView103" />
+
+        <TextView
+            android:id="@+id/textView105"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/若全數過關最高可得"
+            android:textColor="@color/Black"
+            app:layout_constraintStart_toStartOf="@+id/textView104"
+            app:layout_constraintTop_toBottomOf="@+id/textView104" />
+
+        <TextView
+            android:id="@+id/ShopCarBettingType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/corners_3"
+            android:gravity="center"
+            android:textColor="@color/Black"
+            app:layout_constraintBottom_toBottomOf="@+id/textView99"
+            app:layout_constraintEnd_toEndOf="@+id/divider25"
+            app:layout_constraintStart_toEndOf="@+id/textView99"
+            app:layout_constraintTop_toTopOf="@+id/textView99" />
+
+        <TextView
+            android:id="@+id/ShopCarBettingCombination"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/corners_3"
+            android:gravity="center"
+            android:textColor="@color/Black"
+            app:layout_constraintBottom_toBottomOf="@+id/textView101"
+            app:layout_constraintEnd_toEndOf="@+id/divider25"
+            app:layout_constraintStart_toEndOf="@+id/textView101"
+            app:layout_constraintTop_toTopOf="@+id/textView101" />
+
+        <TextView
+            android:id="@+id/ShopCarBettingSingleAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/corners_3"
+            android:gravity="center"
+            android:textColor="@color/Black"
+            app:layout_constraintBottom_toBottomOf="@+id/textView103"
+            app:layout_constraintEnd_toEndOf="@+id/divider25"
+            app:layout_constraintStart_toEndOf="@+id/textView103"
+            app:layout_constraintTop_toTopOf="@+id/textView103" />
+
+        <TextView
+            android:id="@+id/ShopCarBettingAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/corners_3"
+            android:gravity="center"
+            android:textColor="@color/Black"
+            app:layout_constraintBottom_toBottomOf="@+id/textView104"
+            app:layout_constraintEnd_toEndOf="@+id/divider25"
+            app:layout_constraintStart_toEndOf="@+id/textView104"
+            app:layout_constraintTop_toTopOf="@+id/textView104" />
+
+        <TextView
+            android:id="@+id/ShopCarBettingWon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/corners_3"
+            android:gravity="center"
+            android:textColor="@color/Black"
+            app:layout_constraintBottom_toBottomOf="@+id/textView105"
+            app:layout_constraintEnd_toEndOf="@+id/divider25"
+            app:layout_constraintStart_toEndOf="@+id/textView105"
+            app:layout_constraintTop_toTopOf="@+id/textView105" />
+
+
+        <com.cy.cyrvadapter.refreshrv.VerticalRefreshLayout
+            android:id="@+id/ShopCarBettingRV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ShopCarBettingWon">
+
+        </com.cy.cyrvadapter.refreshrv.VerticalRefreshLayout>
+
+        <Button
+            android:id="@+id/ShopCarBettingCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/corners_2"
+            android:text="@string/取消"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ShopCarBettingSend"
+            app:layout_constraintTop_toBottomOf="@+id/ShopCarBettingRV" />
+
+        <Button
+            android:id="@+id/ShopCarBettingSend"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/corners"
+            android:text="@string/確認送出"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ShopCarBettingCancel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ShopCarBettingRV" />
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

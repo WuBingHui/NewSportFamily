@@ -92,10 +92,11 @@ public class NormalGameOddDialog {
                                 String StartTime =time;
                                 String Category = category;
                                 String Mins = content.getJSONObject(i).getString("mins");
+                                String Play = content.getJSONObject(i).getJSONObject("betsTitle").getString("title");
                                 String Select =content.getJSONObject(i).getJSONObject("betsTitle").getString("title")+" "+ content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("name")+content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("outComeConditions");
                                 String Odd = content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("odds");
                                 String Item ="{\"ni\":\"" +ni + "\",\"name\":\"" + content.getJSONObject(i).getJSONObject("betsTitle").getString("titleCode") + "\",\"Id\":\"" + ni + "_" + content.getJSONObject(i).getJSONArray("codes").getJSONObject(j).getString("id") + "\"}";
-                                odd.setTag("{"+"\"Title\":\""+Title+"\","+"\"StartTime\":\""+StartTime+"\","+"\"Category\":\""+Category+"\","+"\"Mins\":\""+Mins+"\","+"\"Select\":\""+Select+"\","+"\"Odd\":\""+Odd+"\","+"\"Item\":"+Item+"}");
+                                odd.setTag("{"+"\"Play\":\""+Play+"\","+"\"Code\":\""+code+"\","+"\"Home\":\""+home+"\","+"\"Away\":\""+away+"\","+"\"Title\":\""+Title+"\","+"\"StartTime\":\""+StartTime+"\","+"\"Category\":\""+Category+"\","+"\"Mins\":\""+Mins+"\","+"\"Select\":\""+Select+"\","+"\"Odd\":\""+Odd+"\","+"\"Item\":"+Item+"}");
                                 odd.setBackgroundResource(R.drawable.corners_3);
                                 odd.setLayoutParams(params);
                                 odd.setGravity(Gravity.CENTER_HORIZONTAL);

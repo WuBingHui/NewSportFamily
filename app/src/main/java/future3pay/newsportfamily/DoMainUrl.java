@@ -28,7 +28,7 @@ public class DoMainUrl {
         AddBettingToShopCar = domain+"/api/mobile/get/member/betting/shopcar";//新增投注選項進購物車
         RemoveBettingFromShopCar = domain+"/api/mobile/get/member/betting/shopcar/clean-one";//刪除購物車單筆投注選項
         RemoveAllBettingFromShopCar = domain+"/api/mobile/get/member/betting/shopcar/clean-up";//刪除購物車全部投注選項
-        CheckBettingFromShopCar = domain+"/api/mobile/get/member/betting/shopcar";//取得投注資料檢查訂單
+        CheckBettingFromShopCar = domain+"/api/mobile/get/member/betting/deal/order";//取得投注資料檢查訂單
         SendBettingFromShopCar = domain+"/api/mobile/get/member/betting/check/order";//確認訂單資訊 送出訂單
 
     }

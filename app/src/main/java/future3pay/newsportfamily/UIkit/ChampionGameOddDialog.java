@@ -65,10 +65,11 @@ public class ChampionGameOddDialog {
                         String StartTime =time;
                         String Category = category;
                         String Mins = mins;
+                        String Play = title;
                         String Select =content.getJSONObject(i).getString("id")+content.getJSONObject(i).getString("option-zh");
                         String Odd = content.getJSONObject(i).getString("odds");
                         String Item ="{\"ni\":\"" +content.getJSONObject(i).getString("ni") + "\",\"name\":\"" + content.getJSONObject(i).getString("name") + "\",\"Id\":\"" + content.getJSONObject(i).getString("ni") + "_" + content.getJSONObject(i).getString("num") + "\"}";
-                            odd.setTag("{"+"\"Title\":\""+Title+"\","+"\"StartTime\":\""+StartTime+"\","+"\"Category\":\""+Category+"\","+"\"Mins\":\""+Mins+"\","+"\"Select\":\""+Select+"\","+"\"Odd\":\""+Odd+"\","+"\"Item\":"+Item+"}");
+                        odd.setTag("{"+"\"Play\":\""+Play+"\","+"\"Code\":\""+code+"\","+"\"Home\":\""+""+"\","+"\"Away\":\""+""+"\","+"\"Title\":\""+Title+"\","+"\"StartTime\":\""+StartTime+"\","+"\"Category\":\""+Category+"\","+"\"Mins\":\""+Mins+"\","+"\"Select\":\""+Select+"\","+"\"Odd\":\""+Odd+"\","+"\"Item\":"+Item+"}");
                             odd.setBackgroundResource(R.drawable.corners_3);
                             odd.setLayoutParams(params);
                             odd.setGravity(Gravity.CENTER_HORIZONTAL);
