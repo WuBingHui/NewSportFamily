@@ -1,5 +1,6 @@
 package future3pay.newsportfamily.API;
 
+import android.content.Intent;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 
@@ -8,12 +9,15 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import future3pay.newsportfamily.Activity.VerifyEmailActivity;
+import future3pay.newsportfamily.Activity.VerifyPhoneActivity;
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.Fragment.GameResultFragment;
 import future3pay.newsportfamily.Fragment.MemberFragment;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.UIkit.Loading;
 import future3pay.newsportfamily.UIkit.ToastShow;
+import future3pay.newsportfamily.UserInfo;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -67,50 +71,68 @@ public class UserInfoAPI {
 
                                 if(content.getInt("result") == 0){
 
-                                    Index.WeakIndex.get().UserInfo.edit()
-                                            .putString("Token",token)
-                                            .putString("Permission",content.getJSONObject("userInfo").getString("permission"))
-                                            .putString("BelongStore",content.getJSONObject("userInfo").getString("belong_store"))
-                                            .putString("UserName",content.getJSONObject("userInfo").getString("username"))
-                                            .putString("Name",content.getJSONObject("userInfo").getString("name"))
-                                            .putString("Email",content.getJSONObject("userInfo").getString("email"))
-                                            .putString("Phone",content.getJSONObject("userInfo").getString("phone"))
-                                            .putString("BankName",content.getJSONObject("userInfo").getString("bank_name"))
-                                            .putString("BankAccount",content.getJSONObject("userInfo").getString("bank_account"))
-                                            .putString("OriginPoints",content.getJSONObject("userInfo").getString("origin_points"))
-                                            .putString("WonPoints",content.getJSONObject("userInfo").getString("won_points"))
-                                            .putString("InviteCode",content.getJSONObject("userInfo").getString("invite_code"))
-                                            .putString("OrderProcessing",content.getJSONObject("userInfo").getString("orderProcessing"))
-                                            .putString("OrderDone",content.getJSONObject("userInfo").getString("orderDone"))
-                                            .putString("OrderOfTheDay",content.getJSONObject("userInfo").getString("orderOfTheDay"))
-                                            .apply();
+                                    UserInfo.add(content,token);
 
-
-                                    MemberFragment.WeakMemberFragment.get().FamilyPoint.setText(content.getJSONObject("userInfo").getString("origin_points"));
-                                    MemberFragment.WeakMemberFragment.get().CashPoint.setText(content.getJSONObject("userInfo").getString("won_points"));
-                                    MemberFragment.WeakMemberFragment.get().InviteCode.setText(content.getJSONObject("userInfo").getString("invite_code"));
-                                    MemberFragment.WeakMemberFragment.get().TodayOrderCount.setText(content.getJSONObject("userInfo").getString("orderOfTheDay"));
-                                    MemberFragment.WeakMemberFragment.get().WaitBonus.setText(content.getJSONObject("userInfo").getString("orderDone"));
-                                    MemberFragment.WeakMemberFragment.get().WaitOrder.setText(content.getJSONObject("userInfo").getString("orderProcessing"));
                                 }else{
+
                                     //信箱未驗證
                                     if(content.getInt("result") == 4) {
-
+                                        ToastShow.start(Index.WeakIndex.get(),"信箱尚未通過驗證");
+                                        UserInfo.add(content,token);
+                                        Intent intent =new Intent();
+                                        intent.setClass(Index.WeakIndex.get(),VerifyEmailActivity.class);
+                                        Index.WeakIndex.get().startActivity(intent);
+                                    }else{
+                                        //手機未驗證
+                                        if(content.getInt("result") == 5){
+                                            ToastShow.start(Index.WeakIndex.get(),"手機尚未通過驗證");
+                                            UserInfo.add(content,token);
+                                            Intent intent =new Intent();
+                                            intent.setClass(Index.WeakIndex.get(),VerifyPhoneActivity.class);
+                                            Index.WeakIndex.get().startActivity(intent);
+                                        }else{
+                                            if(content.getInt("result") == 3){
+                                                ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
+                                                Index.WeakIndex.get().UserInfo.edit().clear().apply();
+                                                Index.WeakIndex.get().bottomNavigation.setCurrentItem(0);
+                                            }else{
+                                                ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
+                                            }
+                                        }
                                     }
-                                    //手機未驗證
-                                    if(content.getInt("result") == 5){
+                                    ////
 
-                                    }
-                                    ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
-                                    Index.WeakIndex.get().UserInfo.edit().clear().apply();
-                                    Index.WeakIndex.get().bottomNavigation.setCurrentItem(0);
                                 }
 
                         }else{
 
-                            ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
-                            Index.WeakIndex.get().UserInfo.edit().clear().apply();
-                            Index.WeakIndex.get().bottomNavigation.setCurrentItem(0);
+                            //信箱未驗證
+                            if(content.getInt("result") == 4) {
+                                ToastShow.start(Index.WeakIndex.get(),"信箱尚未通過驗證");
+                                UserInfo.add(content,token);
+                                Intent intent =new Intent();
+                                intent.setClass(Index.WeakIndex.get(),VerifyEmailActivity.class);
+                                Index.WeakIndex.get().startActivity(intent);
+                            }else{
+                                //手機未驗證
+                                if(content.getInt("result") == 5){
+                                    ToastShow.start(Index.WeakIndex.get(),"手機尚未通過驗證");
+                                    UserInfo.add(content,token);
+                                    Intent intent =new Intent();
+                                    intent.setClass(Index.WeakIndex.get(),VerifyPhoneActivity.class);
+                                    Index.WeakIndex.get().startActivity(intent);
+                                }else{
+                                    if(content.getInt("result") == 3){
+                                        ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
+                                        Index.WeakIndex.get().UserInfo.edit().clear().apply();
+                                        Index.WeakIndex.get().bottomNavigation.setCurrentItem(0);
+                                    }else{
+                                        ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
+                                    }
+                                }
+                            }
+                            ////
+
                         }
                     } catch (JSONException e) {
 
@@ -132,6 +154,7 @@ public class UserInfoAPI {
 
 
     }
+
 
 
 

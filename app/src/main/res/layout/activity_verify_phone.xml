@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="future3pay.newsportfamily.Activity.VerifyPhoneActivity">
+
+
+    <TextView
+        android:id="@+id/textView109"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="若您尚未收到手機驗證碼，請點擊再次發送"
+        android:textColor="@color/Red"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView111"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/手機號碼"
+        android:textColor="@color/Black"
+        app:layout_constraintStart_toStartOf="@+id/textView109"
+        app:layout_constraintTop_toBottomOf="@+id/textView109" />
+
+    <TextView
+        android:id="@+id/VerifyPhone"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/corners_3"
+        android:gravity="center|start"
+        android:paddingStart="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView109"
+        app:layout_constraintStart_toStartOf="@+id/textView111"
+        app:layout_constraintTop_toBottomOf="@+id/textView111" />
+
+    <Button
+        android:id="@+id/SendVerify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/corners"
+        android:text="@string/再次發送"
+        app:layout_constraintEnd_toStartOf="@+id/CheckVerify"
+        app:layout_constraintStart_toStartOf="@+id/VerifyPhone"
+        app:layout_constraintTop_toBottomOf="@+id/VerifyCode" />
+
+    <Button
+        android:id="@+id/CheckVerify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/corners"
+        android:text="@string/送出驗證碼"
+        app:layout_constraintEnd_toEndOf="@+id/VerifyPhone"
+        app:layout_constraintStart_toEndOf="@+id/SendVerify"
+        app:layout_constraintTop_toBottomOf="@+id/VerifyCode" />
+
+    <EditText
+        android:id="@+id/VerifyCode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/corners_4"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="請在此輸入手機驗證碼"
+        android:inputType="number"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/VerifyPhone"
+        app:layout_constraintStart_toStartOf="@+id/VerifyPhone"
+        app:layout_constraintTop_toBottomOf="@+id/VerifyPhone" />
+
+
+</android.support.constraint.ConstraintLayout>

@@ -5,7 +5,7 @@ import android.util.Log;
 public class DoMainUrl {
 
     private volatile static DoMainUrl INSTANCE; //聲明成 volatile
-    public static String Register,PhoneSms,ResetPassWord,Login,Info,SportsType,GameInfo,GameResult,GameChampionInfo,GameCountDown,GameActive,BettingRecord,BettingRecordDetail,PointRecord,DepositRecord,DrawRecord,AddBettingToShopCar,RemoveBettingFromShopCar,RemoveAllBettingFromShopCar,CheckBettingFromShopCar,SendBettingFromShopCar;
+    public static String Register,PhoneSms,ResetPassWord,Login,Info,SportsType,GameInfo,GameResult,GameChampionInfo,GameCountDown,GameActive,BettingRecord,BettingRecordDetail,PointRecord,DepositRecord,DrawRecord,AddBettingToShopCar,RemoveBettingFromShopCar,RemoveAllBettingFromShopCar,CheckBettingFromShopCar,SendBettingFromShopCar,ReSendEmail;
    private final String domain = "https://fet555888.tw";
     private DoMainUrl (){
 
@@ -30,7 +30,7 @@ public class DoMainUrl {
         RemoveAllBettingFromShopCar = domain+"/api/mobile/get/member/betting/shopcar/clean-up";//刪除購物車全部投注選項
         CheckBettingFromShopCar = domain+"/api/mobile/get/member/betting/deal/order";//取得投注資料檢查訂單
         SendBettingFromShopCar = domain+"/api/mobile/get/member/betting/check/order";//確認訂單資訊 送出訂單
-
+        ReSendEmail = domain+"/api/mobile/register/resend-validator-email";//email 重發驗證信
     }
 
     static void GetDoMain() {

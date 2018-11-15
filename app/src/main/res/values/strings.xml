@@ -319,6 +319,8 @@
     <string name="客隊">客隊</string>
     <string name="主隊">主隊</string>
     <string name="投注選項">投注選項</string>
+    <string name="再次發送">再次發送</string>
+    <string name="送出驗證碼">送出驗證碼</string>
 
 
     <array name="Time_list">
@@ -330,6 +332,10 @@
         <item>2月</item>
         <item>3月</item>
     </array>
+
+
+    <string name="DefaultWebClientId">1007297700967-5rl4uk8daott32ca83r5o9kusk03o4jl.apps.googleusercontent.com</string>
+    <string name="其他第三方登入">其他第三方登入</string>
 
 
 </resources>

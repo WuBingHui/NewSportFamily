@@ -1,16 +1,21 @@
 package future3pay.newsportfamily.API;
 
+import android.content.Intent;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
 import future3pay.newsportfamily.Activity.CheckShopCarActivity;
+import future3pay.newsportfamily.Activity.VerifyEmailActivity;
+import future3pay.newsportfamily.Activity.VerifyPhoneActivity;
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.UIkit.Loading;
 import future3pay.newsportfamily.UIkit.StatmentDialog;
 import future3pay.newsportfamily.UIkit.ToastShow;
+import future3pay.newsportfamily.UserInfo;
 import future3pay.newsportfamily.VerifyData;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -22,7 +27,7 @@ import okhttp3.Response;
 public class SendBettingFromShopCarAPI {
 
 
-    public static void SendBettingFromShopCar(String token){
+    public static void SendBettingFromShopCar(final String token){
 
         OkHttpClient client=new OkHttpClient();
 
@@ -78,27 +83,70 @@ public class SendBettingFromShopCarAPI {
                                     CheckShopCarActivity.WeakCheckShopCar.get().finish();
                                     Index.WeakIndex.get().ShopCarInfoList.clear();
                                     ToastShow.start(Index.WeakIndex.get(),"投注訂單已送出");
+
+                                    UserInfoAPI.UserInfo(Index.WeakIndex.get().UserInfo.getString("Token",""));
+
+
                                 }else{
 
-                                    if(content.getInt("result") == 3){
-
-                                        Index.WeakIndex.get().UserInfo.edit().clear().apply();
-
+                                    //信箱未驗證
+                                    if(content.getInt("result") == 4) {
+                                        ToastShow.start(Index.WeakIndex.get(),"信箱尚未通過驗證");
+                                        UserInfo.add(content,token);
+                                        Intent intent =new Intent();
+                                        intent.setClass(Index.WeakIndex.get(),VerifyEmailActivity.class);
+                                        Index.WeakIndex.get().startActivity(intent);
+                                    }else{
+                                        //手機未驗證
+                                        if(content.getInt("result") == 5){
+                                            ToastShow.start(Index.WeakIndex.get(),"手機尚未通過驗證");
+                                            UserInfo.add(content,token);
+                                            Intent intent =new Intent();
+                                            intent.setClass(Index.WeakIndex.get(),VerifyPhoneActivity.class);
+                                            Index.WeakIndex.get().startActivity(intent);
+                                        }else{
+                                            if(content.getInt("result") == 3){
+                                                Index.WeakIndex.get().UserInfo.edit().clear().apply();
+                                                ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
+                                            }else{
+                                                ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
+                                            }
+                                        }
                                     }
+                                    ////
 
-                                    ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
                                     Index.WeakIndex.get().ShopCarInfoList.clear();
                                 }
 
 
                             }else{
 
-                                if(content.getInt("result") == 3){
-                                    Index.WeakIndex.get().UserInfo.edit().clear().apply();
-
+                                //信箱未驗證
+                                if(content.getInt("result") == 4) {
+                                    ToastShow.start(Index.WeakIndex.get(),"信箱尚未通過驗證");
+                                    UserInfo.add(content,token);
+                                    Intent intent =new Intent();
+                                    intent.setClass(Index.WeakIndex.get(),VerifyEmailActivity.class);
+                                    Index.WeakIndex.get().startActivity(intent);
+                                }else{
+                                    //手機未驗證
+                                    if(content.getInt("result") == 5){
+                                        ToastShow.start(Index.WeakIndex.get(),"手機尚未通過驗證");
+                                        UserInfo.add(content,token);
+                                        Intent intent =new Intent();
+                                        intent.setClass(Index.WeakIndex.get(),VerifyPhoneActivity.class);
+                                        Index.WeakIndex.get().startActivity(intent);
+                                    }else{
+                                        if(content.getInt("result") == 3){
+                                            Index.WeakIndex.get().UserInfo.edit().clear().apply();
+                                            ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
+                                        }else{
+                                            ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
+                                        }
+                                    }
                                 }
+                                ////
 
-                                ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
                                 Index.WeakIndex.get().ShopCarInfoList.clear();
                             }
                         } catch (JSONException e) {

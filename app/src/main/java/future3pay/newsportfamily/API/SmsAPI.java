@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import future3pay.newsportfamily.Activity.VerifyEmailActivity;
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.Activity.RegisterActivity;
 import future3pay.newsportfamily.UIkit.ToastShow;

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
 
+import future3pay.newsportfamily.API.GoogleSignInAPI;
 import future3pay.newsportfamily.API.UserInfoAPI;
 import future3pay.newsportfamily.Activity.BettingRecordActivity;
 import future3pay.newsportfamily.Activity.MakeUpPointRecordActivity;
@@ -71,7 +72,6 @@ public class MemberFragment extends Fragment {
         WithdrawalRecord.setOnClickListener(withdrawalRecord);
 
 
-        UserInfoAPI.UserInfo(Index.WeakIndex.get().UserInfo.getString("Token",""));
 
         return view;
     }
@@ -80,6 +80,10 @@ public class MemberFragment extends Fragment {
     private Button.OnClickListener logout = new Button.OnClickListener() {
         @Override
         public void onClick(View view) {
+
+            GoogleSignInAPI.signOut();
+            GoogleSignInAPI.revokeAccess();
+
 
             Index.WeakIndex.get().UserInfo.edit().clear().apply();
 

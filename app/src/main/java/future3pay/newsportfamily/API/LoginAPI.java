@@ -55,6 +55,7 @@ public class LoginAPI {
 
         @Override
         public void onResponse(Call call, final Response response) throws IOException {
+
             final String json =response.body().string();
 
             LoginActivity.WeakLoginActivity.get().runOnUiThread(new Runnable() {
@@ -62,10 +63,12 @@ public class LoginAPI {
                 public void run() {
 
                     if(response.isSuccessful()){
+
                         try {
+
                             JSONObject content = new JSONObject(json);
 
-                            if(  content.getInt("result") == 0){
+                            if( content.getInt("result") == 0){
 
                                 UserInfoAPI.UserInfo(content.getString("message"));
 
@@ -75,13 +78,17 @@ public class LoginAPI {
 
                             }else{
 
+
                                 ToastShow.start(LoginActivity.WeakLoginActivity.get(),"帳號或密碼錯誤");
+
 
                             }
 
                         } catch (JSONException e) {
+
                             e.printStackTrace();
                             ToastShow.start(LoginActivity.WeakLoginActivity.get(),"伺服器忙碌中，請稍後在試");
+
                         }
 
                     }else{

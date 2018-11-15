@@ -1,5 +1,6 @@
 package future3pay.newsportfamily.API;
 
+import android.content.Intent;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -7,11 +8,14 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import future3pay.newsportfamily.Activity.VerifyEmailActivity;
+import future3pay.newsportfamily.Activity.VerifyPhoneActivity;
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.UIkit.Loading;
 import future3pay.newsportfamily.UIkit.StatmentDialog;
 import future3pay.newsportfamily.UIkit.ToastShow;
+import future3pay.newsportfamily.UserInfo;
 import future3pay.newsportfamily.VerifyData;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -23,7 +27,7 @@ import okhttp3.Response;
 public class CheckBettingFromShopCarAPI {
 
 
-    public static void CheckBettingFromShopCar(String token, final String amount, final String payout, final String combo, final String combination, final String column, final String item){
+    public static void CheckBettingFromShopCar(final String token, final String amount, final String payout, final String combo, final String combination, final String column, final String item){
 
         OkHttpClient client=new OkHttpClient();
 
@@ -73,18 +77,13 @@ public class CheckBettingFromShopCarAPI {
                     @Override
                     public void run() {
 
-                        Log.d("aaaaaaaaaaaaaaaaaa", amount);
-                        Log.d("aaaaaaaaaaaaaaaaaa", payout);
-                        Log.d("aaaaaaaaaaaaaaaaaa", combo);
-                        Log.d("aaaaaaaaaaaaaaaaaa", combination);
-                        Log.d("aaaaaaaaaaaaaaaaaa", column);
-                        Log.d("aaaaaaaaaaaaaaaaaa", item);
+
 
                         try {
 
                             String json =response.body().string();
                             JSONObject content = new JSONObject(json);
-                            Log.d("aaaaaaaaaaaaaaaaaa", String.valueOf(content));
+
                             if(response.isSuccessful()){
 
 
@@ -95,60 +94,81 @@ public class CheckBettingFromShopCarAPI {
                                 }else{
 
 
-                                    if(content.getInt("result") == 3){
-                                        Index.WeakIndex.get().UserInfo.edit().clear().apply();
-
-                                    }
-
-                                    if(content.getInt("result") == 4){
-
-
-                                    }
-
-                                    if(content.getInt("result") == 5){
-
-
-                                    }
-                                    String message = "";
-                                    for(int i = 0 ; i <content.getString("message").length();i++){
-                                        if( VerifyData.VerifyChiness(content.getString("message").substring(i,i+1))){
-                                            message = message +content.getString("message").substring(i,i+1);
+                                    //信箱未驗證
+                                    if(content.getInt("result") == 4) {
+                                        ToastShow.start(Index.WeakIndex.get(),"信箱尚未通過驗證");
+                                        UserInfo.add(content,token);
+                                        Intent intent =new Intent();
+                                        intent.setClass(Index.WeakIndex.get(),VerifyEmailActivity.class);
+                                        Index.WeakIndex.get().startActivity(intent);
+                                    }else{
+                                        //手機未驗證
+                                        if(content.getInt("result") == 5){
+                                            ToastShow.start(Index.WeakIndex.get(),"手機尚未通過驗證");
+                                            UserInfo.add(content,token);
+                                            Intent intent =new Intent();
+                                            intent.setClass(Index.WeakIndex.get(),VerifyPhoneActivity.class);
+                                            Index.WeakIndex.get().startActivity(intent);
+                                        }else{
+                                            if(content.getInt("result") == 3){
+                                                Index.WeakIndex.get().UserInfo.edit().clear().apply();
+                                                ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
+                                            }else{
+                                                String message = "";
+                                                for(int i = 0 ; i <content.getString("message").length();i++){
+                                                    if( VerifyData.VerifyChiness(content.getString("message").substring(i,i+1))){
+                                                        message = message +content.getString("message").substring(i,i+1);
+                                                    }
+                                                }
+                                                ToastShow.start(Index.WeakIndex.get(),message);
+                                            }
                                         }
-
                                     }
-                                    ToastShow.start(Index.WeakIndex.get(),message);
+                                    ////
                                     Index.WeakIndex.get().ShopCarInfoList.clear();
                                 }
 
 
                             }else{
 
-                                if(content.getInt("result") == 3){
-                                    Index.WeakIndex.get().UserInfo.edit().clear().apply();
-
-                                }
-
-                                if(content.getInt("result") == 4){
-
-
-                                }
-
-                                if(content.getInt("result") == 5){
-
-
-                                }
-
-                                String message = "";
-                                for(int i = 0 ; i <content.getString("message").length();i++){
-                                    if( VerifyData.VerifyChiness(content.getString("message").substring(i,i+1))){
-                                        message = message +content.getString("message").substring(i,i+1);
+                                //信箱未驗證
+                                if(content.getInt("result") == 4) {
+                                    ToastShow.start(Index.WeakIndex.get(),"信箱尚未通過驗證");
+                                    UserInfo.add(content,token);
+                                    Intent intent =new Intent();
+                                    intent.setClass(Index.WeakIndex.get(),VerifyEmailActivity.class);
+                                    Index.WeakIndex.get().startActivity(intent);
+                                }else{
+                                    //手機未驗證
+                                    if(content.getInt("result") == 5){
+                                        ToastShow.start(Index.WeakIndex.get(),"手機尚未通過驗證");
+                                        UserInfo.add(content,token);
+                                        Intent intent =new Intent();
+                                        intent.setClass(Index.WeakIndex.get(),VerifyPhoneActivity.class);
+                                        Index.WeakIndex.get().startActivity(intent);
+                                    }else{
+                                        if(content.getInt("result") == 3){
+                                            Index.WeakIndex.get().UserInfo.edit().clear().apply();
+                                            ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
+                                        }else{
+                                            String message = "";
+                                            for(int i = 0 ; i <content.getString("message").length();i++){
+                                                if( VerifyData.VerifyChiness(content.getString("message").substring(i,i+1))){
+                                                    message = message +content.getString("message").substring(i,i+1);
+                                                }
+                                            }
+                                            ToastShow.start(Index.WeakIndex.get(),message);
+                                        }
                                     }
                                 }
-                                ToastShow.start(Index.WeakIndex.get(),message);
+                                ////
+
+
+
                                 Index.WeakIndex.get().ShopCarInfoList.clear();
                             }
                         } catch (JSONException e) {
-                            Log.d("aaaaaaaaaaaaaaaaaa",e.toString());
+
                             e.printStackTrace();
                             ToastShow.start(Index.WeakIndex.get(),"伺服器無回應");
 

@@ -10,6 +10,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 import future3pay.newsportfamily.Activity.LoginActivity;
+import future3pay.newsportfamily.Activity.VerifyEmailActivity;
+import future3pay.newsportfamily.Activity.VerifyPhoneActivity;
 import future3pay.newsportfamily.Bean.ShopCarInfoBean;
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.Fragment.BettingFragment;
@@ -17,6 +19,8 @@ import future3pay.newsportfamily.Fragment.GameResultFragment;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.UIkit.Loading;
 import future3pay.newsportfamily.UIkit.ToastShow;
+import future3pay.newsportfamily.UserInfo;
+import future3pay.newsportfamily.VerifyData;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -27,7 +31,7 @@ import okhttp3.Response;
 public class AddBettingToShopCarAPI {
 
 
-    public static void AddBettingToShopCar(String token, final String item,final  JSONObject ItemInfo){
+    public static void AddBettingToShopCar(final String token, final String item, final  JSONObject ItemInfo){
 
         OkHttpClient client=new OkHttpClient();
 
@@ -75,8 +79,8 @@ public class AddBettingToShopCarAPI {
 
                             String json =response.body().string();
                             JSONObject content = new JSONObject(json);
-                           // Log.d("aaaaaaaaaaaaaaaaa", String.valueOf(content));
-                           // Log.d("aaaaaaaaaaaaaaaaa", "["+item+"]");
+
+
                         if(response.isSuccessful()){
 
 
@@ -87,25 +91,70 @@ public class AddBettingToShopCarAPI {
 
                                 }else{
 
-                                    ToastShow.start(BettingFragment.WeakBettingFragment.get().getActivity(),content.getString("message"));
+
+                                    //信箱未驗證
+                                    if(content.getInt("result") == 4) {
+                                        ToastShow.start(BettingFragment.WeakBettingFragment.get().getActivity(),"信箱尚未通過驗證");
+                                        UserInfo.add(content,token);
+                                        Intent intent =new Intent();
+                                        intent.setClass(Index.WeakIndex.get(),VerifyEmailActivity.class);
+                                        Index.WeakIndex.get().startActivity(intent);
+                                    }else{
+                                        //手機未驗證
+                                        if(content.getInt("result") == 5){
+                                            ToastShow.start(BettingFragment.WeakBettingFragment.get().getActivity(),"手機尚未通過驗證");
+                                            UserInfo.add(content,token);
+                                            Intent intent =new Intent();
+                                            intent.setClass(Index.WeakIndex.get(),VerifyPhoneActivity.class);
+                                            Index.WeakIndex.get().startActivity(intent);
+                                        }else{
+                                            if(content.getInt("result") == 3){
+                                                Index.WeakIndex.get().UserInfo.edit().clear().apply();
+                                                ToastShow.start(BettingFragment.WeakBettingFragment.get().getActivity(),content.getString("message"));
+                                            }else{
+                                                ToastShow.start(BettingFragment.WeakBettingFragment.get().getActivity(),content.getString("message"));
+                                            }
+                                        }
+                                    }
+                                    ////
 
                                 }
 
 
                         }else{
 
-                            if(content.getInt("result") == 3){
-                                Index.WeakIndex.get().UserInfo.edit().clear().apply();
 
+                            //信箱未驗證
+                            if(content.getInt("result") == 4) {
+                                ToastShow.start(BettingFragment.WeakBettingFragment.get().getActivity(),"信箱尚未通過驗證");
+                                UserInfo.add(content,token);
+                                Intent intent =new Intent();
+                                intent.setClass(Index.WeakIndex.get(),VerifyEmailActivity.class);
+                                Index.WeakIndex.get().startActivity(intent);
+                            }else{
+                                //手機未驗證
+                                if(content.getInt("result") == 5){
+                                    ToastShow.start(BettingFragment.WeakBettingFragment.get().getActivity(),"手機尚未通過驗證");
+                                    UserInfo.add(content,token);
+                                    Intent intent =new Intent();
+                                    intent.setClass(Index.WeakIndex.get(),VerifyPhoneActivity.class);
+                                    Index.WeakIndex.get().startActivity(intent);
+                                }else{
+                                    if(content.getInt("result") == 3){
+                                        Index.WeakIndex.get().UserInfo.edit().clear().apply();
+                                        ToastShow.start(BettingFragment.WeakBettingFragment.get().getActivity(),content.getString("message"));
+                                    }else{
+                                        ToastShow.start(BettingFragment.WeakBettingFragment.get().getActivity(),content.getString("message"));
+                                    }
+                                }
                             }
-
-                            ToastShow.start(BettingFragment.WeakBettingFragment.get().getActivity(),content.getString("message"));
+                            ////
 
 
                         }
                         } catch (JSONException e) {
 
-                         // Log.d("aaaaaaaaaaaaaaaaa",e.toString());
+
                             e.printStackTrace();
                             ToastShow.start(BettingFragment.WeakBettingFragment.get().getActivity(),"伺服器無回應");
 

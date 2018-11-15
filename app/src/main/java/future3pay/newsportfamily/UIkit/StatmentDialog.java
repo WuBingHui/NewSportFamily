@@ -89,7 +89,7 @@ public class StatmentDialog {
                 }
 
                 intent.putExtra("Combination",Index.WeakIndex.get().combination);
-                intent.putExtra("SingleAmount",Index.WeakIndex.get().BettingPayout.getText().toString());
+                intent.putExtra("SingleAmount",String.valueOf(Integer.valueOf(Index.WeakIndex.get().BettingPayout.getText().toString())*10));
                 intent.setClass(Index.WeakIndex.get(),CheckShopCarActivity.class);
                 Index.WeakIndex.get().startActivity(intent);
             }

@@ -1,5 +1,6 @@
 package future3pay.newsportfamily.API;
 
+import android.content.Intent;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -7,11 +8,14 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import future3pay.newsportfamily.Activity.VerifyEmailActivity;
+import future3pay.newsportfamily.Activity.VerifyPhoneActivity;
 import future3pay.newsportfamily.BettingRule;
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.UIkit.Loading;
 import future3pay.newsportfamily.UIkit.ToastShow;
+import future3pay.newsportfamily.UserInfo;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -21,7 +25,7 @@ import okhttp3.Response;
 
 public class RemoveSingleItemBettingAPI {
 
-    public static void RemoveSingleItemBetting(String token, final int position,String item){
+    public static void RemoveSingleItemBetting(final String token, final int position, String item){
 
         OkHttpClient client=new OkHttpClient();
 
@@ -104,20 +108,64 @@ public class RemoveSingleItemBettingAPI {
 
                                 }else{
 
-                                    ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
+                                    //信箱未驗證
+                                    if(content.getInt("result") == 4) {
+                                        ToastShow.start(Index.WeakIndex.get(),"信箱尚未通過驗證");
+                                        UserInfo.add(content,token);
+                                        Intent intent =new Intent();
+                                        intent.setClass(Index.WeakIndex.get(),VerifyEmailActivity.class);
+                                        Index.WeakIndex.get().startActivity(intent);
+                                    }else{
+                                        //手機未驗證
+                                        if(content.getInt("result") == 5){
+                                            ToastShow.start(Index.WeakIndex.get(),"手機尚未通過驗證");
+                                            UserInfo.add(content,token);
+                                            Intent intent =new Intent();
+                                            intent.setClass(Index.WeakIndex.get(),VerifyPhoneActivity.class);
+                                            Index.WeakIndex.get().startActivity(intent);
+                                        }else{
+                                            if(content.getInt("result") == 3){
+                                                Index.WeakIndex.get().UserInfo.edit().clear().apply();
+                                                ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
+                                            }else{
+                                                ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
+                                            }
+                                        }
+                                    }
+                                    ////
+
 
                                 }
 
 
                             }else{
 
-                                if(content.getInt("result") == 3){
-
-                                    Index.WeakIndex.get().UserInfo.edit().clear().apply();
-
+                                //信箱未驗證
+                                if(content.getInt("result") == 4) {
+                                    ToastShow.start(Index.WeakIndex.get(),"信箱尚未通過驗證");
+                                    UserInfo.add(content,token);
+                                    Intent intent =new Intent();
+                                    intent.setClass(Index.WeakIndex.get(),VerifyEmailActivity.class);
+                                    Index.WeakIndex.get().startActivity(intent);
+                                }else{
+                                    //手機未驗證
+                                    if(content.getInt("result") == 5){
+                                        ToastShow.start(Index.WeakIndex.get(),"手機尚未通過驗證");
+                                        UserInfo.add(content,token);
+                                        Intent intent =new Intent();
+                                        intent.setClass(Index.WeakIndex.get(),VerifyPhoneActivity.class);
+                                        Index.WeakIndex.get().startActivity(intent);
+                                    }else{
+                                        if(content.getInt("result") == 3){
+                                            Index.WeakIndex.get().UserInfo.edit().clear().apply();
+                                            ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
+                                        }else{
+                                            ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
+                                        }
+                                    }
                                 }
+                                ////
 
-                                ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
 
 
                             }

@@ -7,6 +7,33 @@
     android:background="@android:color/white"
     tools:context=".Activity.LoginActivity">
 
+    <Button
+        android:id="@+id/GoogleSignInBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/corners_3"
+        android:drawableStart="@drawable/google"
+        android:gravity="center"
+        android:paddingStart="8dp"
+        android:text="Sign in with Google"
+        app:layout_constraintEnd_toEndOf="@+id/divider27"
+        app:layout_constraintStart_toStartOf="@+id/divider27"
+        app:layout_constraintTop_toBottomOf="@+id/divider27" />
+
+    <Button
+        android:id="@+id/FacebookSignInBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/corners_3"
+        android:drawableStart="@drawable/facebook"
+        android:paddingStart="8dp"
+        android:text="Log in with Facebook"
+        app:layout_constraintEnd_toEndOf="@+id/GoogleSignInBtn"
+        app:layout_constraintStart_toStartOf="@+id/GoogleSignInBtn"
+        app:layout_constraintTop_toBottomOf="@+id/GoogleSignInBtn" />
+
     <TextView
         android:id="@+id/textView16"
         android:layout_width="0dp"
@@ -101,4 +128,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Register" />
+
+    <View
+        android:id="@+id/divider27"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/MinsType"
+        app:layout_constraintEnd_toEndOf="@+id/Login"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/Login"
+        app:layout_constraintTop_toBottomOf="@+id/textView112" />
+
+    <TextView
+        android:id="@+id/textView112"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/其他第三方登入"
+        android:textColor="@color/Black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/Login"
+        app:layout_constraintStart_toStartOf="@+id/Login"
+        app:layout_constraintTop_toBottomOf="@+id/Login" />
+
 </android.support.constraint.ConstraintLayout>

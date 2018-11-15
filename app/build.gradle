@@ -35,4 +35,9 @@ dependencies {
     implementation 'com.github.AnJiaoDe:BaseDialog:V1.1.2'
     implementation 'com.github.AnJiaoDe:RecyclerViewAdapter:V2.3.0'
     implementation 'com.7heaven.widgets:segmentcontrol:1.17'
+    implementation 'com.google.firebase:firebase-core:16.0.5'
+    implementation 'com.google.firebase:firebase-auth:16.0.5'
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
+
 }
+apply plugin: 'com.google.gms.google-services'
