@@ -14,8 +14,8 @@ import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
 
-import future3pay.newsportfamily.API.GoogleSignInAPI;
-import future3pay.newsportfamily.API.UserInfoAPI;
+import future3pay.newsportfamily.FacebookLogin;
+import future3pay.newsportfamily.GoogleLogin;
 import future3pay.newsportfamily.Activity.BettingRecordActivity;
 import future3pay.newsportfamily.Activity.MakeUpPointRecordActivity;
 import future3pay.newsportfamily.Activity.UseRecordActivity;
@@ -81,9 +81,9 @@ public class MemberFragment extends Fragment {
         @Override
         public void onClick(View view) {
 
-            GoogleSignInAPI.signOut();
-            GoogleSignInAPI.revokeAccess();
-
+            GoogleLogin.signOut();
+            GoogleLogin.revokeAccess();
+            FacebookLogin.signOut();
 
             Index.WeakIndex.get().UserInfo.edit().clear().apply();
 

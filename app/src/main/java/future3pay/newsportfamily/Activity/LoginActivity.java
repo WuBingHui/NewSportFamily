@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -11,17 +12,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.cy.dialog.BaseDialog;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.lang.ref.WeakReference;
 
-import future3pay.newsportfamily.API.GoogleSignInAPI;
+import future3pay.newsportfamily.FacebookLogin;
+import future3pay.newsportfamily.GoogleLogin;
 import future3pay.newsportfamily.API.LoginAPI;
 import future3pay.newsportfamily.API.ResetPassWordAPI;
 import future3pay.newsportfamily.Index;
@@ -35,18 +40,13 @@ public class LoginActivity extends AppCompatActivity {
 
     public static WeakReference<LoginActivity> WeakLoginActivity;
     private EditText LoginAccount, LoginPassWord;
-    private Button Login,GoogleSignInBtn,FacebookSignInBtn;
+    private Button Login,GoogleSignInBtn;
+    public LoginButton FacebookSignInBtn;
     private TextView Register, ResetPassWord;
     public BaseDialog ResetPassWordDialog;
 
 
-    public   final int RC_SIGN_IN = 9001;
 
-    // [START declare_auth]
-    public FirebaseAuth mAuth;
-    // [END declare_auth]
-
-    public GoogleSignInClient mGoogleSignInClient;
 
 
 
@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
 
         ObjectCreate();
 
-        GoogleSignInAPI.ConfigureGoogleSignIn();//連結google登入
+
 
     }
 
@@ -106,6 +106,7 @@ public class LoginActivity extends AppCompatActivity {
         Login.setOnClickListener(login);
         GoogleSignInBtn.setOnClickListener(login);
         FacebookSignInBtn.setOnClickListener(login);
+
     }
 
 
@@ -130,13 +131,41 @@ public class LoginActivity extends AppCompatActivity {
                         break;
                     case R.id.GoogleSignInBtn:
 
-                        GoogleSignInAPI googleSignInAPI= new GoogleSignInAPI();
+                        GoogleLogin googleLogin = new GoogleLogin();
 
-                        googleSignInAPI.signIn();
+                        googleLogin.signIn();
 
                         break;
                 case R.id.FacebookSignInBtn:
 
+                   FacebookSignInBtn.setReadPermissions("email", "public_profile");
+                   FacebookSignInBtn.registerCallback(Index.WeakIndex.get().mCallbackManager, new FacebookCallback<LoginResult>() {
+                        @Override
+                        public void onSuccess(LoginResult loginResult) {
+                            // Log.d(TAG, "facebook:onSuccess:" + loginResult);
+                            FacebookLogin.SignIn(loginResult.getAccessToken());
+
+                        }
+
+                        @Override
+                        public void onCancel() {
+                            // Log.d(TAG, "facebook:onCancel");
+                            // [START_EXCLUDE]
+                            //updateUI(null);
+                            // [END_EXCLUDE]
+                        }
+
+                        @Override
+                        public void onError(FacebookException error) {
+
+                            ToastShow.start(LoginActivity.WeakLoginActivity.get(), String.valueOf(error));
+                            //Log.d(TAG, "facebook:onError", error);
+                            // [START_EXCLUDE]
+                            //updateUI(null);
+                            // [END_EXCLUDE]
+                        }
+
+                    });
 
                     break;
 
@@ -202,12 +231,12 @@ public class LoginActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == LoginActivity.WeakLoginActivity.get().RC_SIGN_IN) {
+        if (requestCode == Index.WeakIndex.get().RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                GoogleSignInAPI.firebaseAuthWithGoogle(account);
+                GoogleLogin.firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
 
@@ -215,6 +244,8 @@ public class LoginActivity extends AppCompatActivity {
                 ToastShow.start(LoginActivity.WeakLoginActivity.get(),"Google Sign In failed");
                 // [END_EXCLUDE]
             }
+        }else{
+            Index.WeakIndex.get().mCallbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
     // [END onactivityresult]

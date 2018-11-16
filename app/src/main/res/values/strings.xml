@@ -334,8 +334,11 @@
     </array>
 
 
-    <string name="DefaultWebClientId">1007297700967-5rl4uk8daott32ca83r5o9kusk03o4jl.apps.googleusercontent.com</string>
+
     <string name="其他第三方登入">其他第三方登入</string>
+    <string name="google">Sign in with Google</string>
+    <string name="Facebook">Log in with Facebook</string>
+    <string name="facebook_app_id">2041361076190164</string> <string name="fb_login_protocol_scheme">fb2041361076190164</string>
 
 
 </resources>

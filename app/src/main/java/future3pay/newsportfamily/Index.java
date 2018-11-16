@@ -3,6 +3,9 @@ package future3pay.newsportfamily;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
@@ -14,8 +17,10 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -32,6 +37,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
@@ -39,12 +45,17 @@ import com.cy.cyrvadapter.adapter.RVAdapter;
 import com.cy.cyrvadapter.refreshrv.BaseRefreshLayout;
 import com.cy.cyrvadapter.refreshrv.VerticalRefreshLayout;
 import com.cy.dialog.BaseDialog;
+import com.facebook.CallbackManager;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.firebase.auth.FirebaseAuth;
 import com.sevenheaven.segmentcontrol.SegmentControl;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,8 +67,7 @@ import future3pay.newsportfamily.API.RemoveSingleItemBettingAPI;
 import future3pay.newsportfamily.API.SportTypeAPI;
 import future3pay.newsportfamily.API.UserInfoAPI;
 import future3pay.newsportfamily.Activity.LoginActivity;
-import future3pay.newsportfamily.Bean.GameChampionInfoDetailBean;
-import future3pay.newsportfamily.Bean.GameNormalInfoBean;
+
 import future3pay.newsportfamily.Bean.ShopCarInfoBean;
 import future3pay.newsportfamily.Fragment.BettingFragment;
 import future3pay.newsportfamily.UIkit.Loading;
@@ -65,6 +75,7 @@ import future3pay.newsportfamily.UIkit.ToastShow;
 
 
 public class Index extends AppCompatActivity {
+
     public String SportType = "s-441";
     public String SportRoot = "0";
     public FragmentManager manager = null;
@@ -94,10 +105,21 @@ public class Index extends AppCompatActivity {
     public CheckBox[] ComboCheckBox;
     public static WeakReference<Index> WeakIndex;
 
+    public   final int RC_SIGN_IN = 9001;
+
+    // [START declare_auth]
+    public FirebaseAuth mAuth;
+    // [END declare_auth]
+
+    public GoogleSignInClient mGoogleSignInClient;
+    public CallbackManager mCallbackManager;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
+
 
         WeakIndex = new WeakReference<>(this);
 
@@ -129,7 +151,11 @@ public class Index extends AppCompatActivity {
 
         if (!UserInfo.getString("Token", "").equals("")) {
             UserInfoAPI.UserInfo(UserInfo.getString("Token", ""));
+
         }
+
+        GoogleLogin.ConfigureGoogleSignIn();//連結google登入
+        FacebookLogin.ConfigureFacebookSignIn();//連結facebook登入
 
         //透過下方程式碼，取得Activity中執行的個體。
         manager = getSupportFragmentManager();
@@ -502,6 +528,7 @@ public class Index extends AppCompatActivity {
     //購物車
     public void ShopCar() {
         B_Count = 0;
+        //初始化
         for (int i = 0; i < 8; i++) {
             HasB.add(-1);
             ColumnList.add("");
@@ -582,6 +609,7 @@ public class Index extends AppCompatActivity {
                         } catch (JSONException e) {
 
                             e.printStackTrace();
+
                         }
 
                         }
@@ -612,6 +640,7 @@ public class Index extends AppCompatActivity {
 
             @Override
             public void onItemClick(int position, ShopCarInfoBean bean) {
+
 
 
             }

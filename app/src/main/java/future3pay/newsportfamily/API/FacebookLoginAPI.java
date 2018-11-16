@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import future3pay.newsportfamily.Activity.LoginActivity;
 import future3pay.newsportfamily.DoMainUrl;
+import future3pay.newsportfamily.FacebookLogin;
 import future3pay.newsportfamily.GoogleLogin;
 import future3pay.newsportfamily.UIkit.Loading;
 import future3pay.newsportfamily.UIkit.ToastShow;
@@ -19,10 +20,10 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class GoogleSignInAPI {
+public class FacebookLoginAPI {
 
 
-    public static void GoogleSignIn(final String token){
+    public static void FacebookLogin(final String token){
 
         OkHttpClient client=new OkHttpClient();
 
@@ -33,7 +34,7 @@ public class GoogleSignInAPI {
                 .add("access_token",token)
                 .build();
         Request request=new Request.Builder()
-                .url(DoMainUrl.GoogleSignIn)
+                .url(DoMainUrl.FacebookLogin)
                 .header("Accept","application/json")
                 .post(formBody)
                 .build();
@@ -46,8 +47,7 @@ public class GoogleSignInAPI {
                     public void run() {
                         //告知使用者連線失敗
                         ToastShow.start(LoginActivity.WeakLoginActivity.get(),"無網路狀態，請檢查您的行動網路是否開啟");
-                        GoogleLogin.signOut();
-                        GoogleLogin.revokeAccess();
+                        FacebookLogin.signOut();
                         Loading.diss();
                     }
                 });
@@ -65,7 +65,7 @@ public class GoogleSignInAPI {
                     public void run() {
                         try {
                             JSONObject content = new JSONObject(json);
-                            Log.d("aaaaaaaaaaaaaaa",token);
+
                         if(response.isSuccessful()){
 
                                 if( content.getInt("result") == 0){
@@ -80,9 +80,8 @@ public class GoogleSignInAPI {
 
 
                                     ToastShow.start(LoginActivity.WeakLoginActivity.get(),"登入驗證錯誤");
-                                    GoogleLogin.signOut();
-                                    GoogleLogin.revokeAccess();
 
+                                    FacebookLogin.signOut();
                                 }
 
 
@@ -90,15 +89,13 @@ public class GoogleSignInAPI {
                         }else{
 
                             ToastShow.start(LoginActivity.WeakLoginActivity.get(),"登入驗證錯誤");
-                            GoogleLogin.signOut();
-                            GoogleLogin.revokeAccess();
+                            FacebookLogin.signOut();
                         }
                     } catch (JSONException e) {
 
                         e.printStackTrace();
                         ToastShow.start(LoginActivity.WeakLoginActivity.get(),"伺服器忙碌中，請稍後在試");
-                            GoogleLogin.signOut();
-                            GoogleLogin.revokeAccess();
+                            FacebookLogin.signOut();
                     }
 
                         Loading.diss();
