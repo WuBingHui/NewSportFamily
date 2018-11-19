@@ -527,6 +527,9 @@ public class Index extends AppCompatActivity {
 
     //購物車
     public void ShopCar() {
+
+
+
         B_Count = 0;
         //初始化
         for (int i = 0; i < 8; i++) {
@@ -538,18 +541,26 @@ public class Index extends AppCompatActivity {
             @Override
             public void bindDataToView(final RVViewHolder holder, final int position, final ShopCarInfoBean bean, boolean isSelected) {
 
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //Log.d("aaaaaaaaaaaaaaaaa", String.valueOf(poistion));
+                    }
+                });
+
+
                 try {
 
                     final JSONObject content = new JSONObject(bean.getItem().getString("Item"));
 
-                    if(holder.getTVText(R.id.BettingItemTitle).equals("")&&holder.getTVText(R.id.BettingItemTime).equals("")&&holder.getTVText(R.id.BettingItemCategory).equals("")&&holder.getTVText(R.id.BettingItemMins).equals("")&&holder.getTVText(R.id.BettingItemSelect).equals("")&&holder.getTVText(R.id.BettingItemOdd).equals("")){
+
                         holder.setText(R.id.BettingItemTitle, bean.getItem().getString("Title"));
                         holder.setText(R.id.BettingItemTime, bean.getItem().getString("StartTime"));
                         holder.setText(R.id.BettingItemCategory, bean.getItem().getString("Category"));
                         holder.setText(R.id.BettingItemMins, bean.getItem().getString("Mins"));
                         holder.setText(R.id.BettingItemSelect, bean.getItem().getString("Select"));
                         holder.setText(R.id.BettingItemOdd, bean.getItem().getString("Odd"));
-                    }
+
 
                     if(holder.itemView.findViewById(R.id.BettingItemB).getTag() == null){
                         holder.itemView.findViewById(R.id.BettingItemB).setTag("{"+"\"open\":\""+"0"+"\","+"\"column\":"+"{\"column\":\""+content.getString("Id")+"-"+bean.getItem().getString("Odd")+"\"}"+"}");

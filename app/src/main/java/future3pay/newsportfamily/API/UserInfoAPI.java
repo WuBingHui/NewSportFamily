@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,8 +14,10 @@ import java.io.IOException;
 import future3pay.newsportfamily.Activity.VerifyEmailActivity;
 import future3pay.newsportfamily.Activity.VerifyPhoneActivity;
 import future3pay.newsportfamily.DoMainUrl;
+import future3pay.newsportfamily.FacebookLogin;
 import future3pay.newsportfamily.Fragment.GameResultFragment;
 import future3pay.newsportfamily.Fragment.MemberFragment;
+import future3pay.newsportfamily.GoogleLogin;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.UIkit.Loading;
 import future3pay.newsportfamily.UIkit.ToastShow;
@@ -95,6 +99,9 @@ public class UserInfoAPI {
                                                 ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
                                                 Index.WeakIndex.get().UserInfo.edit().clear().apply();
                                                 Index.WeakIndex.get().bottomNavigation.setCurrentItem(0);
+                                                GoogleLogin.signOut();
+                                                GoogleLogin.revokeAccess();
+                                                FacebookLogin.signOut();
                                             }else{
                                                 ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
                                             }
@@ -126,6 +133,9 @@ public class UserInfoAPI {
                                         ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
                                         Index.WeakIndex.get().UserInfo.edit().clear().apply();
                                         Index.WeakIndex.get().bottomNavigation.setCurrentItem(0);
+                                        GoogleLogin.signOut();
+                                        GoogleLogin.revokeAccess();
+                                        FacebookLogin.signOut();
                                     }else{
                                         ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
                                     }

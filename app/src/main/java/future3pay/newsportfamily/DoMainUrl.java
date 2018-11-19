@@ -32,8 +32,8 @@ public class DoMainUrl {
         SendBettingFromShopCar = domain+"/api/mobile/get/member/betting/check/order";//確認訂單資訊 送出訂單
         ReSendEmail = domain+"/api/mobile/register/resend-validator-email";//email 重發驗證信
 
-        GoogleSignIn = domain+"/api/mobile/socialite/google";//會員登入 - 第三方登入 - google
-        FacebookLogin = domain+"/api/mobile/socialite/facebook";//會員登入 - 第三方登入 - facebook
+        GoogleSignIn = domain+"/api/mobile/socialite/login/google";//會員登入 - 第三方登入 - google
+        FacebookLogin = domain+"/api/mobile/socialite/login/facebook";//會員登入 - 第三方登入 - facebook
 
     }
 

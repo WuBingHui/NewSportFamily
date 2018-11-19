@@ -55,8 +55,9 @@ public class FacebookLogin extends LoginActivity {
                            // updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
-                           // Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            Log.w("aaaaaaaa", "signInWithCredential:failure", task.getException());
                             ToastShow.start(LoginActivity.WeakLoginActivity.get(), "Authentication failed.");
+                            signOut();
                             Loading.diss();
                            // Toast.makeText(FacebookLoginActivity.this, "Authentication failed.",
                                     //Toast.LENGTH_SHORT).show();

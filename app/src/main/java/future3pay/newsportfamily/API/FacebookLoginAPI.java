@@ -65,7 +65,7 @@ public class FacebookLoginAPI {
                     public void run() {
                         try {
                             JSONObject content = new JSONObject(json);
-
+                            Log.d("aaaaaaaaaaaaaa", String.valueOf(content));
                         if(response.isSuccessful()){
 
                                 if( content.getInt("result") == 0){

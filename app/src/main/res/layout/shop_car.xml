@@ -24,8 +24,10 @@
         <com.cy.cyrvadapter.refreshrv.VerticalRefreshLayout
             android:id="@+id/ShopCarRV"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:background="@android:color/white"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"

@@ -41,6 +41,7 @@ public class GoogleSignInAPI {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+
                 LoginActivity.WeakLoginActivity.get().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -63,9 +64,11 @@ public class GoogleSignInAPI {
                 LoginActivity.WeakLoginActivity.get().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+
                         try {
+
                             JSONObject content = new JSONObject(json);
-                            Log.d("aaaaaaaaaaaaaaa",token);
+                            Log.d("aaaaaaaaaaaaaaa", String.valueOf(content));
                         if(response.isSuccessful()){
 
                                 if( content.getInt("result") == 0){
@@ -93,6 +96,7 @@ public class GoogleSignInAPI {
                             GoogleLogin.signOut();
                             GoogleLogin.revokeAccess();
                         }
+
                     } catch (JSONException e) {
 
                         e.printStackTrace();
@@ -103,9 +107,8 @@ public class GoogleSignInAPI {
 
                         Loading.diss();
                     }
+
                 });
-
-
 
 
             }

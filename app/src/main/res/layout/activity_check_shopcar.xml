@@ -158,7 +158,7 @@
         <com.cy.cyrvadapter.refreshrv.VerticalRefreshLayout
             android:id="@+id/ShopCarBettingRV"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:layout_marginTop="8dp"
             android:background="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
