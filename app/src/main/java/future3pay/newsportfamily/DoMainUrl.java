@@ -5,7 +5,7 @@ import android.util.Log;
 public class DoMainUrl {
 
     private volatile static DoMainUrl INSTANCE; //聲明成 volatile
-    public static String Register,PhoneSms,ResetPassWord,Login,Info,SportsType,GameInfo,GameResult,GameChampionInfo,GameCountDown,GameActive,BettingRecord,BettingRecordDetail,PointRecord,DepositRecord,DrawRecord,AddBettingToShopCar,RemoveBettingFromShopCar,RemoveAllBettingFromShopCar,CheckBettingFromShopCar,SendBettingFromShopCar,ReSendEmail,GoogleSignIn,FacebookLogin;
+    public static String Register,PhoneSms,ResetPassWord,Login,Info,SportsType,GameInfo,GameResult,GameChampionInfo,GameCountDown,GameActive,BettingRecord,BettingRecordDetail,PointRecord,DepositRecord,DrawRecord,AddBettingToShopCar,RemoveBettingFromShopCar,RemoveAllBettingFromShopCar,CheckBettingFromShopCar,SendBettingFromShopCar,ReSendEmail,GoogleSignIn,FacebookLogin,PhoneVerify;
    private final String domain = "https://fet555888.tw";
     private DoMainUrl (){
 
@@ -31,6 +31,8 @@ public class DoMainUrl {
         CheckBettingFromShopCar = domain+"/api/mobile/get/member/betting/deal/order";//取得投注資料檢查訂單
         SendBettingFromShopCar = domain+"/api/mobile/get/member/betting/check/order";//確認訂單資訊 送出訂單
         ReSendEmail = domain+"/api/mobile/register/resend-validator-email";//email 重發驗證信
+
+        PhoneVerify = domain+"/api/mobile/members/please-verify-phone";//一般會員 - 手機驗證
 
         GoogleSignIn = domain+"/api/mobile/socialite/login/google";//會員登入 - 第三方登入 - google
         FacebookLogin = domain+"/api/mobile/socialite/login/facebook";//會員登入 - 第三方登入 - facebook

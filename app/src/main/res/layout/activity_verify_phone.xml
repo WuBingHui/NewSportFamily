@@ -32,14 +32,16 @@
         app:layout_constraintStart_toStartOf="@+id/textView109"
         app:layout_constraintTop_toBottomOf="@+id/textView109" />
 
-    <TextView
+    <EditText
         android:id="@+id/VerifyPhone"
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/corners_3"
         android:gravity="center|start"
+        android:hint="請輸入手機號碼"
         android:paddingStart="8dp"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="@+id/textView109"
         app:layout_constraintStart_toStartOf="@+id/textView111"
         app:layout_constraintTop_toBottomOf="@+id/textView111" />

@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
 
-import future3pay.newsportfamily.API.ReSendEmailAPI;
+import future3pay.newsportfamily.API.PhoneVerifyAPI;
 import future3pay.newsportfamily.API.ReSendSmsAPI;
 import future3pay.newsportfamily.API.SmsAPI;
 import future3pay.newsportfamily.Index;
@@ -28,17 +28,22 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         actionbar();
         WeakVerifyPhone = new WeakReference<>(this);
 
-        TextView VerifyPhone = findViewById(R.id.VerifyPhone);
+        final EditText VerifyPhone = findViewById(R.id.VerifyPhone);
         final EditText VerifyCode = findViewById(R.id.VerifyCode);
-        VerifyPhone.setText(Index.WeakIndex.get().UserInfo.getString("Phone",""));
+
         Button SendVerify = findViewById(R.id.SendVerify);
         Button  CheckVerify= findViewById(R.id.CheckVerify);
 
         SendVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Loading.start(WeakVerifyPhone.get());
-                ReSendSmsAPI.ReSendSms(Index.WeakIndex.get().UserInfo.getString("Phone",""));
+
+                if(!VerifyPhone.getText().toString().equals("")){
+                    Loading.start(WeakVerifyPhone.get());
+                    ReSendSmsAPI.ReSendSms(VerifyPhone.getText().toString());
+                }else{
+                    ToastShow.start(VerifyPhoneActivity.this,"手機不得空白");
+                }
 
             }
         });
@@ -47,12 +52,15 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         CheckVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!VerifyCode.getText().toString().equals("")){
+
+                if(!VerifyCode.getText().toString().equals("") && !VerifyPhone.getText().toString().equals("")){
                     //驗證api
                     Loading.start(WeakVerifyPhone.get());
+                    PhoneVerifyAPI.PhoneVerify(Index.WeakIndex.get().UserInfo.getString("Token",""),VerifyPhone.getText().toString(),VerifyCode.getText().toString());
                 }else{
-                    ToastShow.start(VerifyPhoneActivity.this,"驗證碼欄未不得空白");
+                    ToastShow.start(VerifyPhoneActivity.this,"不得空白");
                 }
+
             }
         });
 

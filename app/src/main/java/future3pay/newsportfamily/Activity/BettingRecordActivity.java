@@ -288,6 +288,7 @@ public class BettingRecordActivity extends AppCompatActivity {
                     Status = "Cancel";
                     break;
             }
+            //BettingRecordAPI.BettingRecord(Index.WeakIndex.get().UserInfo.getString("Token", ""));
         }
 
         @Override

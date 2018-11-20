@@ -13,6 +13,7 @@ import java.lang.ref.WeakReference;
 import future3pay.newsportfamily.API.ReSendEmailAPI;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.R;
+import future3pay.newsportfamily.UIkit.Loading;
 
 public class VerifyEmailActivity extends AppCompatActivity {
     public static WeakReference<VerifyEmailActivity> WeakVerifyEmail;
@@ -32,6 +33,7 @@ public class VerifyEmailActivity extends AppCompatActivity {
         SendVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Loading.start(VerifyEmailActivity.this);
                 ReSendEmailAPI.ReSendEmail(Index.WeakIndex.get().UserInfo.getString("Token",""));
             }
         });

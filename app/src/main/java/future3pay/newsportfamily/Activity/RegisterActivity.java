@@ -127,7 +127,7 @@ public class RegisterActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
 
-            Loading.start(RegisterActivity.this);
+
 
             if (!Account.getText().toString().equals("")) {
                 if (!PassWord.getText().toString().equals("")) {
@@ -138,58 +138,60 @@ public class RegisterActivity extends AppCompatActivity {
                                     if (!Phone.getText().toString().equals("")) {
                                         if (!VerifyCode.getText().toString().equals("")) {
                                             if(AgreeCheckBox.isChecked()){
-
+                                                Loading.start(RegisterActivity.this);
                                                 //打註冊api
                                                 RegisterAPI.RegisterApi(Account.getText().toString(),PassWord.getText().toString(),AgainPassWord.getText().toString(),UserName.getText().toString(),Email.getText().toString(),Phone.getText().toString(),BankList.getSelectedItem().toString(),BankAccount.getText().toString(),VerifyCode.getText().toString(),InviteCode.getText().toString());
 
                                             }else{
+
                                                 ToastShow.start(RegisterActivity.this,"尚未同意隱私權政策");
+
                                             }
 
                                         } else {
 
                                             ToastShow.start(RegisterActivity.this,"驗證碼不得空白");
                                             VerifyCode.requestFocus();
-                                            Loading.diss();
+
                                         }
                                     } else {
 
                                         ToastShow.start(RegisterActivity.this,"手機號碼不得空白");
                                         Phone.requestFocus();
-                                        Loading.diss();
+
                                     }
                                 } else {
 
                                     ToastShow.start(RegisterActivity.this,"銀行帳號不得空白");
                                     BankAccount.requestFocus();
-                                    Loading.diss();
+
                                 }
                             } else {
 
                                 ToastShow.start(RegisterActivity.this,"電子郵件不得空白");
                                 Email.requestFocus();
-                                Loading.diss();
+
                             }
                         } else {
 
                             ToastShow.start(RegisterActivity.this,"姓名不得空白");
                             UserName.requestFocus();
-                            Loading.diss();
+
                         }
                     } else {
                         ToastShow.start(RegisterActivity.this,"確認密碼不得空白");
                         AgainPassWord.requestFocus();
-                        Loading.diss();
+
                     }
                 } else {
                     ToastShow.start(RegisterActivity.this,"密碼不得空白");
                     PassWord.requestFocus();
-                    Loading.diss();
+
                 }
             } else {
                 ToastShow.start(RegisterActivity.this,"帳號不得空白");
                 Account.requestFocus();
-                Loading.diss();
+
             }
 
         }

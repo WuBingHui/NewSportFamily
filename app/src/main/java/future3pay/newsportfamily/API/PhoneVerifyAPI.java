@@ -10,6 +10,7 @@ import java.io.IOException;
 import future3pay.newsportfamily.Activity.VerifyEmailActivity;
 import future3pay.newsportfamily.Activity.VerifyPhoneActivity;
 import future3pay.newsportfamily.DoMainUrl;
+import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.UIkit.Loading;
 import future3pay.newsportfamily.UIkit.ToastShow;
 import okhttp3.Call;
@@ -19,25 +20,23 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class ReSendSmsAPI {
+public class PhoneVerifyAPI {
 
-
-    public static void ReSendSms( String phone){
+    public static void PhoneVerify(final String token,final String phone,final String validatorsCode){
 
         OkHttpClient client=new OkHttpClient();
-
         //構建FormBody，傳入要提交的參數
         FormBody formBody = new FormBody
                 .Builder()
-                .add("phone", phone)
+                .add("phone",phone)
+                .add("validatorsCode",validatorsCode)
                 .build();
-
         Request request=new Request.Builder()
-                .url(DoMainUrl.PhoneSms)
+                .url(DoMainUrl.PhoneVerify)
                 .header("Accept","application/json")
+                .header("authorization","bearer "+token)
                 .post(formBody)
                 .build();
-
         Call call =client.newCall(request);
         call.enqueue(new Callback() {
             @Override
@@ -49,7 +48,7 @@ public class ReSendSmsAPI {
                     public void run() {
 
                         //告知使用者連線失敗
-                        ToastShow.start(  VerifyPhoneActivity.WeakVerifyPhone.get(),"無網路狀態，請檢查您的行動網路是否開啟");
+                        ToastShow.start(VerifyPhoneActivity.WeakVerifyPhone.get(),"無網路狀態，請檢查您的行動網路是否開啟");
                         Loading.diss();
 
                     }
@@ -67,7 +66,6 @@ public class ReSendSmsAPI {
                     public void run() {
 
                         try {
-
                             String json =response.body().string();
                             JSONObject content = new JSONObject(json);
 
@@ -75,29 +73,42 @@ public class ReSendSmsAPI {
 
                                 if(content.getInt("result") == 0){
 
-                                    ToastShow.start(VerifyPhoneActivity.WeakVerifyPhone.get(),"發送成功");
+                                    ToastShow.start(VerifyPhoneActivity.WeakVerifyPhone.get(),"驗證成功");
+                                    VerifyPhoneActivity.WeakVerifyPhone.get().finish();
 
                                 }else{
 
-                                    ToastShow.start(  VerifyPhoneActivity.WeakVerifyPhone.get(),content.getString("message"));
+                                    if(content.getInt("result") == 3){
+                                        VerifyPhoneActivity.WeakVerifyPhone.get().finish();
+                                        ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
+                                        Index.WeakIndex.get().UserInfo.edit().clear().apply();
+                                        Index.WeakIndex.get().bottomNavigation.setCurrentItem(0);
+                                    }else{
+                                        ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
+                                    }
 
                                 }
 
                             }else{
 
-                                ToastShow.start(  VerifyPhoneActivity.WeakVerifyPhone.get(),content.getString("message"));
+                                if(content.getInt("result") == 3){
+                                    VerifyPhoneActivity.WeakVerifyPhone.get().finish();
+                                    ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
+                                    Index.WeakIndex.get().UserInfo.edit().clear().apply();
+                                    Index.WeakIndex.get().bottomNavigation.setCurrentItem(0);
+                                }else{
+                                    ToastShow.start(Index.WeakIndex.get(),content.getString("message"));
+                                }
 
                             }
 
                         } catch (JSONException e) {
 
                             e.printStackTrace();
-                            ToastShow.start(  VerifyPhoneActivity.WeakVerifyPhone.get(),"伺服器無回應");
+                            ToastShow.start(VerifyPhoneActivity.WeakVerifyPhone.get(),"伺服器無回應");
 
                         } catch (IOException e) {
-
                             e.printStackTrace();
-
                         }
                         Loading.diss();
                     }
@@ -111,5 +122,4 @@ public class ReSendSmsAPI {
 
 
     }
-
 }

@@ -1,5 +1,7 @@
 package future3pay.newsportfamily.API;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -68,7 +70,7 @@ public class SmsAPI  {
                                 try {
                                     String json =response.body().string();
                                     JSONObject content = new JSONObject(json);
-
+                                    Log.d("aaaaaaaaaaaaaaa", String.valueOf(content));
                                     if(content.getInt("result") == 0){
 
                                         ToastShow.start(RegisterActivity.WeakRegisterActivity.get(),"發送成功");
