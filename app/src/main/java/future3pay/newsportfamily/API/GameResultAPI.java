@@ -1,6 +1,5 @@
 package future3pay.newsportfamily.API;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
@@ -8,17 +7,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashSet;
 
-import future3pay.newsportfamily.Activity.RegisterActivity;
 import future3pay.newsportfamily.ArrayRemoveDuplicate;
 import future3pay.newsportfamily.Bean.GameResultBean;
 import future3pay.newsportfamily.DoMainUrl;
-import future3pay.newsportfamily.Fragment.BettingFragment;
 import future3pay.newsportfamily.Fragment.GameResultFragment;
 import future3pay.newsportfamily.Index;
-import future3pay.newsportfamily.UIkit.Loading;
 import future3pay.newsportfamily.UIkit.ToastShow;
 import okhttp3.Call;
 import okhttp3.Callback;

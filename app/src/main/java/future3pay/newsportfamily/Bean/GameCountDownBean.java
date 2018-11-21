@@ -1,7 +1,5 @@
 package future3pay.newsportfamily.Bean;
 
-import android.widget.ScrollView;
-
 public class GameCountDownBean {
     private String Id;
     private String Code;

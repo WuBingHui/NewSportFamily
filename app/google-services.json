@@ -1,35 +1,27 @@
 {
   "project_info": {
-    "project_number": "1007297700967",
-    "firebase_url": "https://sportfamilly-2c60b.firebaseio.com",
-    "project_id": "sportfamilly-2c60b",
-    "storage_bucket": "sportfamilly-2c60b.appspot.com"
+    "project_number": "846463419625",
+    "firebase_url": "https://atomic-land-160403.firebaseio.com",
+    "project_id": "atomic-land-160403",
+    "storage_bucket": "atomic-land-160403.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1007297700967:android:633cced2e1614cf5",
+        "mobilesdk_app_id": "1:846463419625:android:633cced2e1614cf5",
         "android_client_info": {
           "package_name": "com.sportfamily.user.sportfamily"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1007297700967-m7b0fjjic3duovprqghnec5sg4lp7kvj.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.sportfamily.user.sportfamily",
-            "certificate_hash": "c343af6eef3efa1917b0a22bd89d12dbd52b3f89"
-          }
-        },
-        {
-          "client_id": "1007297700967-5rl4uk8daott32ca83r5o9kusk03o4jl.apps.googleusercontent.com",
+          "client_id": "846463419625-5nhsdt68c9sm8j93a9jk77l1a054pn5t.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCESeby0MTpe7zQY9-qWe0N4T32sJTx3Og"
+          "current_key": "AIzaSyBQi_UXFJ5MQPiLJdtxiSLcY9tGhutTm6o"
         }
       ],
       "services": {
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1007297700967-5rl4uk8daott32ca83r5o9kusk03o4jl.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2

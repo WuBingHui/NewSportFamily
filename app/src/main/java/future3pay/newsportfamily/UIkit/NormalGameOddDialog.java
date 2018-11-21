@@ -2,7 +2,6 @@ package future3pay.newsportfamily.UIkit;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +17,6 @@ import org.json.JSONObject;
 
 import future3pay.newsportfamily.API.AddBettingToShopCarAPI;
 import future3pay.newsportfamily.Fragment.BettingCountDownFragment;
-import future3pay.newsportfamily.Fragment.BettingFragment;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.R;
 

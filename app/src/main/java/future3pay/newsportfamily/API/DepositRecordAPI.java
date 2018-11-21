@@ -1,7 +1,6 @@
 package future3pay.newsportfamily.API;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 
 import org.json.JSONException;
@@ -9,13 +8,10 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import future3pay.newsportfamily.Activity.BettingRecordDetailActivity;
 import future3pay.newsportfamily.Activity.MakeUpPointRecordActivity;
-import future3pay.newsportfamily.Activity.UseRecordActivity;
 import future3pay.newsportfamily.Activity.VerifyEmailActivity;
 import future3pay.newsportfamily.Activity.VerifyPhoneActivity;
 import future3pay.newsportfamily.Bean.DepositRecordBean;
-import future3pay.newsportfamily.Bean.UseRecordBean;
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.UIkit.Loading;

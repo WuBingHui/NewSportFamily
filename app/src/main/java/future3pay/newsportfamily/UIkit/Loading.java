@@ -1,7 +1,6 @@
 package future3pay.newsportfamily.UIkit;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 
 import com.cy.dialog.progress.CYProgressDialog;

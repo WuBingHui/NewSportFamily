@@ -26,7 +26,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView40"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -80,7 +79,6 @@
             app:layout_constraintTop_toTopOf="@+id/guideline" />
 
         <TextView
-            android:id="@+id/textView31"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -92,7 +90,6 @@
             app:layout_constraintTop_toBottomOf="@+id/WaitOrder" />
 
         <TextView
-            android:id="@+id/textView32"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -104,7 +101,6 @@
             app:layout_constraintTop_toBottomOf="@+id/WaitBonus" />
 
         <TextView
-            android:id="@+id/textView33"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -276,7 +272,6 @@
             app:layout_constraintTop_toTopOf="@+id/textView34" />
 
         <TextView
-            android:id="@+id/textView37"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dp"
@@ -290,7 +285,6 @@
             app:layout_constraintTop_toBottomOf="@+id/FamilyPoint" />
 
         <TextView
-            android:id="@+id/textView38"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"

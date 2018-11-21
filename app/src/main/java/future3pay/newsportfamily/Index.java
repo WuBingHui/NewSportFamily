@@ -3,13 +3,8 @@ package future3pay.newsportfamily;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -17,27 +12,20 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Base64;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
@@ -54,8 +42,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -151,7 +137,6 @@ public class Index extends AppCompatActivity {
 
         if (!UserInfo.getString("Token", "").equals("")) {
             UserInfoAPI.UserInfo(UserInfo.getString("Token", ""));
-
         }
 
         GoogleLogin.ConfigureGoogleSignIn();//連結google登入
@@ -171,10 +156,10 @@ public class Index extends AppCompatActivity {
         ActionBar bar = getSupportActionBar();
         bar.setDisplayShowCustomEnabled(true);
         View v = LayoutInflater.from(getApplicationContext()).inflate(R.layout.actionbar_index, null);
-        actionbar_textview = (TextView) v.findViewById(R.id.actionbar_textview);
-        menu = (Button) v.findViewById(R.id.menu);
-        back = (Button) v.findViewById(R.id.back);
-        shop = (Button) v.findViewById(R.id.shop);
+        actionbar_textview = v.findViewById(R.id.actionbar_textview);
+        menu = v.findViewById(R.id.menu);
+        back = v.findViewById(R.id.back);
+        shop = v.findViewById(R.id.shop);
         back.setVisibility(View.GONE);
 
         back.setOnClickListener(Back);
@@ -416,7 +401,7 @@ public class Index extends AppCompatActivity {
 
     private class ButtomTab {
         private void CreateTab() {
-            bottomNavigation = (AHBottomNavigation) findViewById(R.id.BottomNavigation);
+            bottomNavigation = findViewById(R.id.BottomNavigation);
 
             // Create items
             AHBottomNavigationItem item1 = new AHBottomNavigationItem("一般投注", R.mipmap.betting, R.color.topcolor);
@@ -476,6 +461,7 @@ public class Index extends AppCompatActivity {
                                 if (!UserInfo.getString("Token", "").equals("")) {
 
                                     SwitchFragment.selectFragment("MemberFragment");
+
                                 } else {
                                     Intent intent = new Intent();
                                     intent.setClass(Index.this, LoginActivity.class);

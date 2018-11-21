@@ -1,6 +1,5 @@
 package future3pay.newsportfamily.API;
 
-import android.util.Log;
 import android.view.View;
 
 import org.json.JSONException;
@@ -9,7 +8,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 import future3pay.newsportfamily.Bean.GameChampionInfoBean;
-import future3pay.newsportfamily.Bean.GameNormalInfoBean;
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.Fragment.BettingFragment;
 import future3pay.newsportfamily.Index;

@@ -7,7 +7,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import future3pay.newsportfamily.Activity.VerifyEmailActivity;
 import future3pay.newsportfamily.Activity.VerifyPhoneActivity;
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.Index;
@@ -103,7 +102,7 @@ public class PhoneVerifyAPI {
                             }
 
                         } catch (JSONException e) {
-
+                            Log.d("aaaaaaaaaaaaaaaa",e.toString());
                             e.printStackTrace();
                             ToastShow.start(VerifyPhoneActivity.WeakVerifyPhone.get(),"伺服器無回應");
 

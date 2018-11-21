@@ -45,8 +45,8 @@ public class VerifyEmailActivity extends AppCompatActivity {
         ActionBar bar = getSupportActionBar();
         bar.setDisplayShowCustomEnabled(true);
         View v = LayoutInflater.from(getApplicationContext()).inflate(R.layout.actionbar_login, null);
-        TextView actionbar_textview = (TextView) v.findViewById(R.id.actionbar_textview);
-        Button back = (Button) v.findViewById(R.id.Back);
+        TextView actionbar_textview = v.findViewById(R.id.actionbar_textview);
+        Button back = v.findViewById(R.id.Back);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

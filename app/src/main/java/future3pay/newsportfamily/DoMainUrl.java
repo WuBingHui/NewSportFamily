@@ -1,7 +1,5 @@
 package future3pay.newsportfamily;
 
-import android.util.Log;
-
 public class DoMainUrl {
 
     private volatile static DoMainUrl INSTANCE; //聲明成 volatile

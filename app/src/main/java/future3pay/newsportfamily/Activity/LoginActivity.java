@@ -18,10 +18,8 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.lang.ref.WeakReference;
 
@@ -33,8 +31,6 @@ import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.R;
 import future3pay.newsportfamily.UIkit.Loading;
 import future3pay.newsportfamily.UIkit.ToastShow;
-
-import static com.google.android.gms.auth.api.signin.GoogleSignIn.getClient;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -55,16 +51,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         WeakLoginActivity = new WeakReference<>(this);
-
-
 
 
         actionbar();
 
 
         ObjectCreate();
-
 
 
     }
@@ -129,6 +123,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
                         break;
+
                     case R.id.GoogleSignInBtn:
 
                         GoogleLogin googleLogin = new GoogleLogin();
@@ -136,13 +131,14 @@ public class LoginActivity extends AppCompatActivity {
                         googleLogin.signIn();
 
                         break;
+
                 case R.id.FacebookSignInBtn:
 
                    FacebookSignInBtn.setReadPermissions("email", "public_profile");
                    FacebookSignInBtn.registerCallback(Index.WeakIndex.get().mCallbackManager, new FacebookCallback<LoginResult>() {
                         @Override
                         public void onSuccess(LoginResult loginResult) {
-                            // Log.d(TAG, "facebook:onSuccess:" + loginResult);
+                            Log.d("aaaaaaaa", "facebook:onSuccess:" + loginResult);
                             FacebookLogin.SignIn(loginResult.getAccessToken());
 
                         }
@@ -153,6 +149,7 @@ public class LoginActivity extends AppCompatActivity {
                             // [START_EXCLUDE]
                             //updateUI(null);
                             // [END_EXCLUDE]
+
                         }
 
                         @Override

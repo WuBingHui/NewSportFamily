@@ -1,7 +1,5 @@
 package future3pay.newsportfamily;
 
-import android.widget.EditText;
-
 import java.util.regex.Pattern;
 
 public class VerifyData {

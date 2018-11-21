@@ -1,15 +1,10 @@
 package future3pay.newsportfamily;
 
-import android.util.Log;
-import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class BettingRule {
     private static int sum = 0;

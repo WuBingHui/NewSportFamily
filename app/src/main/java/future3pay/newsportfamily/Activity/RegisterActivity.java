@@ -2,7 +2,6 @@ package future3pay.newsportfamily.Activity;
 
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,8 +13,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.cy.dialog.BaseDialog;
-
-import org.w3c.dom.Text;
 
 import java.lang.ref.WeakReference;
 
@@ -58,8 +55,8 @@ public class RegisterActivity extends AppCompatActivity {
         ActionBar bar = getSupportActionBar();
         bar.setDisplayShowCustomEnabled(true);
         View v = LayoutInflater.from(getApplicationContext()).inflate(R.layout.actionbar_login, null);
-        TextView actionbar_textview = (TextView) v.findViewById(R.id.actionbar_textview);
-        Button back = (Button) v.findViewById(R.id.Back);
+        TextView actionbar_textview = v.findViewById(R.id.actionbar_textview);
+        Button back = v.findViewById(R.id.Back);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

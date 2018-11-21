@@ -16,9 +16,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import future3pay.newsportfamily.API.DepositRecordAPI;
 import future3pay.newsportfamily.API.WithdrawalRecordAPI;
-import future3pay.newsportfamily.Bean.DepositRecordBean;
 import future3pay.newsportfamily.Bean.WithdrawalRecordBean;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.R;
@@ -109,9 +107,9 @@ public class WithdrawalRecordActivity extends AppCompatActivity {
         ActionBar bar = getSupportActionBar();
         bar.setDisplayShowCustomEnabled(true);
         View v = LayoutInflater.from(getApplicationContext()).inflate(R.layout.actionbar_login, null);
-        TextView actionbar_textview = (TextView) v.findViewById(R.id.actionbar_textview);
+        TextView actionbar_textview = v.findViewById(R.id.actionbar_textview);
         actionbar_textview.setText("提領紀錄");
-        Button back = (Button) v.findViewById(R.id.Back);
+        Button back = v.findViewById(R.id.Back);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

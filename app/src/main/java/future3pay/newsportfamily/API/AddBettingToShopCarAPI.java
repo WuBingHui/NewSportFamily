@@ -1,26 +1,21 @@
 package future3pay.newsportfamily.API;
 
 import android.content.Intent;
-import android.util.Log;
-import android.widget.ArrayAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
-import future3pay.newsportfamily.Activity.LoginActivity;
 import future3pay.newsportfamily.Activity.VerifyEmailActivity;
 import future3pay.newsportfamily.Activity.VerifyPhoneActivity;
 import future3pay.newsportfamily.Bean.ShopCarInfoBean;
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.Fragment.BettingFragment;
-import future3pay.newsportfamily.Fragment.GameResultFragment;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.UIkit.Loading;
 import future3pay.newsportfamily.UIkit.ToastShow;
 import future3pay.newsportfamily.UserInfo;
-import future3pay.newsportfamily.VerifyData;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;

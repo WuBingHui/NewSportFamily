@@ -1,6 +1,5 @@
 package future3pay.newsportfamily.API;
 
-import android.util.Log;
 import android.widget.ArrayAdapter;
 
 import org.json.JSONException;

@@ -421,7 +421,6 @@
             app:layout_constraintTop_toBottomOf="@+id/AgreeCheckBox" />
 
         <TextView
-            android:id="@+id/AccountNotice"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"

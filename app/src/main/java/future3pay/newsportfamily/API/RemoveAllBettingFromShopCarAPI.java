@@ -9,10 +9,7 @@ import java.io.IOException;
 
 import future3pay.newsportfamily.Activity.VerifyEmailActivity;
 import future3pay.newsportfamily.Activity.VerifyPhoneActivity;
-import future3pay.newsportfamily.Bean.ShopCarInfoBean;
-import future3pay.newsportfamily.BettingRule;
 import future3pay.newsportfamily.DoMainUrl;
-import future3pay.newsportfamily.Fragment.BettingFragment;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.UIkit.Loading;
 import future3pay.newsportfamily.UIkit.ToastShow;

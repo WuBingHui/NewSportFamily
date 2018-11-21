@@ -8,12 +8,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import future3pay.newsportfamily.Activity.MakeUpPointRecordActivity;
-import future3pay.newsportfamily.Activity.UseRecordActivity;
 import future3pay.newsportfamily.Activity.VerifyEmailActivity;
 import future3pay.newsportfamily.Activity.VerifyPhoneActivity;
 import future3pay.newsportfamily.Activity.WithdrawalRecordActivity;
-import future3pay.newsportfamily.Bean.DepositRecordBean;
 import future3pay.newsportfamily.Bean.WithdrawalRecordBean;
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.Index;

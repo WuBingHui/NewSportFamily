@@ -1,7 +1,5 @@
 package future3pay.newsportfamily.API;
 
-import android.util.Log;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -68,12 +66,13 @@ public class GoogleSignInAPI {
                         try {
 
                             JSONObject content = new JSONObject(json);
-                            Log.d("aaaaaaaaaaaaaaa", String.valueOf(content));
+
+
                         if(response.isSuccessful()){
 
                                 if( content.getInt("result") == 0){
 
-                                    UserInfoAPI.UserInfo(content.getString("message"));
+                                    UserInfoAPI.UserInfo(content.getJSONObject("message").getString("token"));
 
                                     ToastShow.start(LoginActivity.WeakLoginActivity.get(),"登入成功");
 

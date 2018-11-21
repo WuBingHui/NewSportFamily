@@ -5,12 +5,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cy.cyrvadapter.adapter.RVAdapter;
 import com.cy.cyrvadapter.refreshrv.BaseRefreshLayout;
@@ -18,23 +16,17 @@ import com.cy.cyrvadapter.refreshrv.VerticalRefreshLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import future3pay.newsportfamily.API.GameConutDownAPI;
 import future3pay.newsportfamily.API.GameConutDownActiveAPI;
-import future3pay.newsportfamily.Bean.GameChampionInfoDetailBean;
 import future3pay.newsportfamily.Bean.GameCountDownActiveBean;
 import future3pay.newsportfamily.Bean.GameCountDownBean;
-import future3pay.newsportfamily.FormaTimeData;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.R;
 import future3pay.newsportfamily.UIkit.Loading;

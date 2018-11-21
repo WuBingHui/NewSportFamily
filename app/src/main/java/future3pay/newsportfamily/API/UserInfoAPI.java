@@ -2,9 +2,6 @@ package future3pay.newsportfamily.API;
 
 import android.content.Intent;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,16 +12,12 @@ import future3pay.newsportfamily.Activity.VerifyEmailActivity;
 import future3pay.newsportfamily.Activity.VerifyPhoneActivity;
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.FacebookLogin;
-import future3pay.newsportfamily.Fragment.GameResultFragment;
-import future3pay.newsportfamily.Fragment.MemberFragment;
 import future3pay.newsportfamily.GoogleLogin;
 import future3pay.newsportfamily.Index;
-import future3pay.newsportfamily.UIkit.Loading;
 import future3pay.newsportfamily.UIkit.ToastShow;
 import future3pay.newsportfamily.UserInfo;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -39,7 +32,6 @@ public class UserInfoAPI {
                 .url(DoMainUrl.Info)
                 .header("Accept","application/json")
                 .header("authorization","bearer "+token)
-
                 .build();
         Call call =client.newCall(request);
         call.enqueue(new Callback() {
@@ -67,6 +59,7 @@ public class UserInfoAPI {
                 Index.WeakIndex.get().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+
                         try {
                             String json =response.body().string();
                             JSONObject content = new JSONObject(json);
@@ -145,10 +138,13 @@ public class UserInfoAPI {
 
                         }
                     } catch (JSONException e) {
-
+                            Index.WeakIndex.get().UserInfo.edit().clear().apply();
+                            Index.WeakIndex.get().bottomNavigation.setCurrentItem(0);
+                            GoogleLogin.signOut();
+                            GoogleLogin.revokeAccess();
+                            FacebookLogin.signOut();
                         e.printStackTrace();
                         ToastShow.start(Index.WeakIndex.get(),"伺服器無回應");
-
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

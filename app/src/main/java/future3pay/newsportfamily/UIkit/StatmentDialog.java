@@ -10,7 +10,6 @@ import com.cy.dialog.BaseDialog;
 import future3pay.newsportfamily.Activity.CheckShopCarActivity;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.R;
-import future3pay.newsportfamily.VerifyData;
 
 public class StatmentDialog {
 

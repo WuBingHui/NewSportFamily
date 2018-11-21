@@ -2,16 +2,10 @@ package future3pay.newsportfamily;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -40,17 +34,17 @@ public class FacebookLogin extends LoginActivity {
         // [START_EXCLUDE silent]
         Loading.start(LoginActivity.WeakLoginActivity.get());
         // [END_EXCLUDE]
-
+       FacebookLoginAPI.FacebookLogin(token.getToken());
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         Index.WeakIndex.get().mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(Index.WeakIndex.get(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-
+                        Log.d("aaaaaaaaaaaaaaaaaa","aaaaaaaaaaaaaaaa");
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                            // Log.d(TAG, "signInWithCredential:success");
-                            FacebookLoginAPI.FacebookLogin(token.getToken());
+                            //FacebookLoginAPI.FacebookLogin(token.getToken());
                           //  FirebaseUser user = mAuth.getCurrentUser();
                            // updateUI(user);
                         } else {

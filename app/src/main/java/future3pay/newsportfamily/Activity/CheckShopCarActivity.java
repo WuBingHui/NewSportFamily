@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -15,13 +14,10 @@ import com.cy.cyrvadapter.refreshrv.BaseRefreshLayout;
 import com.cy.cyrvadapter.refreshrv.VerticalRefreshLayout;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
 
-import future3pay.newsportfamily.API.BettingRecordAPI;
 import future3pay.newsportfamily.API.SendBettingFromShopCarAPI;
-import future3pay.newsportfamily.Bean.BettingRecordBean;
 import future3pay.newsportfamily.Bean.ShopCarInfoBean;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.R;
@@ -87,8 +83,8 @@ public class CheckShopCarActivity extends AppCompatActivity {
         ActionBar bar = getSupportActionBar();
         bar.setDisplayShowCustomEnabled(true);
         View v = LayoutInflater.from(getApplicationContext()).inflate(R.layout.actionbar_login, null);
-        TextView actionbar_textview = (TextView) v.findViewById(R.id.actionbar_textview);
-        Button back = (Button) v.findViewById(R.id.Back);
+        TextView actionbar_textview = v.findViewById(R.id.actionbar_textview);
+        Button back = v.findViewById(R.id.Back);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

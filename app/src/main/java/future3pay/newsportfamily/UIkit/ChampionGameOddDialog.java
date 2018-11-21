@@ -1,8 +1,6 @@
 package future3pay.newsportfamily.UIkit;
 
-import android.util.Log;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;

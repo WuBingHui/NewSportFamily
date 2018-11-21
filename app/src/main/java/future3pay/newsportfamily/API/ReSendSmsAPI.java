@@ -1,13 +1,10 @@
 package future3pay.newsportfamily.API;
 
-import android.util.Log;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
-import future3pay.newsportfamily.Activity.VerifyEmailActivity;
 import future3pay.newsportfamily.Activity.VerifyPhoneActivity;
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.UIkit.Loading;
@@ -76,6 +73,9 @@ public class ReSendSmsAPI {
                                 if(content.getInt("result") == 0){
 
                                     ToastShow.start(VerifyPhoneActivity.WeakVerifyPhone.get(),"發送成功");
+
+
+
 
                                 }else{
 
