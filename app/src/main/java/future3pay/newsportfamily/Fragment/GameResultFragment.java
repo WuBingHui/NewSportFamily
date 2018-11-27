@@ -3,7 +3,9 @@ package future3pay.newsportfamily.Fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -21,6 +23,7 @@ import com.cy.cyrvadapter.refreshrv.VerticalRefreshLayout;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -326,23 +329,35 @@ public class GameResultFragment extends Fragment {
 
                             JSONArray content = new JSONArray(bean.getFinialResult());
 
-                           LinearLayout ChampionContent = holder.itemView.findViewById(R.id.ChampionContent);
+                            DisplayMetrics metrics = new DisplayMetrics();
 
+                            WeakGameResult.get().getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+                           LinearLayout ChampionContent = holder.itemView.findViewById(R.id.ChampionContent);
+                            ChampionContent.removeAllViews();
                             for(int j = 0 ; j < content.length();j++){
 
                                 LinearLayout linearLayout = new LinearLayout(WeakGameResult.get().getContext());
 
+
                                 linearLayout.setVerticalGravity(LinearLayout.HORIZONTAL);
+                                //ConstraintLayout.LayoutParams lp = new ConstraintLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
                                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
+                                lp.setMargins(0,8,0,0);
                                 linearLayout.setLayoutParams(lp);
+
                                 TextView title = new TextView(WeakGameResult.get().getContext());
                                 TextView option = new TextView(WeakGameResult.get().getContext());
 
                                 title.setTextSize(14);
                                 option.setTextSize(14);
 
-                                option.setGravity(Gravity.CENTER);
+                                title.setTextColor(Color.parseColor("#000000"));
+                                option.setTextColor(Color.parseColor("#000000"));
+                                title.setWidth((metrics.widthPixels-32)/2);
+                                option.setWidth((metrics.widthPixels-32)/2);
                                 title.setGravity(Gravity.CENTER);
                                 option.setGravity(Gravity.CENTER);
                                 title.setText(content.getJSONObject(j).getString("title"));
