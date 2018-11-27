@@ -1,6 +1,11 @@
 package future3pay.newsportfamily.API;
 
 import android.content.Intent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.cy.dialog.BaseDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,6 +17,7 @@ import future3pay.newsportfamily.Activity.VerifyEmailActivity;
 import future3pay.newsportfamily.Activity.VerifyPhoneActivity;
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.Index;
+import future3pay.newsportfamily.R;
 import future3pay.newsportfamily.UIkit.Loading;
 import future3pay.newsportfamily.UIkit.ToastShow;
 import future3pay.newsportfamily.UserInfo;
@@ -80,7 +86,21 @@ public class SendBettingFromShopCarAPI {
                                 if(content.getInt("result") == 0){
                                     CheckShopCarActivity.WeakCheckShopCar.get().finish();
                                     Index.WeakIndex.get().ShopCarInfoList.clear();
-                                    ToastShow.start(Index.WeakIndex.get(),"投注訂單已送出");
+                                    //ToastShow.start(Index.WeakIndex.get(),"投注訂單已送出");
+                                    Index.WeakIndex.get().ShopDialog.dismiss();//購物車銷毀
+                                    final BaseDialog  CompeletDialog = new BaseDialog(Index.WeakIndex.get());
+                                    CompeletDialog.config(R.layout.compelet_order, true).show();
+                                  TextView CompeletOrderNo = CompeletDialog.findViewById(R.id.CompeletOrderNo);
+                                    CompeletOrderNo.setText("#"+content.getString("message"));
+                                  Button CompeletOrderBack = CompeletDialog.findViewById(R.id.CompeletOrderBack);
+                                    CompeletOrderBack.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            CompeletDialog.dismiss();
+                                        }
+                                    });
+
+
 
                                     UserInfoAPI.UserInfo(Index.WeakIndex.get().UserInfo.getString("Token",""));
 

@@ -177,6 +177,7 @@ public class BettingRecordAPI {
                             e.printStackTrace();
                             Loading.diss();
                         }
+
                         if (BettingRecordActivity.WeakBettingRecord.get().BettingRecordList.size() <= 0) {
                             BettingRecordActivity.WeakBettingRecord.get().BettingRecordRV.setVisibility(View.GONE);
                             BettingRecordActivity.WeakBettingRecord.get().NoBettingRecord.setVisibility(View.VISIBLE);

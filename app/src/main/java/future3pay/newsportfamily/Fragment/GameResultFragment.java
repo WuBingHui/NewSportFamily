@@ -4,10 +4,13 @@ package future3pay.newsportfamily.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -182,27 +185,31 @@ public class GameResultFragment extends Fragment {
 
         for(int i = 0;i<GameResulList.size();i++){
             if(GameResultCategory.getSelectedItem().equals( GameResulList.get(i).getCategory())){
-                GameResulCount.add(new GameResultBean(
-                        GameResulList.get(i).getBetsType(),
-                        GameResulList.get(i).getGameStartTime(),
-                        GameResulList.get(i).getCategory(),
-                        GameResulList.get(i).getTi(),
-                        GameResulList.get(i).getAwayTeam(),
-                        GameResulList.get(i).getHomeTeam(),
-                        GameResulList.get(i).getAwayScore(),
-                        GameResulList.get(i).getHomeScore(),
-                        GameResulList.get(i).getAwayPeriod(),
-                        GameResulList.get(i).getHomePeriod(),
-                        GameResulList.get(i).getFinialResult(),
-                        GameResulList.get(i).getNi(),
-                        GameResulList.get(i).getCode(),
-                        GameResulList.get(i).getType(),
-                        GameResulList.get(i).getStatus()
-                ));
+
+
+                    GameResulCount.add(new GameResultBean(
+                            GameResulList.get(i).getBetsType(),
+                            GameResulList.get(i).getGameStartTime(),
+                            GameResulList.get(i).getCategory(),
+                            GameResulList.get(i).getTi(),
+                            GameResulList.get(i).getAwayTeam(),
+                            GameResulList.get(i).getHomeTeam(),
+                            GameResulList.get(i).getAwayScore(),
+                            GameResulList.get(i).getHomeScore(),
+                            GameResulList.get(i).getAwayPeriod(),
+                            GameResulList.get(i).getHomePeriod(),
+                            GameResulList.get(i).getFinialResult(),
+                            GameResulList.get(i).getNi(),
+                            GameResulList.get(i).getCode(),
+                            GameResulList.get(i).getType(),
+                            GameResulList.get(i).getStatus()
+                    ));
+
+
+
             }
-
-
         }
+
 
         GameResultAdapter = new RVAdapter<GameResultBean>(GameResulCount) {
             @Override
@@ -306,11 +313,11 @@ public class GameResultFragment extends Fragment {
                     }
 
 
-
-
                 }else{
 
+
                     if(bean.getBetsType().equals("champion")){
+
                         holder.setText(R.id.GameCode, bean.getCode());
                         holder.setText(R.id.GameCategory, bean.getCategory());
                         holder.setText(R.id.GameStartTime, FormaTimeData.formatData("MM月dd日 HH:mm", Long.parseLong(bean.getGameStartTime())));
@@ -319,11 +326,35 @@ public class GameResultFragment extends Fragment {
 
                             JSONArray content = new JSONArray(bean.getFinialResult());
 
-                            holder.setText(R.id.ChampionTitle,content.getJSONObject(0).getString("title"));
-                            holder.setText(R.id.ChampionResult,content.getJSONObject(0).getString("option"));
+                           LinearLayout ChampionContent = holder.itemView.findViewById(R.id.ChampionContent);
 
+                            for(int j = 0 ; j < content.length();j++){
+
+                                LinearLayout linearLayout = new LinearLayout(WeakGameResult.get().getContext());
+
+                                linearLayout.setVerticalGravity(LinearLayout.HORIZONTAL);
+                                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+                                linearLayout.setLayoutParams(lp);
+                                TextView title = new TextView(WeakGameResult.get().getContext());
+                                TextView option = new TextView(WeakGameResult.get().getContext());
+
+                                title.setTextSize(14);
+                                option.setTextSize(14);
+
+                                option.setGravity(Gravity.CENTER);
+                                title.setGravity(Gravity.CENTER);
+                                option.setGravity(Gravity.CENTER);
+                                title.setText(content.getJSONObject(j).getString("title"));
+                                option.setText(content.getJSONObject(j).getString("option"));
+                                linearLayout.addView(title);
+                                linearLayout.addView(option);
+                                ChampionContent.addView(linearLayout);
+
+                            }
 
                         } catch (JSONException e) {
+
                             e.printStackTrace();
                         }
                     }
@@ -374,6 +405,7 @@ public class GameResultFragment extends Fragment {
 
                         GameResultAdapter.notifyDataSetChanged();
                         GameResultRV.finishRefreshing();
+
                     }
                 });
 
@@ -411,7 +443,9 @@ public class GameResultFragment extends Fragment {
                         }
 
                     }
+
                 }
+
             }
 
         }

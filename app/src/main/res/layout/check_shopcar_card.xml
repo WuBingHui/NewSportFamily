@@ -7,7 +7,10 @@
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginEnd="8dp"
-    android:background="@drawable/corners_3">
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/corners_3"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
 
     <TextView
         android:id="@+id/textView107"
@@ -24,8 +27,8 @@
 
     <TextView
         android:id="@+id/ShopCarCardNo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="176dp"
+        android:layout_height="17dp"
         android:background="@drawable/corners_3"
         android:textAlignment="center"
         android:textColor="@color/Black"
@@ -39,7 +42,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         android:text="@string/過關數"
         android:textColor="@color/Black"
         app:layout_constraintBottom_toBottomOf="@+id/ShopCarCardNo"
@@ -77,6 +79,7 @@
         android:layout_height="1dp"
         android:layout_marginTop="8dp"
         android:background="@color/grey_400"
+        app:layout_constraintBottom_toTopOf="@+id/textView107"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ShopCarCardCategory" />
@@ -87,9 +90,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="@string/客隊"
+        android:text="客　　隊"
         android:textColor="@color/Black"
         app:layout_constraintEnd_toStartOf="@+id/ShopCarCardAway"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView107" />
 
@@ -98,7 +102,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="@string/主隊"
+        android:text="主　隊"
         android:textColor="@color/Black"
         app:layout_constraintBottom_toBottomOf="@+id/ShopCarCardAway"
         app:layout_constraintEnd_toStartOf="@+id/ShopCarCardHome"
@@ -107,8 +111,8 @@
 
     <TextView
         android:id="@+id/ShopCarCardAway"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="175dp"
+        android:layout_height="17dp"
         android:layout_marginStart="8dp"
         android:background="@drawable/corners_3"
         android:textAlignment="center"
@@ -172,8 +176,8 @@
 
     <TextView
         android:id="@+id/ShopCarCardSelect"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="175dp"
+        android:layout_height="19dp"
         android:layout_marginStart="8dp"
         android:background="@drawable/corners_3"
         android:textAlignment="center"
@@ -188,7 +192,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="@string/賠率"
+        android:text="賠　率"
         android:textColor="@color/Black"
         app:layout_constraintBottom_toBottomOf="@+id/ShopCarCardSelect"
         app:layout_constraintEnd_toStartOf="@+id/ShopCarCardOdd"
