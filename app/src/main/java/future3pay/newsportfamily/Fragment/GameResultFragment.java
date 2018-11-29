@@ -189,7 +189,6 @@ public class GameResultFragment extends Fragment {
         for(int i = 0;i<GameResulList.size();i++){
             if(GameResultCategory.getSelectedItem().equals( GameResulList.get(i).getCategory())){
 
-
                     GameResulCount.add(new GameResultBean(
                             GameResulList.get(i).getBetsType(),
                             GameResulList.get(i).getGameStartTime(),

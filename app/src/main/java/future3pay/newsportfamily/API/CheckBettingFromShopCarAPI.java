@@ -124,7 +124,7 @@ public class CheckBettingFromShopCarAPI {
                                         }
                                     }
                                     ////
-                                    Index.WeakIndex.get().ShopCarInfoList.clear();
+                                   // Index.WeakIndex.get().ShopCarInfoList.clear();
                                 }
 
 
@@ -161,10 +161,7 @@ public class CheckBettingFromShopCarAPI {
                                     }
                                 }
                                 ////
-
-
-
-                                Index.WeakIndex.get().ShopCarInfoList.clear();
+                                //Index.WeakIndex.get().ShopCarInfoList.clear();
                             }
                         } catch (JSONException e) {
 
