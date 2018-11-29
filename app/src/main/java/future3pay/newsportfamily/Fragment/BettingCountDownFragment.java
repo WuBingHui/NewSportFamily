@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,7 @@ public class BettingCountDownFragment extends Fragment {
 
     public List<GameCountDownActiveBean> GameCountDownActiveList;
 
-    public TextView CountDownAway, CountDownHome, DayTenDigits, DayDigits, HourTenDigits, HourDigits, MinTenDigits, MinDigits, SecTenDigits, SecDigits, NoCountDown;
+    public TextView VS,GameContent,Day,Hour,Min,Sec,CountDownAway, CountDownHome, DayTenDigits, DayDigits, HourTenDigits, HourDigits, MinTenDigits, MinDigits, SecTenDigits, SecDigits, NoCountDown;
 
     public ScheduledExecutorService scheduledThreadPool,scheduledThreadPool2,scheduledThreadPool3;
 
@@ -80,6 +81,12 @@ public class BettingCountDownFragment extends Fragment {
         SecTenDigits = view.findViewById(R.id.SecTenDigits);
         SecDigits = view.findViewById(R.id.SecDigits);
         NoCountDown = view.findViewById(R.id.NoCountDown);
+        Day= view.findViewById(R.id.Day);
+        Hour= view.findViewById(R.id.Hour);
+        Min= view.findViewById(R.id.Min);
+        Sec= view.findViewById(R.id.Sec);
+        VS = view.findViewById(R.id.VS);
+        GameContent= view.findViewById(R.id.GameContent);
 
         CountdownNext = view.findViewById(R.id.CountdownNext);
         CountDownRV = view.findViewById(R.id.CountDownRV);
@@ -87,6 +94,9 @@ public class BettingCountDownFragment extends Fragment {
         CountdownNext.setVisibility(View.GONE);
         NoCountDown.setVisibility(View.GONE);
         CountDownRV.setVisibility(View.GONE);
+        VS.setVisibility(View.GONE);
+        GameContent.setVisibility(View.GONE);
+
 
         Loading.start(Index.WeakIndex.get());
 
@@ -137,7 +147,20 @@ public class BettingCountDownFragment extends Fragment {
                     WeakBettingCountDown.get().getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-
+                           if(day == 0 ){
+                               DayTenDigits.setVisibility(View.GONE);
+                               DayDigits.setVisibility(View.GONE);
+                               Day.setVisibility(View.GONE);
+                           }else{
+                               DayTenDigits.setVisibility(View.VISIBLE);
+                               DayDigits.setVisibility(View.VISIBLE);
+                               Day.setVisibility(View.VISIBLE);
+                           }
+                           if(hour >= 10){
+                               HourTenDigits.setVisibility(View.VISIBLE);
+                           }else{
+                               HourTenDigits.setVisibility(View.GONE);
+                           }
                             if (day <= 0 && hour <= 0 && min <= 0 && sec <= 0) {
                                 StartActiveAPI();//啟動正在進行的場中
                                 scheduledThreadPool.shutdownNow();
@@ -148,6 +171,7 @@ public class BettingCountDownFragment extends Fragment {
                                 if (!String.valueOf(DayDigits.getText()).equals(String.format("%02d", day).substring(1))) {
                                     DayDigits.setText(String.format("%02d", day).substring(1));
                                 }
+
 
                                 if (!String.valueOf(HourTenDigits.getText()).equals(String.format("%02d", hour).substring(0, 1))) {
                                     HourTenDigits.setText(String.format("%02d", hour).substring(0, 1));

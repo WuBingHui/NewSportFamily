@@ -82,9 +82,9 @@ public class Index extends AppCompatActivity {
     private SegmentControl ShopCarPlaySelect;
     private BaseDialog DialogMenu;
     public AHBottomNavigation bottomNavigation;
-    public TextView actionbar_textview, BettingPayout, BettingSum, BettingWon;
+    public TextView actionbar_textview, BettingPayout, BettingSum, BettingWon,ShopCount,shop;
     public LinearLayout ComboTypeSelect;
-    public Button menu, back, shop, RemoveAll, SendOrder;
+    public Button menu, back, RemoveAll, SendOrder;
     public ScrollView MenuScroll;
     public int Play = 0, B_Count = 0;
     public   String column = "0", combo = "",combination = "",item = "";
@@ -161,7 +161,7 @@ public class Index extends AppCompatActivity {
         back = v.findViewById(R.id.back);
         shop = v.findViewById(R.id.shop);
         back.setVisibility(View.GONE);
-
+        ShopCount = v.findViewById(R.id.ShopCount);
         back.setOnClickListener(Back);
         menu.setOnClickListener(Menu);
         shop.setOnClickListener(Shop);

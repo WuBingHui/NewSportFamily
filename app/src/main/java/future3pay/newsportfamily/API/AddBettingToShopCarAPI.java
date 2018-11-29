@@ -83,7 +83,7 @@ public class AddBettingToShopCarAPI {
 
                                     Index.WeakIndex.get().ShopCarInfoList.add(new ShopCarInfoBean(ItemInfo));
                                     ToastShow.start(BettingFragment.WeakBettingFragment.get().getActivity(),"加入成功");
-
+                                    Index.WeakIndex.get().ShopCount.setText(String.valueOf(Index.WeakIndex.get().ShopCarInfoList.size()));
                                 }else{
 
 

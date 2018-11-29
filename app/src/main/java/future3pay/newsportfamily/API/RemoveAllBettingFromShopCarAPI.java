@@ -85,7 +85,7 @@ public class RemoveAllBettingFromShopCarAPI {
                                     Index.WeakIndex.get().ComboTypeSelect.removeAllViews();
                                             Index.WeakIndex.get().ShopCarAdapter.notifyDataSetChanged();
 
-
+                                    Index.WeakIndex.get().ShopCount.setText(String.valueOf(Index.WeakIndex.get().ShopCarInfoList.size()));
 
                                 }else{
 

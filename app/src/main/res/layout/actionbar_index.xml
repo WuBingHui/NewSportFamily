@@ -8,7 +8,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-        <Button
+        <TextView
             android:id="@+id/shop"
             android:layout_width="35dp"
             android:layout_height="35dp"
@@ -19,6 +19,18 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/ShopCount"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:background="@drawable/notification_background"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/shop"
+        app:layout_constraintTop_toTopOf="@+id/shop" />
 
         <TextView
         android:id="@+id/actionbar_textview"

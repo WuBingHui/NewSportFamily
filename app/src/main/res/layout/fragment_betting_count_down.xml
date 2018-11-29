@@ -7,6 +7,18 @@
     tools:context=".Fragment.BettingCountDownFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/NoCountDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:drawableTop="@mipmap/logo"
+        android:gravity="center"
+        android:text="@string/目前無場中賽事"
+        android:textColor="@color/topcolor"
+        android:textSize="24sp" />
+
     <com.cy.cyrvadapter.refreshrv.VerticalRefreshLayout
         android:id="@+id/CountDownRV"
         android:layout_width="match_parent"
@@ -26,21 +38,22 @@
         android:background="@color/white">
 
         <TextView
-            android:id="@+id/textView67"
+            android:id="@+id/GameContent"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/corners_11"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/DayTenDigits" />
 
         <TextView
-            android:id="@+id/textView65"
+            android:id="@+id/Sec"
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
+            android:layout_height="0dp"
             android:layout_marginEnd="16dp"
             android:gravity="center"
             android:text="@string/秒"
@@ -49,38 +62,39 @@
             app:layout_constraintBottom_toBottomOf="@+id/SecDigits"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/SecDigits"
-            app:layout_constraintTop_toTopOf="@+id/SecDigits" />
+            app:layout_constraintTop_toTopOf="@+id/SecDigits"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/SecTenDigits"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="0"
             android:textColor="@color/topcolor"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView62"
             app:layout_constraintEnd_toStartOf="@+id/SecDigits"
-            app:layout_constraintStart_toEndOf="@+id/textView62"
-            app:layout_constraintTop_toTopOf="@+id/textView62" />
+            app:layout_constraintStart_toEndOf="@+id/Min"
+            app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
         <TextView
             android:id="@+id/SecDigits"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="0"
             android:textColor="@color/topcolor"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/SecTenDigits"
-            app:layout_constraintEnd_toStartOf="@+id/textView65"
+            app:layout_constraintEnd_toStartOf="@+id/Sec"
             app:layout_constraintStart_toEndOf="@+id/SecTenDigits"
-            app:layout_constraintTop_toTopOf="@+id/SecTenDigits" />
+            app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
         <TextView
-            android:id="@+id/textView62"
+            android:id="@+id/Min"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:gravity="center"
             android:text="@string/分"
             android:textColor="@color/Black"
@@ -88,12 +102,13 @@
             app:layout_constraintBottom_toBottomOf="@+id/MinDigits"
             app:layout_constraintEnd_toStartOf="@+id/SecTenDigits"
             app:layout_constraintStart_toEndOf="@+id/MinDigits"
-            app:layout_constraintTop_toTopOf="@+id/MinDigits" />
+            app:layout_constraintTop_toTopOf="@+id/MinDigits"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/textView58"
+            android:id="@+id/Hour"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:gravity="center"
             android:text="@string/時"
             android:textColor="@color/Black"
@@ -101,72 +116,75 @@
             app:layout_constraintBottom_toBottomOf="@+id/HourDigits"
             app:layout_constraintEnd_toStartOf="@+id/MinTenDigits"
             app:layout_constraintStart_toEndOf="@+id/HourDigits"
-            app:layout_constraintTop_toTopOf="@+id/HourDigits" />
+            app:layout_constraintTop_toTopOf="@+id/HourDigits"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/MinDigits"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="0"
             android:textColor="@color/topcolor"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/MinTenDigits"
-            app:layout_constraintEnd_toStartOf="@+id/textView62"
+            app:layout_constraintEnd_toStartOf="@+id/Min"
             app:layout_constraintStart_toEndOf="@+id/MinTenDigits"
-            app:layout_constraintTop_toTopOf="@+id/MinTenDigits" />
+            app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
         <TextView
             android:id="@+id/MinTenDigits"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="0"
             android:textColor="@color/topcolor"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView58"
             app:layout_constraintEnd_toStartOf="@+id/MinDigits"
-            app:layout_constraintStart_toEndOf="@+id/textView58"
-            app:layout_constraintTop_toTopOf="@+id/textView58" />
+            app:layout_constraintStart_toEndOf="@+id/Hour"
+            app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
         <TextView
             android:id="@+id/HourDigits"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="0"
             android:textColor="@color/topcolor"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/HourTenDigits"
-            app:layout_constraintEnd_toStartOf="@+id/textView58"
+            app:layout_constraintEnd_toStartOf="@+id/Hour"
             app:layout_constraintStart_toEndOf="@+id/HourTenDigits"
-            app:layout_constraintTop_toTopOf="@+id/HourTenDigits" />
+            app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
         <TextView
             android:id="@+id/HourTenDigits"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="0"
             android:textColor="@color/topcolor"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView50"
             app:layout_constraintEnd_toStartOf="@+id/HourDigits"
-            app:layout_constraintStart_toEndOf="@+id/textView50"
-            app:layout_constraintTop_toTopOf="@+id/textView50" />
+            app:layout_constraintStart_toEndOf="@+id/Day"
+            app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
         <TextView
             android:id="@+id/DayDigits"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="0"
             android:textColor="@color/topcolor"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/DayTenDigits"
-            app:layout_constraintEnd_toStartOf="@+id/textView50"
+            app:layout_constraintEnd_toStartOf="@+id/Day"
             app:layout_constraintStart_toEndOf="@+id/DayTenDigits"
-            app:layout_constraintTop_toTopOf="@+id/DayTenDigits" />
+            app:layout_constraintTop_toTopOf="@+id/guideline3"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/CountDownAway"
@@ -176,23 +194,24 @@
             android:textColor="@color/Black"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView67"
-            app:layout_constraintEnd_toStartOf="@+id/textView30"
-            app:layout_constraintStart_toStartOf="@+id/textView67"
-            app:layout_constraintTop_toTopOf="@+id/textView67" />
+            app:layout_constraintBottom_toBottomOf="@+id/GameContent"
+            app:layout_constraintEnd_toStartOf="@+id/VS"
+            app:layout_constraintStart_toStartOf="@+id/GameContent"
+            app:layout_constraintTop_toTopOf="@+id/GameContent" />
 
         <TextView
-            android:id="@+id/textView30"
+            android:id="@+id/VS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
             android:text="@string/VS"
             android:textColor="@color/red"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView67"
+            app:layout_constraintBottom_toBottomOf="@+id/GameContent"
             app:layout_constraintEnd_toStartOf="@+id/CountDownHome"
             app:layout_constraintStart_toEndOf="@+id/CountDownAway"
-            app:layout_constraintTop_toTopOf="@+id/textView67" />
+            app:layout_constraintTop_toTopOf="@+id/GameContent" />
 
         <TextView
             android:id="@+id/CountDownHome"
@@ -202,17 +221,17 @@
             android:textColor="@color/Black"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView67"
-            app:layout_constraintEnd_toEndOf="@+id/textView67"
-            app:layout_constraintStart_toEndOf="@+id/textView30"
-            app:layout_constraintTop_toTopOf="@+id/textView67" />
+            app:layout_constraintBottom_toBottomOf="@+id/GameContent"
+            app:layout_constraintEnd_toEndOf="@+id/GameContent"
+            app:layout_constraintStart_toEndOf="@+id/VS"
+            app:layout_constraintTop_toTopOf="@+id/GameContent" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.4" />
+            app:layout_constraintGuide_percent="0.45" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -226,6 +245,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
@@ -243,9 +263,9 @@
             app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
         <TextView
-            android:id="@+id/textView50"
+            android:id="@+id/Day"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:gravity="center"
             android:text="@string/天"
             android:textColor="@color/Black"
@@ -253,19 +273,9 @@
             app:layout_constraintBottom_toBottomOf="@+id/DayDigits"
             app:layout_constraintEnd_toStartOf="@+id/HourTenDigits"
             app:layout_constraintStart_toEndOf="@+id/DayDigits"
-            app:layout_constraintTop_toTopOf="@+id/DayDigits" />
+            app:layout_constraintTop_toTopOf="@+id/DayDigits"
+            app:layout_constraintVertical_bias="0.0" />
 
     </android.support.constraint.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/NoCountDown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:drawableTop="@mipmap/logo"
-        android:gravity="center"
-        android:text="@string/目前無場中賽事"
-        android:textColor="@color/topcolor"
-        android:textSize="24sp" />
 
 </FrameLayout>

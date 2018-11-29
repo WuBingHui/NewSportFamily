@@ -103,7 +103,7 @@ public class SendBettingFromShopCarAPI {
 
 
                                     UserInfoAPI.UserInfo(Index.WeakIndex.get().UserInfo.getString("Token",""));
-
+                                    Index.WeakIndex.get().ShopCount.setText(String.valueOf(Index.WeakIndex.get().ShopCarInfoList.size()));
 
                                 }else{
 
