@@ -84,7 +84,7 @@ public class Index extends AppCompatActivity {
     public AHBottomNavigation bottomNavigation;
     public TextView actionbar_textview, BettingPayout, BettingSum, BettingWon,ShopCount,shop;
     public LinearLayout ComboTypeSelect;
-    public Button menu, back, RemoveAll, SendOrder;
+    public Button menu, back, RemoveAll, SendOrder,KeepBetting;
     public ScrollView MenuScroll;
     public int Play = 0, B_Count = 0;
     public   String column = "0", combo = "",combination = "",item = "";
@@ -216,9 +216,16 @@ public class Index extends AppCompatActivity {
                 BettingWon = ShopDialog.findViewById(R.id.BettingWon);
                 RemoveAll = ShopDialog.findViewById(R.id.RemoveAll);
                 SendOrder = ShopDialog.findViewById(R.id.SendOrder);
+                KeepBetting= ShopDialog.findViewById(R.id.KeepBetting);
                 ComboTypeSelect = ShopDialog.findViewById(R.id.ComboTypeSelect);
                 SendOrder.setOnClickListener(betting);
                 RemoveAll.setOnClickListener(remove);
+                KeepBetting.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ShopDialog.dismiss();
+                    }
+                });
                 ShopCarPlaySelect.setOnSegmentControlClickListener(SelectPlay);
 
                 BettingSum.setText(String.valueOf(Integer.valueOf(BettingPayout.getText().toString()) * 10 * ShopCarInfoList.size()));

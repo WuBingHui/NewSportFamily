@@ -18,18 +18,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.PrivacyPolicyActivity" />
-        <activity android:name=".Activity.RegisterActivity" />
-        <activity android:name=".Activity.LoginActivity" />
-        <activity android:name=".Activity.UserInfoActivity" />
-        <activity android:name=".Activity.BettingRecordActivity" />
-        <activity android:name=".Activity.UseRecordActivity" />
-        <activity android:name=".Activity.MakeUpPointRecordActivity" />
-        <activity android:name=".Activity.WithdrawalRecordActivity" />
-        <activity android:name=".Activity.BettingRecordDetailActivity" />
-        <activity android:name=".Activity.CheckShopCarActivity" />
-        <activity android:name=".Activity.VerifyEmailActivity" />
-        <activity android:name=".Activity.VerifyPhoneActivity">
+        <activity android:name=".Activity.PrivacyPolicyActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activity.RegisterActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activity.LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activity.UserInfoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activity.BettingRecordActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activity.UseRecordActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activity.MakeUpPointRecordActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activity.WithdrawalRecordActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activity.BettingRecordDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activity.CheckShopCarActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activity.VerifyEmailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activity.VerifyPhoneActivity"
+            android:screenOrientation="portrait">
+
 
         </activity>
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/> <activity android:name="com.facebook.FacebookActivity" android:configChanges= "keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:label="@string/app_name" /> <activity android:name="com.facebook.CustomTabActivity" android:exported="true"> <intent-filter> <action android:name="android.intent.action.VIEW" /> <category android:name="android.intent.category.DEFAULT" /> <category android:name="android.intent.category.BROWSABLE" /> <data android:scheme="@string/fb_login_protocol_scheme" /> </intent-filter> </activity>

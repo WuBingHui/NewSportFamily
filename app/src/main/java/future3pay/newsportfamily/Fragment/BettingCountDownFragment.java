@@ -94,8 +94,7 @@ public class BettingCountDownFragment extends Fragment {
         CountdownNext.setVisibility(View.GONE);
         NoCountDown.setVisibility(View.GONE);
         CountDownRV.setVisibility(View.GONE);
-        VS.setVisibility(View.GONE);
-        GameContent.setVisibility(View.GONE);
+
 
 
         Loading.start(Index.WeakIndex.get());

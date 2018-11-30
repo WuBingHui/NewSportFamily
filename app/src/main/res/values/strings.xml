@@ -337,6 +337,7 @@
     <string name="google">Sign in with Google</string>
     <string name="facebook_app_id">2041361076190164</string> <string name="fb_login_protocol_scheme">fb2041361076190164</string>
     <string name="返回">返回</string>
+    <string name="繼續投注">繼續投注</string>
 
 
 </resources>

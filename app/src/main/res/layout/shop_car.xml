@@ -202,8 +202,21 @@
             android:text="@string/投注"
             android:textColor="@color/Black"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/textView102"
+            app:layout_constraintEnd_toStartOf="@+id/KeepBetting"
             app:layout_constraintStart_toEndOf="@+id/RemoveAll"
+            app:layout_constraintTop_toBottomOf="@+id/textView102" />
+
+        <Button
+            android:id="@+id/KeepBetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/corners_2"
+            android:text="@string/繼續投注"
+            app:layout_constraintEnd_toEndOf="@+id/textView102"
+            app:layout_constraintStart_toEndOf="@+id/SendOrder"
             app:layout_constraintTop_toBottomOf="@+id/textView102" />
 
     </android.support.constraint.ConstraintLayout>

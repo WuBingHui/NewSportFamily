@@ -48,7 +48,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/DayTenDigits" />
+            app:layout_constraintTop_toBottomOf="@+id/Hour" />
 
         <TextView
             android:id="@+id/Sec"
@@ -203,7 +203,6 @@
             android:id="@+id/VS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
             android:text="@string/VS"
             android:textColor="@color/red"
             android:textSize="18sp"

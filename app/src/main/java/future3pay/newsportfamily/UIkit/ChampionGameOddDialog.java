@@ -1,6 +1,7 @@
 package future3pay.newsportfamily.UIkit;
 
 import android.view.Gravity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
@@ -25,11 +26,17 @@ public class ChampionGameOddDialog {
             @Override
             public void run() {
 
-                BaseDialog dialog = new BaseDialog(BettingFragment.WeakBettingFragment.get().getActivity());
+                final BaseDialog dialog = new BaseDialog(BettingFragment.WeakBettingFragment.get().getActivity());
                 dialog.config(R.layout.game_odd_dialog, true).show();
 
                 TextView GameType = dialog.findViewById(R.id.GameType);
-
+                Button OddCancel = dialog.findViewById(R.id.OddCancel);
+                OddCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
                 TextView NormalGameOddTitle = dialog.findViewById(R.id.NormalGameOddTitle);
                 NormalGameOddTitle.setText(title);
 

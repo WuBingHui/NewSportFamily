@@ -37,6 +37,15 @@ public class NormalGameOddDialog {
                 }
 
                 TextView GameType = dialog.findViewById(R.id.GameType);
+                Button OddCancel = dialog.findViewById(R.id.OddCancel);
+
+                OddCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                        dialog = null;
+                    }
+                });
 
                 TextView NormalGameOddTitle = dialog.findViewById(R.id.NormalGameOddTitle);
                 NormalGameOddTitle.setText(code + " " + away + " VS " + home);

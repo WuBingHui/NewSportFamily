@@ -1,5 +1,6 @@
 package future3pay.newsportfamily;
 
+import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
@@ -9,7 +10,7 @@ import org.json.JSONObject;
 public class BettingRule {
     private static int sum = 0;
     private static int count = 0;
-
+    private static int ComboCheck;
     //單場最高可得金額計算
     public static int Single(int payout) {
         Index.WeakIndex.get().ComboTypeSelect.removeAllViews();
@@ -73,7 +74,7 @@ public class BettingRule {
                 comb(com, to, i, com.length, i);
 
                 if(sum!=0 && count != 0){
-
+                     ComboCheck = 0;
                     Index.WeakIndex.get().ComboCheckBox[i] = new CheckBox(Index.WeakIndex.get().ShopDialog.getContext());
                     Index.WeakIndex.get().ComboCheckBox[i] .setText("過 " + i + " 關( " + count + " 個組合 最高可得 " + sum + " 元)");
                     Index.WeakIndex.get().ComboCheckBox[i] .setTag("{"+"\"pass\":\""+i+"\","+"\"count\":\""+count+"\","+"\"sum\":\""+sum+"\""+"}");
@@ -86,9 +87,17 @@ public class BettingRule {
                                 JSONObject content = new JSONObject(compoundButton.getTag().toString());
                                 if(compoundButton.isChecked()){
 
+                                    ComboCheck = ComboCheck + Integer.valueOf(content.getString("count"));
+
                                     Index.WeakIndex.get().BettingWon.setText(String.valueOf(Integer.valueOf(Index.WeakIndex.get().BettingWon.getText().toString()) + Integer.valueOf(content.getString("sum"))));
                                 }else{
+                                    ComboCheck = ComboCheck - Integer.valueOf(content.getString("count"));
                                     Index.WeakIndex.get().BettingWon.setText(String.valueOf(Integer.valueOf(Index.WeakIndex.get().BettingWon.getText().toString()) - Integer.valueOf(content.getString("sum"))));
+                                }
+                                if(ComboCheck == 0){
+                                    Index.WeakIndex.get().BettingSum.setText(String.valueOf(10*Integer.parseInt(Index.WeakIndex.get().BettingPayout.getText().toString())));
+                                }else{
+                                    Index.WeakIndex.get().BettingSum.setText(String.valueOf(ComboCheck*10*Integer.parseInt(Index.WeakIndex.get().BettingPayout.getText().toString())));
                                 }
 
 
