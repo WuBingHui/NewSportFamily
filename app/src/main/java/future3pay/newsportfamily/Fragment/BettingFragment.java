@@ -63,6 +63,7 @@ public class BettingFragment extends Fragment {
     {
         // Fragment剛被建立時執行此方法
         super.onCreate(savedInstanceState);
+
     }
 
     @Override

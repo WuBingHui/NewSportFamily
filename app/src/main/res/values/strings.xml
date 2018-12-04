@@ -338,6 +338,10 @@
     <string name="facebook_app_id">2041361076190164</string> <string name="fb_login_protocol_scheme">fb2041361076190164</string>
     <string name="返回">返回</string>
     <string name="繼續投注">繼續投注</string>
+    <string name="熱門玩法">熱門玩法</string>
+    <string name="熱門賽事">熱門賽事</string>
+    <string name="單場專區">單場專區</string>
+    <string name="點擊黃色區塊可查看玩法及賠率">點擊黃色區塊可查看玩法及賠率</string>
 
 
 </resources>

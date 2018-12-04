@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -48,8 +49,11 @@ import java.util.List;
 import future3pay.newsportfamily.API.CheckBettingFromShopCarAPI;
 import future3pay.newsportfamily.API.GameChampionInfoAPI;
 import future3pay.newsportfamily.API.GameNormalInfoAPI;
+import future3pay.newsportfamily.API.NowOpeningAPI;
+import future3pay.newsportfamily.API.PopularGameAPI;
 import future3pay.newsportfamily.API.RemoveAllBettingFromShopCarAPI;
 import future3pay.newsportfamily.API.RemoveSingleItemBettingAPI;
+import future3pay.newsportfamily.API.SingleGameAPI;
 import future3pay.newsportfamily.API.SportTypeAPI;
 import future3pay.newsportfamily.API.UserInfoAPI;
 import future3pay.newsportfamily.Activity.LoginActivity;
@@ -70,6 +74,12 @@ public class Index extends AppCompatActivity {
     public SharedPreferences UserInfo;
     public List<String> GameType;
     public List<String> GameName;
+    public List<String> SingleGame;
+    public List<String> NormalType;
+    public List<String> NormalName;
+    public List<String> ChampionName;
+    public List<String> ChampionType;
+    public List<String> PopularGame;
     public List<String> GameCategory;
     public List<String> ColumnList;
     public List<Integer> HasB;
@@ -117,6 +127,14 @@ public class Index extends AppCompatActivity {
 
         GameType = new ArrayList<>();
         GameName = new ArrayList<>();
+        SingleGame= new ArrayList<>();
+        PopularGame= new ArrayList<>();
+
+        NormalType= new ArrayList<>();
+        NormalName= new ArrayList<>();
+        ChampionName= new ArrayList<>();
+        ChampionType= new ArrayList<>();
+
         GameCategory = new ArrayList<>();
         ShopCarInfoList = new ArrayList<>();
         ColumnList = new ArrayList<>();
@@ -133,7 +151,9 @@ public class Index extends AppCompatActivity {
         DoMainUrl.GetDoMain();//加載一次domain
         actionbar();
 
-        SportTypeAPI.SportType();//取球種Api
+        SportTypeAPI.SportType();//取所有Api
+        NowOpeningAPI.NowOpening();//取球種Api
+
 
         if (!UserInfo.getString("Token", "").equals("")) {
             UserInfoAPI.UserInfo(UserInfo.getString("Token", ""));
@@ -334,45 +354,81 @@ public class Index extends AppCompatActivity {
             DialogMenu = new BaseDialog(Index.this);
             DialogMenu.config(R.layout.menu, 0.5f, Gravity.LEFT | Gravity.CENTER, BaseDialog.AnimInType.LEFT,
                     (int) (metrics.widthPixels / 1.5), WindowManager.LayoutParams.MATCH_PARENT, true).show();
-
+            Button Popular = DialogMenu.findViewById(R.id.Popular);
+            Button Single = DialogMenu.findViewById(R.id.Single);
+            Popular.setTag("4");
+            Single.setTag("3");
+            Popular.setOnClickListener(SportTypeSelect);
+            Single.setOnClickListener(SportTypeSelect);
             LinearLayout Normal = DialogMenu.findViewById(R.id.NormalGame);
             LinearLayout Champion = DialogMenu.findViewById(R.id.ChampionGame);
 
+            //一般賽事選項
+            for (int i = 0; i < NormalName.size(); i++) {
 
-            for (int i = 0; i < GameName.size(); i++) {
+                Button NormalTypeBtn = new Button(DialogMenu.getContext());
 
-                Button NormalType = new Button(DialogMenu.getContext());
-                Button ChampionType = new Button(DialogMenu.getContext());
 
-                NormalType.setTextColor(Color.parseColor("#218838"));
-                ChampionType.setTextColor(Color.parseColor("#218838"));
+                NormalTypeBtn.setTextColor(Color.parseColor("#218838"));
 
-                NormalType.setBackgroundColor(Color.parseColor("#ffffff"));
-                ChampionType.setBackgroundColor(Color.parseColor("#ffffff"));
 
-                NormalType.setTextSize(18);
-                ChampionType.setTextSize(18);
+                NormalTypeBtn.setBackgroundColor(Color.parseColor("#ffffff"));
 
-                NormalType.setPadding(16, 0, 0, 0);
-                ChampionType.setPadding(16, 0, 0, 0);
 
-                ChampionType.setGravity(Gravity.CENTER | Gravity.START);
-                NormalType.setGravity(Gravity.CENTER | Gravity.START);
+                NormalTypeBtn.setTextSize(18);
 
-                NormalType.setTag("0" + GameType.get(i));
-                ChampionType.setTag("1" + GameType.get(i));
 
-                NormalType.setText(GameName.get(i));
-                ChampionType.setText(GameName.get(i));
+                NormalTypeBtn.setPadding(16, 0, 0, 0);
 
-                NormalType.setOnClickListener(SportTypeSelect);
-                ChampionType.setOnClickListener(SportTypeSelect);
 
-                Normal.addView(NormalType);
-                Champion.addView(ChampionType);
+                NormalTypeBtn.setGravity(Gravity.CENTER | Gravity.START);
+
+                NormalTypeBtn.setTag("0" + NormalType.get(i));
+
+
+                NormalTypeBtn.setText(NormalName.get(i));
+
+
+                NormalTypeBtn.setOnClickListener(SportTypeSelect);
+
+
+                Normal.addView(NormalTypeBtn);
 
 
             }
+
+            //冠軍賽事選項
+            for (int i = 0; i < ChampionName.size(); i++) {
+
+                Button ChampionTypeBtn = new Button(DialogMenu.getContext());
+
+
+                ChampionTypeBtn.setTextColor(Color.parseColor("#218838"));
+
+
+                ChampionTypeBtn.setBackgroundColor(Color.parseColor("#ffffff"));
+
+
+                ChampionTypeBtn.setTextSize(18);
+
+
+                ChampionTypeBtn.setPadding(16, 0, 0, 0);
+
+                ChampionTypeBtn.setGravity(Gravity.CENTER | Gravity.START);
+
+                ChampionTypeBtn.setTag("1" + ChampionType.get(i));
+
+
+                ChampionTypeBtn.setText(ChampionName.get(i));
+
+
+                ChampionTypeBtn.setOnClickListener(SportTypeSelect);
+
+                Champion.addView(ChampionTypeBtn);
+
+
+            }
+
 
         }
 
@@ -398,6 +454,13 @@ public class Index extends AppCompatActivity {
                 case "1":
                     GameChampionInfoAPI.GameInfo();
                     BettingFragment.WeakBettingFragment.get().GetChampionBetting();
+                    break;
+                case "3":
+                    SingleGameAPI.SingleGame();
+                    break;
+                case "4":
+                    PopularGameAPI.PopularGame();
+
                     break;
             }
 

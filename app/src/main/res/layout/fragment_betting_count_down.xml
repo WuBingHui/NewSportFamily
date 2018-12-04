@@ -38,6 +38,20 @@
         android:background="@color/white">
 
         <TextView
+            android:id="@+id/textView32"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/點擊黃色區塊可查看玩法及賠率"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/CountDownHome"
+            app:layout_constraintStart_toStartOf="@+id/CountDownAway"
+            app:layout_constraintTop_toBottomOf="@+id/GameContent" />
+
+        <TextView
             android:id="@+id/GameContent"
             android:layout_width="0dp"
             android:layout_height="50dp"

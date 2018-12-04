@@ -88,6 +88,8 @@ public class BettingCountDownFragment extends Fragment {
         VS = view.findViewById(R.id.VS);
         GameContent= view.findViewById(R.id.GameContent);
 
+
+
         CountdownNext = view.findViewById(R.id.CountdownNext);
         CountDownRV = view.findViewById(R.id.CountDownRV);
 
@@ -95,7 +97,7 @@ public class BettingCountDownFragment extends Fragment {
         NoCountDown.setVisibility(View.GONE);
         CountDownRV.setVisibility(View.GONE);
 
-
+        CountdownNext.setOnClickListener(NextOdd);
 
         Loading.start(Index.WeakIndex.get());
 
@@ -432,6 +434,27 @@ public class BettingCountDownFragment extends Fragment {
 
     }
 
+    private TextView.OnClickListener NextOdd = new TextView.OnClickListener(){
+
+        @Override
+        public void onClick(View view) {
+
+
+            try {
+                if(GameCountDownList.size() >0){
+                    JSONArray   content = new JSONArray(GameCountDownList.get(0).getGame());
+
+                    NormalGameOddDialog.NormalGameOdd(content.getJSONObject(0).getJSONArray("bets").toString(),content.getJSONObject(0).getString("code"),content.getJSONObject(0).getString("mins"),content.getJSONObject(0).getString("awayTeam"),content.getJSONObject(0).getString("homeTeam"),content.getJSONObject(0).getString("ni"),content.getJSONObject(0).getString("category"),content.getJSONObject(0).getString("gameStartTime"));
+
+                }
+            } catch (JSONException e) {
+
+                e.printStackTrace();
+            }
+
+
+        }
+    };
 
 
 

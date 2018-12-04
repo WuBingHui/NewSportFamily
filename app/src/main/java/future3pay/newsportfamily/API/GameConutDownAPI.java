@@ -1,5 +1,6 @@
 package future3pay.newsportfamily.API;
 
+import android.util.Log;
 import android.view.View;
 
 import org.json.JSONException;
@@ -79,7 +80,8 @@ public class GameConutDownAPI {
                                             content.getJSONObject("countdownGame").getString("code"),
                                             content.getJSONObject("countdownGame").getString("awayTeam"),
                                             content.getJSONObject("countdownGame").getString("homeTeam"),
-                                            content.getJSONObject("countdownGame").getString("gameStartTime")
+                                            content.getJSONObject("countdownGame").getString("gameStartTime"),
+                                            String.valueOf(content.getJSONObject("countdownGame").getJSONArray("game"))
                                     ));
                                     BettingCountDownFragment.WeakBettingCountDown.get().CountDownAway.setText(content.getJSONObject("countdownGame").getString("awayTeam"));
                                     BettingCountDownFragment.WeakBettingCountDown.get().CountDownHome.setText(content.getJSONObject("countdownGame").getString("homeTeam"));

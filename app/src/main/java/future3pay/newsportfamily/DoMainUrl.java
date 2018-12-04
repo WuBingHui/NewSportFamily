@@ -3,7 +3,7 @@ package future3pay.newsportfamily;
 public class DoMainUrl {
 
     private volatile static DoMainUrl INSTANCE; //聲明成 volatile
-    public static String Register,PhoneSms,ResetPassWord,Login,Info,SportsType,GameInfo,GameResult,GameChampionInfo,GameCountDown,GameActive,BettingRecord,BettingRecordDetail,PointRecord,DepositRecord,DrawRecord,AddBettingToShopCar,RemoveBettingFromShopCar,RemoveAllBettingFromShopCar,CheckBettingFromShopCar,SendBettingFromShopCar,ReSendEmail,GoogleSignIn,FacebookLogin,PhoneVerify;
+    public static String SingleGame,PopularGame,NowOpening,Register,PhoneSms,ResetPassWord,Login,Info,SportsType,GameInfo,GameResult,GameChampionInfo,GameCountDown,GameActive,BettingRecord,BettingRecordDetail,PointRecord,DepositRecord,DrawRecord,AddBettingToShopCar,RemoveBettingFromShopCar,RemoveAllBettingFromShopCar,CheckBettingFromShopCar,SendBettingFromShopCar,ReSendEmail,GoogleSignIn,FacebookLogin,PhoneVerify;
    private final String domain = "https://fet555888.tw";
     private DoMainUrl (){
 
@@ -35,6 +35,9 @@ public class DoMainUrl {
         GoogleSignIn = domain+"/api/mobile/socialite/login/google";//會員登入 - 第三方登入 - google
         FacebookLogin = domain+"/api/mobile/socialite/login/facebook";//會員登入 - 第三方登入 - facebook
 
+        NowOpening = domain+"/api/mobile/get/nowopening/sports";//目前開賽的球種
+        PopularGame = domain+"/api/mobile/get/popular/game/info";//賽事 - 熱門賽事
+        SingleGame = domain+"/api/mobile/get/single/game/info";//賽事 - 單場賽事
     }
 
     static void GetDoMain() {
