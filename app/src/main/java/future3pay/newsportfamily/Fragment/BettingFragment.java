@@ -21,6 +21,8 @@ import java.util.List;
 
 import future3pay.newsportfamily.API.GameChampionInfoAPI;
 import future3pay.newsportfamily.API.GameNormalInfoAPI;
+import future3pay.newsportfamily.API.PopularGameAPI;
+import future3pay.newsportfamily.API.SingleGameAPI;
 import future3pay.newsportfamily.Bean.GameChampionInfoBean;
 import future3pay.newsportfamily.Bean.GameChampionInfoDetailBean;
 import future3pay.newsportfamily.Bean.GameNormalInfoBean;
@@ -99,6 +101,15 @@ public class BettingFragment extends Fragment {
             case "1":
                 GetChampionBetting();
                 GameChampionInfoAPI.GameInfo();
+                break;
+            case "3":
+                GetNormalBetting();
+                SingleGameAPI.SingleGame();
+                break;
+            case "4":
+                GetNormalBetting();
+                PopularGameAPI.PopularGame();
+
                 break;
 
         }

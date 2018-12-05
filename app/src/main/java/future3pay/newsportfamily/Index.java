@@ -49,6 +49,7 @@ import java.util.List;
 import future3pay.newsportfamily.API.CheckBettingFromShopCarAPI;
 import future3pay.newsportfamily.API.GameChampionInfoAPI;
 import future3pay.newsportfamily.API.GameNormalInfoAPI;
+import future3pay.newsportfamily.API.HaveGameConutDownActiveAPI;
 import future3pay.newsportfamily.API.NowOpeningAPI;
 import future3pay.newsportfamily.API.PopularGameAPI;
 import future3pay.newsportfamily.API.RemoveAllBettingFromShopCarAPI;
@@ -67,7 +68,7 @@ import future3pay.newsportfamily.UIkit.ToastShow;
 public class Index extends AppCompatActivity {
 
     public String SportType = "s-441";
-    public String SportRoot = "0";
+    public String SportRoot = "4";
     public FragmentManager manager = null;
     public FragmentTransaction transaction = null;
     private FrameLayout IndexFrame;
@@ -153,7 +154,7 @@ public class Index extends AppCompatActivity {
 
         SportTypeAPI.SportType();//取所有Api
         NowOpeningAPI.NowOpening();//取球種Api
-
+        HaveGameConutDownActiveAPI.HaveGameConutDownActive();//是否有場中
 
         if (!UserInfo.getString("Token", "").equals("")) {
             UserInfoAPI.UserInfo(UserInfo.getString("Token", ""));
@@ -509,11 +510,13 @@ public class Index extends AppCompatActivity {
                     actionbar_textview.setText("運彩家族");
                     back.setVisibility(View.GONE);
                     menu.setVisibility(View.VISIBLE);
-
+                    HaveGameConutDownActiveAPI.HaveGameConutDownActive();//判斷是否有場中
                     switch (position) {
+
                         case 0:
                             if (!wasSelected) {
                                 SwitchFragment.selectFragment("BettingFragment");
+
                             }
                             break;
                         case 1:
