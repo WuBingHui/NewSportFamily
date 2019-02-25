@@ -27,14 +27,21 @@ public class VerifyEmailActivity extends AppCompatActivity {
 
      TextView VerifyEmail = findViewById(R.id.VerifyEmail);
 
-      VerifyEmail.setText(Index.WeakIndex.get().UserInfo.getString("Email",""));
+     if(Index.WeakIndex.get() != null){
+         VerifyEmail.setText(Index.WeakIndex.get().UserInfo.getString("Email",""));
+     }
+
      Button SendVerify = findViewById(R.id.SendVerify);
 
         SendVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Loading.start(VerifyEmailActivity.this);
-                ReSendEmailAPI.ReSendEmail(Index.WeakIndex.get().UserInfo.getString("Token",""));
+
+                if(Index.WeakIndex.get() != null){
+                    ReSendEmailAPI.ReSendEmail(Index.WeakIndex.get().UserInfo.getString("Token",""));
+                }
+
             }
         });
 

@@ -77,7 +77,7 @@ public class LoginAPI {
 
 
                                 ToastShow.start(LoginActivity.WeakLoginActivity.get(),"帳號或密碼錯誤");
-
+                                Loading.diss();
 
                             }
 
@@ -85,14 +85,15 @@ public class LoginAPI {
 
                             e.printStackTrace();
                             ToastShow.start(LoginActivity.WeakLoginActivity.get(),"伺服器忙碌中，請稍後在試");
-
+                            Loading.diss();
                         }
 
                     }else{
 
                         ToastShow.start(LoginActivity.WeakLoginActivity.get(),"帳號或密碼錯誤");
+                        Loading.diss();
                     }
-                    Loading.diss();
+
                 }
             });
 

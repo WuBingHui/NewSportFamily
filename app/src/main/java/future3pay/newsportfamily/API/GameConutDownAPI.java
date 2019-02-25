@@ -41,7 +41,7 @@ public class GameConutDownAPI {
 
                 Index.WeakIndex.get().runOnUiThread(new Runnable() {
                     @Override
-                    public synchronized void run() {
+                    public  void run() {
 
                         //告知使用者連線失敗
                         ToastShow.start(BettingCountDownFragment.WeakBettingCountDown.get().getActivity(), "無網路狀態，請檢查您的行動網路是否開啟");
@@ -58,17 +58,12 @@ public class GameConutDownAPI {
             public void onResponse(Call call, final Response response) throws IOException {
 
 
-
-                BettingCountDownFragment.WeakBettingCountDown.get().getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public synchronized void run() {
-
                         if (response.isSuccessful()) {
 
                             try {
 
                                 String json = response.body().string();
-                                JSONObject content = new JSONObject(json);
+                                final JSONObject content = new JSONObject(json);
 
                                 if (content.getInt("result") == 0) {
 
@@ -83,9 +78,24 @@ public class GameConutDownAPI {
                                             content.getJSONObject("countdownGame").getString("gameStartTime"),
                                             String.valueOf(content.getJSONObject("countdownGame").getJSONArray("game"))
                                     ));
-                                    BettingCountDownFragment.WeakBettingCountDown.get().CountDownAway.setText(content.getJSONObject("countdownGame").getString("awayTeam"));
-                                    BettingCountDownFragment.WeakBettingCountDown.get().CountDownHome.setText(content.getJSONObject("countdownGame").getString("homeTeam"));
-                                    BettingCountDownFragment.WeakBettingCountDown.get().GmaeNext();
+
+
+                                    Index.WeakIndex.get().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public  void run() {
+
+                                            try {
+                                                BettingCountDownFragment.WeakBettingCountDown.get().GmaeNext();
+                                                BettingCountDownFragment.WeakBettingCountDown.get().CountDownAway.setText(content.getJSONObject("countdownGame").getString("awayTeam"));
+                                                BettingCountDownFragment.WeakBettingCountDown.get().CountDownHome.setText(content.getJSONObject("countdownGame").getString("homeTeam"));
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+
+                                        }
+
+                                    });
+
                                 } else {
 
                                     ToastShow.start(BettingCountDownFragment.WeakBettingCountDown.get().getActivity(), "場中賽事獲取失敗");
@@ -103,6 +113,12 @@ public class GameConutDownAPI {
                             ToastShow.start(BettingCountDownFragment.WeakBettingCountDown.get().getActivity(), "場中賽事獲取失敗");
 
                         }
+
+
+                Index.WeakIndex.get().runOnUiThread(new Runnable() {
+                    @Override
+                    public  void run() {
+
                         if (BettingCountDownFragment.WeakBettingCountDown.get().GameCountDownList.size() <= 0) {
                             BettingCountDownFragment.WeakBettingCountDown.get().NoCountDown.setVisibility(View.VISIBLE);
                             BettingCountDownFragment.WeakBettingCountDown.get().CountdownNext.setVisibility(View.GONE);
@@ -113,7 +129,11 @@ public class GameConutDownAPI {
 
                         Loading.diss();
                     }
+
                 });
+
+
+
 
 
             }

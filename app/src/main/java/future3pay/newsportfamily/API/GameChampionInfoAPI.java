@@ -60,9 +60,7 @@ public class GameChampionInfoAPI {
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
 
-                Index.WeakIndex.get().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
+
                         if(response.isSuccessful()){
 
                             try {
@@ -105,6 +103,9 @@ public class GameChampionInfoAPI {
 
                         }
 
+                Index.WeakIndex.get().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
                         Loading.diss();
                         BettingFragment.WeakBettingFragment.get().BettingRV.finishRefreshing();
                         BettingFragment.WeakBettingFragment.get().GameChampionAdapter.notifyDataSetChanged();
@@ -118,9 +119,11 @@ public class GameChampionInfoAPI {
                             BettingFragment.WeakBettingFragment.get().BettingRV.setVisibility(View.VISIBLE);
                             BettingFragment.WeakBettingFragment.get().BettingDetailRV.setVisibility(View.GONE);
                         }
-
                     }
                 });
+
+
+
 
 
             }

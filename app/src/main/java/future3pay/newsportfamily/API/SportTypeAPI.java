@@ -59,9 +59,7 @@ public class SportTypeAPI {
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
 
-                Index.WeakIndex.get().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
+
                         if(response.isSuccessful()){
 
                             try {
@@ -79,13 +77,7 @@ public class SportTypeAPI {
                                         Index.WeakIndex.get().GameType.add(content.getJSONArray("sportsType").getJSONObject(i).getString("type"));
                                      //   Log.d("aaaaaaaaaaaaaa",content.getJSONArray("sportsType").getJSONObject(i).getString("name")+"    "+content.getJSONArray("sportsType").getJSONObject(i).getString("type"));
                                     }
-                                    ArrayAdapter<String> List = new ArrayAdapter<>(GameResultFragment.WeakGameResult.get().getContext(),
-                                            android.R.layout.simple_spinner_dropdown_item,
-                                            Index.WeakIndex.get().GameName);
 
-                                    GameResultFragment.WeakGameResult.get().GameResultType.setAdapter(List);
-
-                                    GameResultAPI.GameResul(Index.WeakIndex.get().GameType.get(GameResultFragment.WeakGameResult.get().GameResultType.getSelectedItemPosition()),GameResultFragment.WeakGameResult.get().SwitchDate());
 
                                 }else{
 
@@ -106,9 +98,19 @@ public class SportTypeAPI {
                             ToastShow.start(Index.WeakIndex.get(),"獲取賽事球種失敗");
 
                         }
+
+                Index.WeakIndex.get().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ArrayAdapter<String> List = new ArrayAdapter<>(GameResultFragment.WeakGameResult.get().getContext(),
+                                android.R.layout.simple_spinner_dropdown_item,
+                                Index.WeakIndex.get().GameName);
+
+                        GameResultFragment.WeakGameResult.get().GameResultType.setAdapter(List);
+
+                        GameResultAPI.GameResul(Index.WeakIndex.get().GameType.get(GameResultFragment.WeakGameResult.get().GameResultType.getSelectedItemPosition()),GameResultFragment.WeakGameResult.get().SwitchDate());
                     }
                 });
-
 
             }
         });

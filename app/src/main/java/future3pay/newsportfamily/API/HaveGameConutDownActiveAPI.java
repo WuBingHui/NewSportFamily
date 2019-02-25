@@ -40,12 +40,13 @@ public class HaveGameConutDownActiveAPI {
 
                 Index.WeakIndex.get().runOnUiThread(new Runnable() {
                     @Override
-                    public synchronized void run() {
+                    public  void run() {
 
                         //告知使用者連線失敗
                         //ToastShow.start(BettingCountDownFragment.WeakBettingCountDown.get().getActivity(), "無網路狀態，請檢查您的行動網路是否開啟");
                        // Loading.diss();
                         Index.WeakIndex.get().bottomNavigation.setNotification("",1);
+
                     }
 
                 });
@@ -58,52 +59,90 @@ public class HaveGameConutDownActiveAPI {
 
 
 
-                Index.WeakIndex.get().runOnUiThread(new Runnable() {
-                    @Override
-                    public synchronized void run() {
+
 
                         if (response.isSuccessful()) {
 
                             try {
 
                                 String json = response.body().string();
-                                JSONObject content = new JSONObject(json);
+                                final JSONObject content = new JSONObject(json);
 
                               //  Log.d("aaaaaaaaaaaaaaa", String.valueOf(content));
                                 if (content.getInt("result") == 0) {
 
-                                    if (content.getJSONArray("liveGames").length() > 0  ) {
 
-                                        Index.WeakIndex.get().bottomNavigation.setNotification("hot",1);
+                                    Index.WeakIndex.get().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                if (content.getJSONArray("liveGames").length() > 0  ) {
+
+                                                    Index.WeakIndex.get().bottomNavigation.setNotification("hot",1);
 
 
-                                    } else {
-                                        Index.WeakIndex.get().bottomNavigation.setNotification("",1);
+                                                } else {
+                                                    Index.WeakIndex.get().bottomNavigation.setNotification("",1);
 
-                                    }
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    });
+
 
 
                                 } else {
-                                    Index.WeakIndex.get().bottomNavigation.setNotification("",1);
+                                    Index.WeakIndex.get().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+
+                                            Index.WeakIndex.get().bottomNavigation.setNotification("",1);
+
+                                        }
+                                    });
                                    // ToastShow.start(BettingCountDownFragment.WeakBettingCountDown.get().getActivity(), "場中賽事獲取失敗");
                                 }
                             } catch (JSONException e) {
-                                Index.WeakIndex.get().bottomNavigation.setNotification("",1);
+                                Index.WeakIndex.get().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        Index.WeakIndex.get().bottomNavigation.setNotification("",1);
+
+                                    }
+                                });
                                 e.printStackTrace();
                                // ToastShow.start(BettingCountDownFragment.WeakBettingCountDown.get().getActivity(), "伺服器斷線");
 
                             } catch (IOException e) {
                                 e.printStackTrace();
-                                Index.WeakIndex.get().bottomNavigation.setNotification("",1);
+                                Index.WeakIndex.get().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        Index.WeakIndex.get().bottomNavigation.setNotification("",1);
+
+                                    }
+                                });
                             }
                         } else {
-                            Index.WeakIndex.get().bottomNavigation.setNotification("",1);
+
+                            Index.WeakIndex.get().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                        Index.WeakIndex.get().bottomNavigation.setNotification("",1);
+
+                                }
+                            });
+
+
                            // ToastShow.start(BettingCountDownFragment.WeakBettingCountDown.get().getActivity(), "場中賽事獲取失敗");
 
                         }
 
-                    }
-                });
 
 
             }

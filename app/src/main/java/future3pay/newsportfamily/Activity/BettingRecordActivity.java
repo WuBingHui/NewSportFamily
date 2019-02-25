@@ -99,7 +99,12 @@ public class BettingRecordActivity extends AppCompatActivity {
             if (!String.valueOf(StartDate.getText()).equals("") && !String.valueOf(EndDate.getText()).equals("")) {
 
                 Loading.start(BettingRecordActivity.this);
-                BettingRecordAPI.BettingRecord(Index.WeakIndex.get().UserInfo.getString("Token", ""));
+
+
+                if(Index.WeakIndex.get() != null){
+                    BettingRecordAPI.BettingRecord(Index.WeakIndex.get().UserInfo.getString("Token", ""));
+                }
+
 
             } else {
 
@@ -247,8 +252,11 @@ public class BettingRecordActivity extends AppCompatActivity {
                     @Override
                     public void onRefresh() {
 
-
-                        BettingRecordAPI.BettingRecord(Index.WeakIndex.get().UserInfo.getString("Token", ""));
+                        if(Index.WeakIndex.get() != null){
+                            BettingRecordAPI.BettingRecord(Index.WeakIndex.get().UserInfo.getString("Token", ""));
+                        }else{
+                            BettingRecordRV.finishRefreshing();
+                        }
 
                     }
                 });

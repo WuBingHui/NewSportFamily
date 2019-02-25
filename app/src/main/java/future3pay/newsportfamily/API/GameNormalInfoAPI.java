@@ -60,9 +60,7 @@ public class GameNormalInfoAPI {
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
 
-                Index.WeakIndex.get().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
+
                         if(response.isSuccessful()){
 
                             try {
@@ -100,10 +98,14 @@ public class GameNormalInfoAPI {
                             }
                         }else{
 
-                            ToastShow.start(  Index.WeakIndex.get(),"賽事獲取失敗");
+                            ToastShow.start( Index.WeakIndex.get(),"賽事獲取失敗");
 
                         }
 
+
+                Index.WeakIndex.get().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
                         Loading.diss();
                         BettingFragment.WeakBettingFragment.get().BettingRV.finishRefreshing();
                         BettingFragment.WeakBettingFragment.get().GameNormalAdapter.notifyDataSetChanged();

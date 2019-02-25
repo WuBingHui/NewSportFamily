@@ -14,6 +14,7 @@ import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.FacebookLogin;
 import future3pay.newsportfamily.GoogleLogin;
 import future3pay.newsportfamily.Index;
+import future3pay.newsportfamily.UIkit.Loading;
 import future3pay.newsportfamily.UIkit.ToastShow;
 import future3pay.newsportfamily.UserInfo;
 import okhttp3.Call;
@@ -152,7 +153,7 @@ public class UserInfoAPI {
                     }
                 });
 
-
+                Loading.diss();
             }
         });
 

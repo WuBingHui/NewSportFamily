@@ -34,6 +34,7 @@ import future3pay.newsportfamily.Bean.GameResultBean;
 import future3pay.newsportfamily.FormaTimeData;
 import future3pay.newsportfamily.Index;
 import future3pay.newsportfamily.R;
+import future3pay.newsportfamily.UIkit.Loading;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,6 +53,8 @@ public class GameResultFragment extends Fragment {
     public Spinner GameResultType,GameResultCategory,GameResultDate;
 
     public TextView NoGame;
+
+    public Thread GameResultFragmentThread;
 
     public GameResultFragment() {
         // Required empty public constructor
@@ -138,7 +141,15 @@ public class GameResultFragment extends Fragment {
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         GameResultRV.setVisibility(View.GONE);
-        GameResultAPI.GameResul(Index.WeakIndex.get().GameType.get(GameResultFragment.WeakGameResult.get().GameResultType.getSelectedItemPosition()),GameResultFragment.WeakGameResult.get().SwitchDate());
+        Loading.start(Index.WeakIndex.get());
+
+        GameResultFragmentThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                GameResultAPI.GameResul(Index.WeakIndex.get().GameType.get(GameResultFragment.WeakGameResult.get().GameResultType.getSelectedItemPosition()),GameResultFragment.WeakGameResult.get().SwitchDate());
+            }
+        });
+        GameResultFragmentThread.start();
 
     }
 
@@ -153,7 +164,16 @@ public class GameResultFragment extends Fragment {
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
             GameResultRV.setVisibility(View.GONE);
 
-            GameResultAPI.GameResul(Index.WeakIndex.get().GameType.get(GameResultFragment.WeakGameResult.get().GameResultType.getSelectedItemPosition()),GameResultFragment.WeakGameResult.get().SwitchDate());
+            Loading.start(Index.WeakIndex.get());
+
+
+            GameResultFragmentThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    GameResultAPI.GameResul(Index.WeakIndex.get().GameType.get(GameResultFragment.WeakGameResult.get().GameResultType.getSelectedItemPosition()),GameResultFragment.WeakGameResult.get().SwitchDate());
+                }
+            });
+            GameResultFragmentThread.start();
 
 
         }
@@ -185,8 +205,10 @@ public class GameResultFragment extends Fragment {
     public void GetGameResultInfo(){
 
         GameResulCount.clear();
-
+        Log.d("aaaaaaaaaaaaaa", String.valueOf(GameResultCategory.getSelectedItem()));
+        Log.d("aaaaaaaaaaaaaa", String.valueOf(GameResulList.size()));
         for(int i = 0;i<GameResulList.size();i++){
+
             if(GameResultCategory.getSelectedItem().equals( GameResulList.get(i).getCategory())){
 
                     GameResulCount.add(new GameResultBean(

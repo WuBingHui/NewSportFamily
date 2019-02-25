@@ -101,7 +101,7 @@ public class Index extends AppCompatActivity {
     public   String column = "0", combo = "",combination = "",item = "";
     public CheckBox[] ComboCheckBox;
     public static WeakReference<Index> WeakIndex;
-
+    public Thread IndexThread;
     public   final int RC_SIGN_IN = 9001;
 
     // [START declare_auth]
@@ -153,7 +153,9 @@ public class Index extends AppCompatActivity {
         actionbar();
 
         SportTypeAPI.SportType();//取所有Api
+
         NowOpeningAPI.NowOpening();//取球種Api
+
         HaveGameConutDownActiveAPI.HaveGameConutDownActive();//是否有場中
 
         if (!UserInfo.getString("Token", "").equals("")) {

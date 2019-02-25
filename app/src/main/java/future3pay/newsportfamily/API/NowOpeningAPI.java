@@ -58,9 +58,7 @@ public class NowOpeningAPI {
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
 
-                Index.WeakIndex.get().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
+
                         if(response.isSuccessful()){
 
                             try {
@@ -104,8 +102,7 @@ public class NowOpeningAPI {
                             ToastShow.start(Index.WeakIndex.get(),"獲取賽事球種失敗");
 
                         }
-                    }
-                });
+
 
 
             }

@@ -335,7 +335,7 @@ public class BettingCountDownFragment extends Fragment {
                 scheduledThreadPool3 = Executors.newScheduledThreadPool(5);
                 scheduledThreadPool3.scheduleAtFixedRate(new Runnable() {
                     @Override
-                    public synchronized void run() {
+                    public  void run() {
 
                         try {
 
@@ -349,6 +349,7 @@ public class BettingCountDownFragment extends Fragment {
                                     NormalGameOddDialog.NormalGameOdd(content.getJSONObject(position).getJSONArray("bets").toString(),content.getJSONObject(position).getString("code"),content.getJSONObject(position).getString("mins"),content.getJSONObject(position).getString("awayTeam"),content.getJSONObject(position).getString("homeTeam"),content.getJSONObject(position).getString("ni"),content.getJSONObject(position).getString("category"),content.getJSONObject(position).getString("gameStartTime"));
 
                                 }
+
                             } catch (JSONException e) {
 
                                 e.printStackTrace();
@@ -359,9 +360,6 @@ public class BettingCountDownFragment extends Fragment {
                     }
 
                 }, 0, 2, TimeUnit.SECONDS);
-
-
-
 
 
 
@@ -457,29 +455,58 @@ public class BettingCountDownFragment extends Fragment {
     };
 
 
+    @Override
+    public void onPause(){
+        super.onPause();
 
+    if(scheduledThreadPool3 != null){
+        scheduledThreadPool3.shutdownNow();
+        scheduledThreadPool3= null;
+    }
+        if(scheduledThreadPool != null){
+            scheduledThreadPool.shutdownNow();
+            scheduledThreadPool= null;
+        }
+        if(scheduledThreadPool2 != null){
+            scheduledThreadPool2.shutdownNow();
+            scheduledThreadPool2 = null;
+        }
+
+
+        System.gc();
+    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        scheduledThreadPool3.shutdownNow();
-        scheduledThreadPool.shutdownNow();
-        scheduledThreadPool2.shutdownNow();
-        scheduledThreadPool3= null;
-        scheduledThreadPool= null;
-        scheduledThreadPool2 = null;
-        System.gc();
+        if(scheduledThreadPool3 != null){
+            scheduledThreadPool3.shutdownNow();
+            scheduledThreadPool3= null;
+        }
+        if(scheduledThreadPool != null){
+            scheduledThreadPool.shutdownNow();
+            scheduledThreadPool= null;
+        }
+        if(scheduledThreadPool2 != null){
+            scheduledThreadPool2.shutdownNow();
+            scheduledThreadPool2 = null;
+        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        scheduledThreadPool3.shutdownNow();
-        scheduledThreadPool.shutdownNow();
-        scheduledThreadPool2.shutdownNow();
-        scheduledThreadPool3= null;
-        scheduledThreadPool= null;
-        scheduledThreadPool2 = null;
-        System.gc();
+        if(scheduledThreadPool3 != null){
+            scheduledThreadPool3.shutdownNow();
+            scheduledThreadPool3= null;
+        }
+        if(scheduledThreadPool != null){
+            scheduledThreadPool.shutdownNow();
+            scheduledThreadPool= null;
+        }
+        if(scheduledThreadPool2 != null){
+            scheduledThreadPool2.shutdownNow();
+            scheduledThreadPool2 = null;
+        }
     }
 }

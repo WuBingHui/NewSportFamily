@@ -5,15 +5,20 @@ import android.content.Context;
 
 import com.cy.dialog.progress.CYProgressDialog;
 
+import future3pay.newsportfamily.Index;
+
 public class Loading   {
 
-  private static    CYProgressDialog cyProgressDialog;
+    private static CYProgressDialog cyProgressDialog;
 
 
     public static void  start(final Context context){
-        new Activity().runOnUiThread(new Runnable() {
+        Index.WeakIndex.get().runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                if(cyProgressDialog != null){
+                    cyProgressDialog.dismiss();
+                }
                 cyProgressDialog=new CYProgressDialog(context);
                 cyProgressDialog.config(0.6f,0xffffffff,20,0xffffffff,0xff2a5caa).show();
                 cyProgressDialog.setCanceledOnTouchOutside(false);
@@ -23,14 +28,17 @@ public class Loading   {
     }
 
     public static void  diss(){
-        new Activity().runOnUiThread(new Runnable() {
+        Index.WeakIndex.get().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                cyProgressDialog.dismiss();
+                if(cyProgressDialog!= null){
+                    cyProgressDialog.dismiss();
+                    cyProgressDialog= null;
+                    System.gc();
+                }
             }
         });
     }
-
 
 }
 

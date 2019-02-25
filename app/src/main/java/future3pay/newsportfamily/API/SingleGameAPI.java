@@ -59,20 +59,31 @@ public class SingleGameAPI {
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
 
-                Index.WeakIndex.get().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
+
 
                         if(response.isSuccessful()){
 
                             try {
 
                                 String json =response.body().string();
-                                JSONObject content = new JSONObject(json);
+                                final JSONObject content = new JSONObject(json);
 
                                 if(content.getInt("result") == 0){
 
-                                    BettingFragment.WeakBettingFragment.get().GetNormalBettingDetail(content.getJSONArray("singleGames").toString());
+
+
+                                    Index.WeakIndex.get().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                BettingFragment.WeakBettingFragment.get().GetNormalBettingDetail(content.getJSONArray("singleGames").toString());
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    });
+
+
 
                                 }else{
 
@@ -95,6 +106,10 @@ public class SingleGameAPI {
 
                         }
 
+
+                Index.WeakIndex.get().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
                         Loading.diss();
                         BettingFragment.WeakBettingFragment.get().BettingRV.finishRefreshing();
                         BettingFragment.WeakBettingFragment.get().GameNormalAdapter.notifyDataSetChanged();
@@ -103,6 +118,8 @@ public class SingleGameAPI {
                         BettingFragment.WeakBettingFragment.get().NoGame.setVisibility(View.GONE);
                     }
                 });
+
+
 
 
             }

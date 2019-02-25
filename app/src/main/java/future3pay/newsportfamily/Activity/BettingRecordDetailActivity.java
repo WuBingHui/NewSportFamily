@@ -64,7 +64,11 @@ public class BettingRecordDetailActivity extends AppCompatActivity {
 
         Loading.start(this);
         GetRecord();
-        BettingRecordDetailAPI.BettingRecordDetail(Index.WeakIndex.get().UserInfo.getString("Token", ""), intent.getStringExtra("order"));
+
+        if(Index.WeakIndex.get() != null){
+            BettingRecordDetailAPI.BettingRecordDetail(Index.WeakIndex.get().UserInfo.getString("Token", ""), intent.getStringExtra("order"));
+        }
+
     }
 
     private void actionbar() {

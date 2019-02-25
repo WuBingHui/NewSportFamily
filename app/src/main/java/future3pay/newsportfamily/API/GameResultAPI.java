@@ -14,6 +14,7 @@ import future3pay.newsportfamily.Bean.GameResultBean;
 import future3pay.newsportfamily.DoMainUrl;
 import future3pay.newsportfamily.Fragment.GameResultFragment;
 import future3pay.newsportfamily.Index;
+import future3pay.newsportfamily.UIkit.Loading;
 import future3pay.newsportfamily.UIkit.ToastShow;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -69,9 +70,8 @@ public class GameResultAPI {
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
 
-                Index.WeakIndex.get().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
+
+
                         try {
                             String json =response.body().string();
                             JSONObject content = new JSONObject(json);
@@ -105,13 +105,7 @@ public class GameResultAPI {
 
                                     }
 
-                                        if( GameResultFragment.WeakGameResult.get().GameResulList.size() <= 0){
-                                            GameResultFragment.WeakGameResult.get().GameResultRV.setVisibility(View.GONE);
-                                            GameResultFragment.WeakGameResult.get().NoGame.setVisibility(View.VISIBLE);
-                                        }else{
-                                            GameResultFragment.WeakGameResult.get().GameResultRV.setVisibility(View.VISIBLE);
-                                            GameResultFragment.WeakGameResult.get().NoGame.setVisibility(View.GONE);
-                                        }
+
 
 
                                 }else{
@@ -134,14 +128,26 @@ public class GameResultAPI {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+
+
+                Index.WeakIndex.get().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Loading.diss();
+                        if( GameResultFragment.WeakGameResult.get().GameResulList.size() <= 0){
+                            GameResultFragment.WeakGameResult.get().GameResultRV.setVisibility(View.GONE);
+                            GameResultFragment.WeakGameResult.get().NoGame.setVisibility(View.VISIBLE);
+                        }else{
+                            GameResultFragment.WeakGameResult.get().GameResultRV.setVisibility(View.VISIBLE);
+                            GameResultFragment.WeakGameResult.get().NoGame.setVisibility(View.GONE);
+                        }
+
                         GameResultFragment.WeakGameResult.get().GameResultRV.finishRefreshing();
 
                         ArrayAdapter<String> List = new ArrayAdapter<>(GameResultFragment.WeakGameResult.get().getContext(),
                                 android.R.layout.simple_spinner_dropdown_item,
                                 ArrayRemoveDuplicate.RemoveDuplicate(GameResultFragment.WeakGameResult.get().GameResulList));
                         GameResultFragment.WeakGameResult.get().GameResultCategory.setAdapter(List);
-
-                        GameResultFragment.WeakGameResult.get().GetGameResultInfo();
 
 
 
@@ -152,9 +158,12 @@ public class GameResultAPI {
                         GameResultFragment.WeakGameResult.get().GameResultDate.setOnItemSelectedListener(GameResultFragment.WeakGameResult.get().DateSelect);
 
                         GameResultFragment.WeakGameResult.get().GameResultRV.setVisibility(View.VISIBLE);
-
+                        GameResultFragment.WeakGameResult.get().GetGameResultInfo();
                     }
                 });
+
+
+
 
 
             }

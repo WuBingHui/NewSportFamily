@@ -54,6 +54,7 @@ public class BettingFragment extends Fragment {
     public  List<GameNormalInfoDetailBean> GameNormalInfoDetailList;
     public  List<GameChampionInfoDetailBean> GameChampionInfoDetailList;
 
+    public Thread BettingFragmentThread;
     public TextView NoGame;
 
     public BettingFragment() {
@@ -71,6 +72,7 @@ public class BettingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+
         // Fragment即將在螢幕上顯示時執行此方法
         View view = inflater.inflate(R.layout.fragment_betting, container, false);
         WeakBettingFragment = new WeakReference<>(this);
@@ -96,19 +98,43 @@ public class BettingFragment extends Fragment {
 
             case "0":
                 GetNormalBetting();
-                GameNormalInfoAPI.GameInfo();
+                BettingFragmentThread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        GameNormalInfoAPI.GameInfo();
+                    }
+                });
+                BettingFragmentThread.start();
                 break;
             case "1":
                 GetChampionBetting();
-                GameChampionInfoAPI.GameInfo();
+                BettingFragmentThread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        GameChampionInfoAPI.GameInfo();
+                    }
+                });
+                BettingFragmentThread.start();
                 break;
             case "3":
                 GetNormalBetting();
-                SingleGameAPI.SingleGame();
+                BettingFragmentThread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        SingleGameAPI.SingleGame();
+                    }
+                });
+                BettingFragmentThread.start();
                 break;
             case "4":
                 GetNormalBetting();
-                PopularGameAPI.PopularGame();
+                BettingFragmentThread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        PopularGameAPI.PopularGame();
+                    }
+                });
+                BettingFragmentThread.start();
 
                 break;
 
@@ -187,7 +213,14 @@ public class BettingFragment extends Fragment {
                     @Override
                     public void onRefresh() {
 
-                        GameNormalInfoAPI.GameInfo();
+                        BettingFragmentThread = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                GameNormalInfoAPI.GameInfo();
+                            }
+                        });
+                        BettingFragmentThread.start();
+
 
                     }
                 });
@@ -242,7 +275,14 @@ public class BettingFragment extends Fragment {
                     @Override
                     public void onRefresh() {
 
-                        GameChampionInfoAPI.GameInfo();
+
+                        BettingFragmentThread = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                GameChampionInfoAPI.GameInfo();
+                            }
+                        });
+                        BettingFragmentThread.start();
 
                     }
                 });

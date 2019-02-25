@@ -58,20 +58,30 @@ public class PopularGameAPI {
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
 
-                Index.WeakIndex.get().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
+
 
                         if(response.isSuccessful()){
 
                             try {
 
                                 String json =response.body().string();
-                                JSONObject content = new JSONObject(json);
+                                final JSONObject content = new JSONObject(json);
 
                                 if(content.getInt("result") == 0){
 
-                                    BettingFragment.WeakBettingFragment.get().GetNormalBettingDetail(content.getJSONArray("popularGames").toString());
+
+
+                                    Index.WeakIndex.get().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                BettingFragment.WeakBettingFragment.get().GetNormalBettingDetail(content.getJSONArray("popularGames").toString());
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    });
+
 
                                 }else{
 
@@ -94,6 +104,10 @@ public class PopularGameAPI {
 
                         }
 
+
+                Index.WeakIndex.get().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
                         Loading.diss();
                         BettingFragment.WeakBettingFragment.get().BettingRV.finishRefreshing();
                         BettingFragment.WeakBettingFragment.get().GameNormalAdapter.notifyDataSetChanged();
@@ -102,6 +116,8 @@ public class PopularGameAPI {
                         BettingFragment.WeakBettingFragment.get().NoGame.setVisibility(View.GONE);
                     }
                 });
+
+
 
 
             }
