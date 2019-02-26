@@ -152,7 +152,7 @@ public class Index extends AppCompatActivity {
         DoMainUrl.GetDoMain();//加載一次domain
         actionbar();
 
-        SportTypeAPI.SportType();//取所有Api
+
 
         NowOpeningAPI.NowOpening();//取球種Api
 

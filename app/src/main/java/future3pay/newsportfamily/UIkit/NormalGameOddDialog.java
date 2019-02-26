@@ -2,6 +2,7 @@ package future3pay.newsportfamily.UIkit;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -197,7 +198,7 @@ public class NormalGameOddDialog {
             dialog = null;
 
             if(BettingCountDownFragment.WeakBettingCountDown != null && BettingCountDownFragment.WeakBettingCountDown.get().scheduledThreadPool3 != null){
-
+                Log.d("aaaaaaaaaaaaaa","我又近來");
                 BettingCountDownFragment.WeakBettingCountDown.get().scheduledThreadPool3.shutdownNow();
 
             }

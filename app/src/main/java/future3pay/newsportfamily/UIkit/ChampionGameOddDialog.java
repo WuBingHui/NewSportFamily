@@ -1,5 +1,7 @@
 package future3pay.newsportfamily.UIkit;
 
+import android.content.DialogInterface;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +14,7 @@ import com.cy.dialog.BaseDialog;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import future3pay.newsportfamily.Fragment.BettingCountDownFragment;
 import future3pay.newsportfamily.Fragment.BettingFragment;
 import future3pay.newsportfamily.R;
 
@@ -122,6 +125,8 @@ public class ChampionGameOddDialog {
 
 
     }
+
+
 
 
 }

@@ -78,7 +78,6 @@ public class GameResultAPI {
 
                         if(response.isSuccessful()){
 
-
                                 if(content.getInt("result") == 0){
 
                                     GameResultFragment.WeakGameResult.get().GameResulList.clear();
@@ -149,16 +148,18 @@ public class GameResultAPI {
                                 ArrayRemoveDuplicate.RemoveDuplicate(GameResultFragment.WeakGameResult.get().GameResulList));
                         GameResultFragment.WeakGameResult.get().GameResultCategory.setAdapter(List);
 
-
+                        //GameResultFragment.WeakGameResult.get().GetGameResultInfo();
 
                         GameResultFragment.WeakGameResult.get() .GameResultType.setOnItemSelectedListener(GameResultFragment.WeakGameResult.get().TypeSelect);
 
-                        GameResultFragment.WeakGameResult.get() .GameResultCategory.setOnItemSelectedListener(GameResultFragment.WeakGameResult.get().CategorySelect);
-
                         GameResultFragment.WeakGameResult.get().GameResultDate.setOnItemSelectedListener(GameResultFragment.WeakGameResult.get().DateSelect);
 
+                        GameResultFragment.WeakGameResult.get() .GameResultCategory.setOnItemSelectedListener(GameResultFragment.WeakGameResult.get().CategorySelect);
+
+
+
                         GameResultFragment.WeakGameResult.get().GameResultRV.setVisibility(View.VISIBLE);
-                        GameResultFragment.WeakGameResult.get().GetGameResultInfo();
+
                     }
                 });
 

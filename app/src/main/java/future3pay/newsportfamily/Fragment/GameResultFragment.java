@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import future3pay.newsportfamily.API.GameResultAPI;
+import future3pay.newsportfamily.API.SportTypeAPI;
 import future3pay.newsportfamily.Bean.GameResultBean;
 import future3pay.newsportfamily.FormaTimeData;
 import future3pay.newsportfamily.Index;
@@ -54,7 +55,7 @@ public class GameResultFragment extends Fragment {
 
     public TextView NoGame;
 
-    public Thread GameResultFragmentThread;
+
 
     public GameResultFragment() {
         // Required empty public constructor
@@ -89,12 +90,7 @@ public class GameResultFragment extends Fragment {
 
         GameResulCount = new ArrayList<>();
 
-        //SportTypeAPI.SportType();//取球種Api
-
-
-
-
-
+        SportTypeAPI.SportType();//取所有Api
 
 
 
@@ -140,16 +136,13 @@ public class GameResultFragment extends Fragment {
     public AdapterView.OnItemSelectedListener TypeSelect = new AdapterView.OnItemSelectedListener() {
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
         GameResultRV.setVisibility(View.GONE);
         Loading.start(Index.WeakIndex.get());
 
-        GameResultFragmentThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                GameResultAPI.GameResul(Index.WeakIndex.get().GameType.get(GameResultFragment.WeakGameResult.get().GameResultType.getSelectedItemPosition()),GameResultFragment.WeakGameResult.get().SwitchDate());
-            }
-        });
-        GameResultFragmentThread.start();
+
+         GameResultAPI.GameResul(Index.WeakIndex.get().GameType.get(GameResultFragment.WeakGameResult.get().GameResultType.getSelectedItemPosition()),GameResultFragment.WeakGameResult.get().SwitchDate());
+
 
     }
 
@@ -167,13 +160,8 @@ public class GameResultFragment extends Fragment {
             Loading.start(Index.WeakIndex.get());
 
 
-            GameResultFragmentThread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    GameResultAPI.GameResul(Index.WeakIndex.get().GameType.get(GameResultFragment.WeakGameResult.get().GameResultType.getSelectedItemPosition()),GameResultFragment.WeakGameResult.get().SwitchDate());
-                }
-            });
-            GameResultFragmentThread.start();
+           GameResultAPI.GameResul(Index.WeakIndex.get().GameType.get(GameResultFragment.WeakGameResult.get().GameResultType.getSelectedItemPosition()),GameResultFragment.WeakGameResult.get().SwitchDate());
+
 
 
         }
@@ -205,8 +193,8 @@ public class GameResultFragment extends Fragment {
     public void GetGameResultInfo(){
 
         GameResulCount.clear();
-        Log.d("aaaaaaaaaaaaaa", String.valueOf(GameResultCategory.getSelectedItem()));
-        Log.d("aaaaaaaaaaaaaa", String.valueOf(GameResulList.size()));
+        //Log.d("aaaaaaaaaaaaaa", String.valueOf(GameResultCategory.getSelectedItem()));
+        Log.d("aaaaaaaaaaaaaa", String.valueOf(GameResulCount.size()));
         for(int i = 0;i<GameResulList.size();i++){
 
             if(GameResultCategory.getSelectedItem().equals( GameResulList.get(i).getCategory())){
