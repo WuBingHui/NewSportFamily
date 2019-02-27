@@ -45,7 +45,9 @@ public class NormalGameOddDialog {
                     public void onClick(View view) {
                         dialog.dismiss();
                         dialog = null;
-                        BettingCountDownFragment.WeakBettingCountDown.get().scheduledThreadPool3.shutdownNow();
+                        if(BettingCountDownFragment.WeakBettingCountDown.get().scheduledThreadPool3 != null){
+                            BettingCountDownFragment.WeakBettingCountDown.get().scheduledThreadPool3.shutdownNow();
+                        }
                     }
                 });
 
