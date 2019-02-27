@@ -263,6 +263,7 @@ public class BettingCountDownFragment extends Fragment {
                                 holder.setTextColor(R.id.AwaySum, Color.parseColor("#000000"));
 
                             }
+
                         }
 
 
@@ -335,12 +336,13 @@ public class BettingCountDownFragment extends Fragment {
                 scheduledThreadPool3 = Executors.newScheduledThreadPool(5);
                 scheduledThreadPool3.scheduleAtFixedRate(new Runnable() {
                     @Override
-                    public  void run() {
+                    public synchronized   void run() {
 
                         try {
 
-
+                                Log.d("aaaaaaaaaaaaaa","我進來囉");
                             JSONArray content = new JSONArray( GameCountDownActiveList.get(position).getGame());
+
                                 if(!content.getJSONObject(position).getJSONArray("bets").toString().equals(OldOdd)){
                                   //  Log.d("aaaaaaaaaaaaaaaa",OldOdd);
                                    // Log.d("aaaaaaaaaaaaaaaa",content.getJSONObject(position).getJSONArray("bets").toString());
