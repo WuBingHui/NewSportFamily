@@ -6,8 +6,8 @@ android {
         applicationId 'com.sportfamily.user.sportfamily'
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 9
-        versionName "2.102"
+        versionCode 10
+        versionName "2.103"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
